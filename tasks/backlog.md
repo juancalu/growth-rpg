@@ -7,13 +7,8 @@ cada bloco só fecha com `ruff` + `pytest` verdes. Não somar entre frentes. Nã
 
 ---
 
-### BLK-A1 — Validador de contrato
-**Objetivo:** garantir que qualquer `dados.json` do cowork é válido antes do app consumir.
-**Escopo:** `contract/validate.py` (já iniciado) + `config/schema/dados.schema.json`.
-- Validar contra o JSON Schema (v1.3).
-- Invariantes: nenhum campo que some frentes / total por pessoa; `frentes` = exatamente as 3;
-  `vazao_quinzena == round(entregue_quinzena/dias_disponiveis, 2)`; `total_equipe_quinzena` (de-dup) ≤ soma das `contribuicoes_quinzena`.
-**Critérios de aceite:** `tests/test_contract.py` valida o golden de Maio sem erros; `ruff`/`pytest` verdes.
+> **BLK-A1 (Validador de contrato) — CONCLUÍDO** na base M0/A1 (ver `tasks/completed.md`).
+> O loop começa pelo **BLK-A2**.
 
 ### BLK-A2 — App estático (consumir + apresentar, gamificado e bonito)
 **Objetivo:** front que renderiza o estado do jogo a partir do `dados.json`.

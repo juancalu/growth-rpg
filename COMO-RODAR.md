@@ -1,21 +1,21 @@
 # COMO RODAR — ativar o ralph loop autônomo
 
 Passo a passo para deixar o build rodando 100% autônomo, em container isolado. O loop constrói
-os marcos de `tasks/backlog.md` (M1→M6) sozinho, sem intervenção sua, e entrega um branch para
-você revisar.
+os blocos de `tasks/backlog.md` (**BLK-A2→A4**) sozinho, sem intervenção sua, e entrega um branch
+para você revisar. (BLK-A1 já está concluído — ver `tasks/completed.md`.)
 
 ## Pré-requisitos
 - Docker instalado na máquina onde o loop vai rodar (NÃO precisa ser a VPS; é build, não produção).
 - **Seu plano Max já basta — não precisa de API key.** O container usa um **token da sua assinatura** (passo 1).
 - **Nada** de chave da VPS nem token de escrita do ClickUp no container (o `run-ralph-loop.sh` aborta se detectar). E **não** sete `ANTHROPIC_API_KEY` — ela tem precedência e cobraria via API em vez do Max.
 
-## 0. (uma vez) Tornar a pasta um repositório git isolado
-O loop commita em branches `ciclo/*`. Para o branch isolar bem, use um repo próprio:
+## 0. (uma vez) Branch de trabalho
+O repo já existe (remote `github.com/Kastaldy/growth-rpg`, branch `main`). O loop **commita por path
+no branch atual** e **nunca faz merge/push**. Para revisar limpo, crie um branch ANTES de rodar:
 ```bash
 cd "Growth RPG"
-git init && git add -A && git commit -m "M0: bootstrap do Growth RPG"
+git checkout -b ciclo/a2      # o loop commita aqui; você revisa e faz merge depois
 ```
-> Se esta pasta já estiver dentro de outro repo, considere movê-la para um diretório próprio antes do `git init`.
 
 ## 1. (uma vez) Token da assinatura Max + build da imagem
 No host (onde você já está logado no Claude com o Max), gere um token de 1 ano:
