@@ -1,0 +1,18 @@
+# Bloco do Caddy para o Growth RPG (adicionar ao Caddyfile existente da VPS).
+# Serve arquivos estáticos atrás do Authelia. Sem backend, sem porta de banco.
+# Ajuste SEU-DOMINIO e o nome/porta do serviço Authelia conforme a sua VPS.
+
+rpg.SEU-DOMINIO {
+    # Autenticação: só os 4 (forward_auth para o Authelia já existente)
+    forward_auth authelia:9091 {
+        uri /api/verify?rd=https://auth.SEU-DOMINIO
+        copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+    }
+
+    root * /srv/growth-rpg
+    file_server
+    encode gzip
+
+    # dados.json e snapshots ficam SOB o Authelia (nunca públicos)
+    header /dados.json Cache-Control "no-store"
+}

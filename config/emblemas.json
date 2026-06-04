@@ -1,0 +1,68 @@
+{
+  "_nota": "Conquistas por ENTREGA na quinzena (deterministicas). Um membro ganha o emblema se entregue_quinzena na frente >= limiar. Salvos no historico do personagem. Limiares = ponto de partida, ajustaveis [DH].",
+  "lista": [
+    {
+      "id": "op_batedor",
+      "nome": "Batedor",
+      "frente": "operacional",
+      "metrica": "itens",
+      "limiar": 10
+    },
+    {
+      "id": "op_ceifador",
+      "nome": "Ceifador",
+      "frente": "operacional",
+      "metrica": "itens",
+      "limiar": 25
+    },
+    {
+      "id": "op_senhor_hordas",
+      "nome": "Senhor das Hordas",
+      "frente": "operacional",
+      "metrica": "itens",
+      "limiar": 50
+    },
+    {
+      "id": "prj_construtor",
+      "nome": "Construtor",
+      "frente": "projeto",
+      "metrica": "pontos",
+      "limiar": 8
+    },
+    {
+      "id": "prj_engenheiro_mestre",
+      "nome": "Engenheiro Mestre",
+      "frente": "projeto",
+      "metrica": "pontos",
+      "limiar": 20
+    },
+    {
+      "id": "prj_arquiteto_chefe",
+      "nome": "Arquiteto-Chefe",
+      "frente": "projeto",
+      "metrica": "pontos",
+      "limiar": 40
+    },
+    {
+      "id": "ana_alquimista",
+      "nome": "Alquimista",
+      "frente": "analise",
+      "metrica": "pontos",
+      "limiar": 10
+    },
+    {
+      "id": "ana_vidente",
+      "nome": "Vidente",
+      "frente": "analise",
+      "metrica": "pontos",
+      "limiar": 20
+    },
+    {
+      "id": "ana_oraculo",
+      "nome": "Oraculo",
+      "frente": "analise",
+      "metrica": "pontos",
+      "limiar": 30
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "Maio/2026 (ref.)": {
+    "operacional": {
+      "camadas": {
+        "comprometida": 80,
+        "alvo": 110,
+        "stretch": 140
+      }
+    },
+    "projeto": {
+      "camadas": {
+        "comprometida": 120,
+        "alvo": 180,
+        "stretch": 240
+      }
+    },
+    "analise": {
+      "camadas": {
+        "comprometida": 25,
+        "alvo": 40,
+        "stretch": 60
+      }
+    }
+  }
+}

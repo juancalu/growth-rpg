@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dados.json — contrato Growth RPG (v1.3)",
+  "type": "object",
+  "required": ["meta", "classes", "emblemas_catalogo", "pessoas", "ranking_quinzena", "guild", "eventos", "missoes_organizacao"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["schema_version", "quinzena", "custos_por_nivel"],
+      "properties": {
+        "schema_version": { "type": "string" },
+        "custos_por_nivel": {
+          "type": "object",
+          "required": ["operacional", "projeto", "analise"],
+          "properties": {
+            "operacional": { "const": 6 },
+            "projeto": { "const": 8 },
+            "analise": { "const": 6 }
+          }
+        }
+      }
+    },
+    "classes": { "type": "object", "required": ["operacional", "projeto", "analise"] },
+    "emblemas_catalogo": { "type": "object" },
+    "pessoas": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "nome", "jogavel", "dias_disponiveis", "afastamentos", "frentes", "emblemas_quinzena", "emblemas_historico", "prestigio"],
+        "properties": {
+          "id": { "type": "number" },
+          "nome": { "type": "string" },
+          "jogavel": { "type": "boolean" },
+          "dias_disponiveis": { "type": "number" },
+          "afastamentos": { "type": "array" },
+          "emblemas_quinzena": { "type": "array", "items": { "type": "string" } },
+          "emblemas_historico": { "type": "array" },
+          "prestigio": { "type": "object" },
+          "frentes": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["operacional", "projeto", "analise"],
+            "properties": {
+              "operacional": { "$ref": "#/$defs/frente" },
+              "projeto": { "$ref": "#/$defs/frente" },
+              "analise": { "$ref": "#/$defs/frente" }
+            }
+          }
+        }
+      }
+    },
+    "ranking_quinzena": { "type": "object" },
+    "guild": {
+      "type": "object",
+      "required": ["operacional", "projeto", "analise"],
+      "patternProperties": {
+        "^(operacional|projeto|analise)$": {
+          "type": "object",
+          "required": ["unidade", "objetivo", "camadas", "total_equipe_quinzena"],
+          "properties": {
+            "camadas": {
+              "type": "object",
+              "required": ["comprometida", "alvo", "stretch"]
+            }
+          }
+        }
+      }
+    },
+    "eventos": { "type": "object" },
+    "missoes_organizacao": { "type": "array" }
+  },
+  "$defs": {
+    "frente": {
+      "type": "object",
+      "required": ["unidade", "nivel", "custo_por_nivel", "xp_total", "vazao_quinzena", "titulo"],
+      "properties": {
+        "unidade": { "enum": ["itens", "pontos"] },
+        "nivel": { "type": "integer", "minimum": 0 },
+        "custo_por_nivel": { "type": "integer", "enum": [6, 8] },
+        "xp_total": { "type": "number", "minimum": 0 },
+        "vazao_quinzena": { "type": "number", "minimum": 0 }
+      }
+    }
+  }
+}

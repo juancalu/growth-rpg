@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+dist/
+build/
+*.egg-info/
+
+# Segredos — NUNCA versionar
+.env
+*.secret
+secrets/
+*.key
+config/secrets.json
+
+# Dados derivados / histórico (regeneráveis; backup vive em 2 cópias, não no git)
+historico/
+dados.local.json
+
+# Sinalizador do ralph loop
+LOOP_DONE
+
+# Claude Code — config local (especifica da maquina/sessao; nao compartilhar)
+.claude/settings.local.json

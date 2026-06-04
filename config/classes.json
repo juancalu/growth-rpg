@@ -1,0 +1,236 @@
+{
+  "operacional": {
+    "nome": "Guerreiro",
+    "tema": "a horda e a conquista de territorio",
+    "trilha": [
+      {
+        "tier": 1,
+        "de": 0,
+        "ate": 0,
+        "titulo": "Recruta"
+      },
+      {
+        "tier": 2,
+        "de": 1,
+        "ate": 2,
+        "titulo": "Soldado"
+      },
+      {
+        "tier": 3,
+        "de": 3,
+        "ate": 5,
+        "titulo": "Combatente"
+      },
+      {
+        "tier": 4,
+        "de": 6,
+        "ate": 9,
+        "titulo": "Veterano"
+      },
+      {
+        "tier": 5,
+        "de": 10,
+        "ate": 14,
+        "titulo": "Ceifador de Hordas"
+      },
+      {
+        "tier": 6,
+        "de": 15,
+        "ate": 21,
+        "titulo": "Barbaro"
+      },
+      {
+        "tier": 7,
+        "de": 22,
+        "ate": 30,
+        "titulo": "Campeao"
+      },
+      {
+        "tier": 8,
+        "de": 31,
+        "ate": 45,
+        "titulo": "Comandante"
+      },
+      {
+        "tier": 9,
+        "de": 46,
+        "ate": 65,
+        "titulo": "Senhor da Guerra"
+      },
+      {
+        "tier": 10,
+        "de": 66,
+        "ate": 90,
+        "titulo": "Conquistador"
+      },
+      {
+        "tier": 11,
+        "de": 91,
+        "ate": 129,
+        "titulo": "Marechal das Fronteiras"
+      },
+      {
+        "tier": 12,
+        "de": 130,
+        "ate": null,
+        "titulo": "Lenda da Vanguarda"
+      }
+    ]
+  },
+  "projeto": {
+    "nome": "Engenheiro",
+    "tema": "a construcao e a criacao da base",
+    "trilha": [
+      {
+        "tier": 1,
+        "de": 0,
+        "ate": 0,
+        "titulo": "Aprendiz"
+      },
+      {
+        "tier": 2,
+        "de": 1,
+        "ate": 2,
+        "titulo": "Tecnico"
+      },
+      {
+        "tier": 3,
+        "de": 3,
+        "ate": 5,
+        "titulo": "Engenheiro Junior"
+      },
+      {
+        "tier": 4,
+        "de": 6,
+        "ate": 9,
+        "titulo": "Engenheiro"
+      },
+      {
+        "tier": 5,
+        "de": 10,
+        "ate": 14,
+        "titulo": "Engenheiro Senior"
+      },
+      {
+        "tier": 6,
+        "de": 15,
+        "ate": 21,
+        "titulo": "Mestre de Obras"
+      },
+      {
+        "tier": 7,
+        "de": 22,
+        "ate": 30,
+        "titulo": "Mecanista"
+      },
+      {
+        "tier": 8,
+        "de": 31,
+        "ate": 45,
+        "titulo": "Arquiteto de Sistemas"
+      },
+      {
+        "tier": 9,
+        "de": 46,
+        "ate": 65,
+        "titulo": "Engenheiro-Chefe"
+      },
+      {
+        "tier": 10,
+        "de": 66,
+        "ate": 90,
+        "titulo": "Grande Engenheiro"
+      },
+      {
+        "tier": 11,
+        "de": 91,
+        "ate": 129,
+        "titulo": "Engenheiro-Mor"
+      },
+      {
+        "tier": 12,
+        "de": 130,
+        "ate": null,
+        "titulo": "Demiurgo"
+      }
+    ]
+  },
+  "analise": {
+    "nome": "Mago",
+    "tema": "a magia e o mapa de insights",
+    "trilha": [
+      {
+        "tier": 1,
+        "de": 0,
+        "ate": 0,
+        "titulo": "Aprendiz de Feiticos"
+      },
+      {
+        "tier": 2,
+        "de": 1,
+        "ate": 2,
+        "titulo": "Conjurador"
+      },
+      {
+        "tier": 3,
+        "de": 3,
+        "ate": 5,
+        "titulo": "Feiticeiro"
+      },
+      {
+        "tier": 4,
+        "de": 6,
+        "ate": 9,
+        "titulo": "Bruxo"
+      },
+      {
+        "tier": 5,
+        "de": 10,
+        "ate": 14,
+        "titulo": "Arcanista"
+      },
+      {
+        "tier": 6,
+        "de": 15,
+        "ate": 21,
+        "titulo": "Necromante"
+      },
+      {
+        "tier": 7,
+        "de": 22,
+        "ate": 30,
+        "titulo": "Mago"
+      },
+      {
+        "tier": 8,
+        "de": 31,
+        "ate": 45,
+        "titulo": "Mago Superior"
+      },
+      {
+        "tier": 9,
+        "de": 46,
+        "ate": 65,
+        "titulo": "Magus"
+      },
+      {
+        "tier": 10,
+        "de": 66,
+        "ate": 90,
+        "titulo": "Grande Mago"
+      },
+      {
+        "tier": 11,
+        "de": 91,
+        "ate": 129,
+        "titulo": "Arquimago"
+      },
+      {
+        "tier": 12,
+        "de": 130,
+        "ate": null,
+        "titulo": "Senhor do Arcano"
+      }
+    ]
+  }
+}

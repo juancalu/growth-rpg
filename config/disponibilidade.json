@@ -1,0 +1,21 @@
+{
+  "Maio/2026 (ref.)": {
+    "Felipe": {
+      "dias_disponiveis": 20,
+      "afastamentos": []
+    },
+    "Juan": {
+      "dias_disponiveis": 16,
+      "afastamentos": [
+        {
+          "tipo": "atestado",
+          "dias": 4
+        }
+      ]
+    },
+    "Vinicius": {
+      "dias_disponiveis": 20,
+      "afastamentos": []
+    }
+  }
+}
