@@ -13,11 +13,6 @@ description: >-
 
 # Growth RPG — Skill Produtora (cowork)
 
-> **Esta é a cópia de referência versionada no repo.** A skill viva roda no **cowork**
-> (`.claude/skills/growth-rpg-producer/SKILL.md`). O repo só **valida o contrato e apresenta** —
-> o motor de scoring não é código do repo; ele vive aqui como documentação executável do que o
-> cowork faz, para auditoria e paridade.
-
 Você é o **produtor** do Growth RPG. Seu trabalho é, de forma **determinística e somente-leitura**,
 transformar o estado do ClickUp no `dados.json` que o app web consome, e — apenas no fechamento
 quinzenal — no `painel.html` para leitura gerencial.
@@ -38,7 +33,7 @@ passar, há um bug — **PARE e reporte**, não force o número.
 
 | Execução | O que gera | Quando |
 |---|---|---|
-| **Diária** | `dados.json` atualizado | Todo dia (manualmente ou agendado) |
+| **Diária** | `dados.json` atualizado | Todo dia útil às 15h50 (agendado) |
 | **Quinzenal** | `dados.json` + `painel.html` + atualiza histórico | Na quinta de fechamento: 18/06, 02/07, 16/07, 30/07… |
 
 No fechamento quinzenal, `config/backlog_quinzena.json` e `config/disponibilidade.json` já devem
@@ -46,14 +41,14 @@ estar atualizados com a quinzena que se encerra — travados no planejamento, **
 
 ---
 
-## Caminhos de arquivo (padronizados — a pasta do projeto é a fonte do app)
+## Caminhos de arquivo
 
 ```
 PROJETO    = C:\Users\Felipe Silva\Desktop\Growth RPG\
 CONFIG_DIR = C:\Users\Felipe Silva\Desktop\Growth RPG\config\
-OUTPUT     = C:\Users\Felipe Silva\Desktop\Growth RPG\dados.json     (o app lê DAQUI; deploy.sh envia DAQUI)
+OUTPUT     = C:\Users\Felipe Silva\Desktop\Growth RPG\dados.json
 HISTORICO  = C:\Users\Felipe Silva\Desktop\Growth RPG\historico\
-PAINEL_DIR = C:\Users\Felipe Silva\Desktop\Relatórios - Estratégia e Growth\   (só o painel.html vai aqui)
+PAINEL_DIR = C:\Users\Felipe Silva\Desktop\Relatórios - Estratégia e Growth\
 ```
 
 Arquivos em `CONFIG_DIR` (curados manualmente, não são código):
@@ -64,9 +59,9 @@ Arquivos em `CONFIG_DIR` (curados manualmente, não são código):
 - `marcadores_titulo.json` — lista de strings (ex.: `["fix","bug","corrigir",...]`).
 - `schema/dados.schema.json` — JSON Schema do contrato v1.3 (validação).
 
-Histórico (lido; escrito só no fechamento):
-- `historico/acumulado.json` — acumulado **antes** da quinzena atual, por pessoa/frente, com **dois**
-  contadores: `{"Felipe": {"operacional": {"xp": 0, "entregaveis": 0}, "projeto": {"xp": 168, "entregaveis": 66}, ...}, ...}`.
+Histórico (lido; escrito só no fechamento quinzenal):
+- `historico/acumulado.json` — acumulado **antes** da quinzena atual, por pessoa/frente, com
+  dois contadores: `{"Felipe": {"operacional": {"xp": 0, "entregaveis": 0}, "projeto": {"xp": 168, "entregaveis": 66}, ...}, ...}`.
   Se ausente, assuma zeros (primeira execução, baseline zero) e registre no relatório.
 
 ---
@@ -109,6 +104,8 @@ MODO = "quinzenal" if hoje == QUINZENA_ATE else "diario"
 - O **mesmo label** tem que existir em `disponibilidade.json`. Abrir uma quinzena nova = adicionar
   um bloco nos dois configs (ver `config/_TEMPLATE_quinzena.md`) — **o prompt do scheduler nunca muda**.
 
+---
+
 ### 2. Ler o ClickUp — SOMENTE LEITURA
 
 Use apenas ferramentas de leitura do MCP ClickUp:
@@ -124,18 +121,18 @@ Colete três conjuntos (cada tarefa com `tags`, `status`, `date_done`, **`assign
 
 - **(a) Concluídas na janela:** status `concluído` (closed) com `date_done ∈ [QUINZENA_DE, QUINZENA_ATE]`.
 - **(b) Abertas com tag de frente:** status ≠ concluído, com ≥1 tag de frente (para backlog/guild).
-- **(c) Concluídas fora da janela (opcional):** só para conferência com o histórico; **não entram no
-  scoring da quinzena**. Pode pular no modo diário.
+- **(c) Concluídas fora da janela (opcional):** só para conferência com o histórico; não entram no
+  scoring da quinzena. Pode pular no modo diário.
 
-Monte a lista `tarefas` em que cada item tem este formato normalizado:
+Monte a lista `tarefas` onde cada item tem:
 
 ```python
 {
   "task_id": ..., "nome": ..., "descricao": ..., "url": ...,
-  "assignees": [...],            # nomes de JOGADORES (Marcos e outros são filtrados fora)
+  "assignees": [...],            # nomes de JOGADORES (Marcos e outros filtrados fora)
   "frentes_tags": [...],         # todas as tags de frente normalizadas: subset de operacional/projeto/analise
   "complexidades_tags": [...],   # todas as tags de sizing normalizadas: subset de baixa/media/alta
-  "concluida": bool,             # status closed/concluído
+  "concluida": bool,
   "date_done": "YYYY-MM-DD" | None,
   "na_janela": bool,             # date_done ∈ [QUINZENA_DE, QUINZENA_ATE]
   "parent": ... | None,
@@ -143,9 +140,9 @@ Monte a lista `tarefas` em que cada item tem este formato normalizado:
 }
 ```
 
-Mapeamento de assignee → nome (jogadores): `296609800`→Felipe, `101182134`→Juan, `101182135`→Vinícius.
-Normalize tags para caixa baixa sem acento (`análise`→`analise`, `média`→`media`). **Preserve as listas
-completas de tags** (frente e sizing) — a ambiguidade (≥2) é tratada no §3, não jogada fora aqui.
+Mapeamento assignee → nome (jogadores): `296609800`→Felipe, `101182134`→Juan, `101182135`→Vinícius.
+Normalize tags: caixa baixa sem acento (`análise`→`analise`, `média`→`media`).
+**Preserve as listas completas de tags** — ambiguidade (≥2) é tratada no §3, não descartada aqui.
 
 ---
 
@@ -158,10 +155,10 @@ import re, json
 from collections import defaultdict
 from datetime import datetime
 
-PONTOS  = {"baixa": 1, "media": 3, "alta": 8}
-CUSTOS  = {"operacional": 6, "projeto": 8, "analise": 6}
-FRENTES = ["operacional", "projeto", "analise"]
-UNIDADE = {"operacional": "itens", "projeto": "pontos", "analise": "pontos"}
+PONTOS   = {"baixa": 1, "media": 3, "alta": 8}
+CUSTOS   = {"operacional": 6, "projeto": 8, "analise": 6}
+FRENTES  = ["operacional", "projeto", "analise"]
+UNIDADE  = {"operacional": "itens", "projeto": "pontos", "analise": "pontos"}
 OBJETIVO = {"operacional": "territorio", "projeto": "construcao", "analise": "mapa_insights"}
 
 JOGADORES   = {296609800: "Felipe", 101182134: "Juan", 101182135: "Vinicius"}
@@ -172,7 +169,8 @@ def qtd_operacional(t):
     """Itens de uma tarefa operacional. Prioridade: [VOL_OPERACIONAL: N] na descrição,
     depois (N estudos) no nome, senão 1."""
     txt = f"{t.get('nome','')} {t.get('descricao','')}"
-    m = re.search(r"VOL_OPERACIONAL:\s*(\d+)", txt, re.I) or re.search(r"\((\d+)\s+estudos?\)", txt, re.I)
+    m = re.search(r"VOL_OPERACIONAL:\s*(\d+)", txt, re.I) or \
+        re.search(r"\((\d+)\s+estudos?\)", txt, re.I)
     return int(m.group(1)) if m else 1
 
 def frente_unica(t):
@@ -181,7 +179,7 @@ def frente_unica(t):
     return fr[0] if len(fr) == 1 else None
 
 def validade(t):
-    """'valida' ou o motivo de invalidade (determinístico). Sizing só importa em projeto/analise."""
+    """'valida' ou o motivo de invalidade (determinístico)."""
     fr, cx = t["frentes_tags"], t["complexidades_tags"]
     if len(fr) == 0:  return "falta_frente"
     if len(fr) >= 2:  return "frente_ambigua"
@@ -221,7 +219,7 @@ def rate(x, d):
     return round(x / d, 2) if d else 0
 
 def lookup_tier(nivel, frente, classes_config):
-    """Tier/título dependem SÓ do NÍVEL daquela frente (de/ate são faixas de nível)."""
+    """Tier/título dependem do NÍVEL daquela frente (de/ate são faixas de nível)."""
     for tier in reversed(classes_config[frente]["trilha"]):
         if nivel >= tier["de"]:
             return tier["tier"], tier["titulo"]
@@ -236,25 +234,27 @@ def nivel_e_resto(xp_total, custo):
 #### 3b. Scoring — por pessoa (crédito colaborativo) e total de equipe (de-dup)
 
 ```python
-# Acumuladores por pessoa/frente: valor (itens/pontos) e qtd (nº de tarefas)
-P = {nome: {f: {"valor": 0, "qtd": 0, "bk_valor": 0, "bk_tarefas": 0} for f in FRENTES} for nome in NOMES}
+# Acumuladores por pessoa/frente
+P = {nome: {f: {"valor": 0, "qtd": 0, "bk_valor": 0, "bk_tarefas": 0}
+            for f in FRENTES} for nome in NOMES}
 # Total de equipe por frente (DE-DUP: cada tarefa conta UMA vez)
 T = {f: 0 for f in FRENTES}
 
 for t in tarefas:
     fr = frente_unica(t)
 
-    # --- Entrega da quinzena (concluída, válida, na janela) ---
+    # --- Entrega da quinzena ---
     if pontua_na_quinzena(t, tarefas):
         v = valor_da_tarefa(t, fr)
-        T[fr] += v                                   # total de equipe: UMA vez
-        for nome in t["assignees"]:                  # crédito individual: CADA responsável
+        T[fr] += v                          # total da equipe: UMA vez (de-dup)
+        for nome in t["assignees"]:         # crédito individual: CADA responsável
             if nome in P:
                 P[nome][fr]["valor"] += v
                 P[nome][fr]["qtd"]   += 1
 
-    # --- Backlog (abertas, com frente; ignora subtarefa-sem-tag sob pai tagueado) ---
-    elif (not t["concluida"]) and fr and not _subtarefa_sem_tag_sob_pai_tagueado(t, tarefas):
+    # --- Backlog (abertas com frente válida) ---
+    elif (not t["concluida"]) and fr and \
+         not _subtarefa_sem_tag_sob_pai_tagueado(t, tarefas):
         v = valor_da_tarefa(t, fr)
         for nome in t["assignees"]:
             if nome in P:
@@ -262,18 +262,22 @@ for t in tarefas:
                 P[nome][fr]["bk_tarefas"] += 1
 ```
 
-> **Regras de hierarquia (resumo):**
-> - Subtarefa sem tag própria, pai tagueado → ignorada (não missão).
+> **Regras de hierarquia:**
+> - Subtarefa sem tag própria, pai tagueado → ignorada (não é missão).
 > - Pai tagueado com filhos tagueados → conta as folhas, **não** o pai (sem dobra).
-> - Tarefa concluída sem frente e sem pai tagueado → missão (`falta_frente`).
+> - Tarefa concluída sem frente, sem pai tagueado → missão (`falta_frente`).
+> - ≥2 frentes ou ≥2 sizings → missão (`frente_ambigua` / `sizing_ambiguo`).
 
-#### 3c. Extensões RPG (nível, tier, título, emblemas, ranking, guild, eventos, missões)
+#### 3c. Extensões RPG
 
 ```python
-# historico_acum: {nome: {frente: {"xp": int, "entregaveis": int}}}  (lido do §1; {} se ausente)
-# disp_q   = disponibilidade_json.get(QUINZENA_LABEL, {})
-# backlog_q = backlog_quinzena_json.get(QUINZENA_LABEL, {})
-# classes_config, emblemas_json (objeto {_nota, lista}), marcadores_titulo (lista)
+# Inputs lidos no §1:
+# historico_acum : {nome: {frente: {"xp": int, "entregaveis": int}}}  ({} se ausente)
+# disp_q         : disponibilidade_json[QUINZENA_LABEL]
+# backlog_q      : backlog_quinzena_json[QUINZENA_LABEL]
+# classes_config : dict carregado de config/classes.json
+# emblemas_json  : objeto {_nota, lista} de config/emblemas.json
+# marcadores_titulo : lista de strings de config/marcadores_titulo.json
 # historico_emblemas: {nome: [{quinzena, ids}]}  (do dados.json anterior; {} se ausente)
 
 def hist(nome, frente, chave):
@@ -287,16 +291,13 @@ for nome in NOMES:
     frentes_rpg = {}
     for frente in FRENTES:
         acc = P[nome][frente]
-        valor_q = acc["valor"]                                   # entregue na unidade da frente
-        # entregáveis: itens (op) OU nº de tarefas (prj/ana)
+        valor_q       = acc["valor"]
         entregaveis_q = valor_q if frente == "operacional" else acc["qtd"]
-
-        xp_total = hist(nome, frente, "xp") + valor_q
+        xp_total          = hist(nome, frente, "xp") + valor_q
         entregaveis_total = hist(nome, frente, "entregaveis") + entregaveis_q
         custo = CUSTOS[frente]
         nivel, xp_no_nivel, xp_para_proximo = nivel_e_resto(xp_total, custo)
         tier, titulo = lookup_tier(nivel, frente, classes_config)
-
         frentes_rpg[frente] = {
             "classe":               classes_config[frente]["nome"],
             "unidade":              UNIDADE[frente],
@@ -315,12 +316,10 @@ for nome in NOMES:
         }
     pessoas_rpg[nome] = frentes_rpg
 
-# --- Emblemas por pessoa (determinístico por limiar na quinzena) ---
-emblemas_lista = emblemas_json["lista"]
+# --- Emblemas (determinístico por limiar na quinzena) ---
 def emblemas_de(nome):
-    fr = pessoas_rpg[nome]
-    return [e["id"] for e in emblemas_lista
-            if fr.get(e["frente"], {}).get("entregue_quinzena", 0) >= e["limiar"]]
+    return [e["id"] for e in emblemas_json["lista"]
+            if pessoas_rpg[nome].get(e["frente"], {}).get("entregue_quinzena", 0) >= e["limiar"]]
 emblemas_por_pessoa = {nome: emblemas_de(nome) for nome in NOMES}
 
 # --- Ranking por frente (secundário/cosmético; NUNCA combina frentes) ---
@@ -332,11 +331,10 @@ def ranking_de(frente):
         key=lambda x: x["valor"], reverse=True)
     for i, item in enumerate(ordem):
         item["pos"] = i + 1
-    return {"unidade": UNIDADE[frente],
-            "ordem": [{"pos": x["pos"], **{k: x[k] for k in ("pessoa", "valor", "vazao")}} for x in ordem]}
+    return {"unidade": UNIDADE[frente], "ordem": ordem}
 ranking_quinzena = {f: ranking_de(f) for f in FRENTES}
 
-# --- Guild (objetivo coletivo por frente; de-dup; anti-inflação) ---
+# --- Guild (objetivo coletivo; de-dup; anti-inflação) ---
 def camada_status(total, camadas):
     ordem = ["comprometida", "alvo", "stretch"]
     atingida = None
@@ -363,7 +361,7 @@ for frente in FRENTES:
         "proxima_camada":         proxima,
         "restante_para_proxima":  restante,
         "contribuicoes_quinzena": contrib,
-        "total_equipe_quinzena":  total,     # de-dup: <= soma das contribuições
+        "total_equipe_quinzena":  total,
     }
 
 # --- Eventos / Hordas (cosmético; score vem das tags) ---
@@ -380,22 +378,25 @@ if tarefas_horda:
     itens_t = []
     for t in tarefas_horda:
         fr = frente_unica(t)
-        v = valor_da_tarefa(t, fr)
+        v  = valor_da_tarefa(t, fr)
         hp += v
         for nome in t["assignees"]:
             if nome in P:
                 contrib_h[nome] += v
-        itens_t.append({"task_id": t["task_id"], "nome": t["nome"],
-                        "assignee": (t["assignees"][0] if t["assignees"] else None),
-                        "complexidade": (t["complexidades_tags"][0] if t["complexidades_tags"] else None),
-                        "pontos": v, "concluida": t["concluida"], "url": t["url"]})
+        itens_t.append({
+            "task_id":    t["task_id"], "nome": t["nome"],
+            "assignee":   (t["assignees"][0] if t["assignees"] else None),
+            "complexidade": (t["complexidades_tags"][0] if t["complexidades_tags"] else None),
+            "pontos": v, "concluida": t["concluida"], "url": t["url"],
+        })
     eventos_lista.append({
         "id": f"horda_bugs_{slug(QUINZENA_LABEL)}", "nome": "Horda de Bugs",
-        "frente": "projeto", "unidade": "pontos", "hp": hp, "restante": 0,
-        "concluido": True, "contribuicoes_quinzena": dict(contrib_h), "tarefas": itens_t,
+        "frente": "projeto", "unidade": "pontos",
+        "hp": hp, "restante": 0, "concluido": True,
+        "contribuicoes_quinzena": dict(contrib_h), "tarefas": itens_t,
     })
 
-# --- Missões de organização (SÓ concluídas inválidas) ---
+# --- Missões de organização (concluídas na janela com tags inválidas) ---
 MOTIVOS = {"falta_frente", "frente_ambigua", "falta_sizing", "sizing_ambiguo"}
 missoes = []
 for t in tarefas:
@@ -405,29 +406,35 @@ for t in tarefas:
         continue
     motivo = validade(t)
     if motivo in MOTIVOS:
-        missoes.append({"task_id": t["task_id"], "nome": t["nome"],
-                        "assignee": (t["assignees"][0] if t["assignees"] else None),
-                        "motivo": motivo, "url": t["url"]})
+        missoes.append({
+            "task_id":  t["task_id"], "nome": t["nome"],
+            "assignee": (t["assignees"][0] if t["assignees"] else None),
+            "motivo":   motivo, "url": t["url"],
+        })
 ```
 
 ---
 
 ### 4. Verificar invariantes antes de montar o JSON
 
-Se **qualquer uma falhar: PARE** e reporte — não ajuste número.
+Se **qualquer assert falhar: PARE** e reporte — não ajuste número.
 
 ```python
 for nome in NOMES:
     dias = disp_q.get(nome, {}).get("dias_disponiveis", 0)
     for f, fd in pessoas_rpg[nome].items():
-        assert fd["xp_para_proximo"] > 0, f"xp_para_proximo zerado: {nome}/{f}"
+        assert fd["xp_para_proximo"] > 0, \
+            f"xp_para_proximo zerado: {nome}/{f}"
         esperado = rate(fd["entregue_quinzena"], dias)
-        assert abs(fd["vazao_quinzena"] - esperado) <= 0.01, f"vazão {nome}/{f}: {fd['vazao_quinzena']} != {esperado}"
+        assert abs(fd["vazao_quinzena"] - esperado) <= 0.01, \
+            f"vazão incorreta: {nome}/{f}: {fd['vazao_quinzena']} != {esperado}"
 
 for f, g in guild.items():
     soma = sum(g["contribuicoes_quinzena"].values())
-    assert g["total_equipe_quinzena"] <= soma, f"guild {f}: total {g['total_equipe_quinzena']} > soma {soma}"
-    assert set(g["camadas"]) >= {"comprometida", "alvo", "stretch"}, f"guild {f}: camadas incompletas (config?)"
+    assert g["total_equipe_quinzena"] <= soma, \
+        f"guild {f}: total {g['total_equipe_quinzena']} > soma contrib {soma}"
+    assert set(g["camadas"]) >= {"comprometida", "alvo", "stretch"}, \
+        f"guild {f}: camadas incompletas — verifique config/backlog_quinzena.json"
 
 print("✓ Invariantes OK.")
 ```
@@ -450,14 +457,16 @@ dados = {
         "motor_versao":   "cowork/produtividade-clickup-ultra",
         "gerado_em":      datetime.now().astimezone().isoformat(),
         "fonte":          "ClickUp PROJETOS-DEG (read-only) via cowork",
-        "quinzena": {"label": QUINZENA_LABEL, "de": QUINZENA_DE, "ate": QUINZENA_ATE,
-                     "ancora": QUINZENA_ANCORA,
-                     "cadencia": "quinzenal — quintas: 18/06, 02/07, 16/07, 30/07..."},
+        "quinzena": {
+            "label":    QUINZENA_LABEL, "de": QUINZENA_DE, "ate": QUINZENA_ATE,
+            "ancora":   QUINZENA_ANCORA,
+            "cadencia": "quinzenal — quintas: 18/06, 02/07, 16/07, 30/07...",
+        },
         "xp_base": {"operacional_por_item": 1, "projeto_por_ponto": 1, "analise_por_ponto": 1},
         "custos_por_nivel": {"operacional": 6, "projeto": 8, "analise": 6},
     },
-    "classes": classes_config,
-    "emblemas_catalogo": emblemas_json,          # objeto {_nota, lista} — como no golden
+    "classes":          classes_config,
+    "emblemas_catalogo": emblemas_json,
     "pessoas": [
         {
             "id":                 ID_POR_NOME[nome],
@@ -473,21 +482,26 @@ dados = {
         for nome in NOMES
     ],
     "ranking_quinzena": ranking_quinzena,
-    "guild": guild,
+    "guild":   guild,
     "eventos": {"marcadores_titulo": marcadores_titulo, "lista": eventos_lista},
     "missoes_organizacao": missoes,
+    "_nota_missoes": (
+        "Só entra aqui tarefa concluída na janela com tag inválida (falta_frente, "
+        "frente_ambigua, falta_sizing, sizing_ambiguo). Subtarefa sem tag sob pai "
+        "tagueado é ignorada silenciosamente."
+    ),
 }
 
-OUTPUT    = r"C:\Users\Felipe Silva\Desktop\Growth RPG\dados.json"
-SNAPSHOT  = rf"C:\Users\Felipe Silva\Desktop\Growth RPG\historico\dados_{datetime.now().strftime('%Y%m%d')}.json"
+OUTPUT   = r"C:\Users\Felipe Silva\Desktop\Growth RPG\dados.json"
+SNAPSHOT = rf"C:\Users\Felipe Silva\Desktop\Growth RPG\historico\dados_{datetime.now().strftime('%Y%m%d')}.json"
 for caminho in (OUTPUT, SNAPSHOT):
     with open(caminho, "w", encoding="utf-8") as f:
         json.dump(dados, f, ensure_ascii=False, indent=2)
-print(f"✓ dados.json salvo em {OUTPUT}")
-print(f"✓ snapshot salvo em {SNAPSHOT}")
+print(f"✓ dados.json → {OUTPUT}")
+print(f"✓ snapshot   → {SNAPSHOT}")
 ```
 
-> **Valide imediatamente** (mesmo motor do repo). Se houver erro, **PARE**:
+> **Valide imediatamente** (mesmo motor do repo). Se houver erro, **PARE** e não publique:
 > `python -c "from contract.validate import validar_arquivo; print(validar_arquivo(r'C:\Users\Felipe Silva\Desktop\Growth RPG\dados.json'))"`
 > Saída esperada: `[]` (lista vazia = válido).
 
@@ -495,10 +509,12 @@ print(f"✓ snapshot salvo em {SNAPSHOT}")
 
 ### 6. Gerar o `painel.html` — **só no fechamento quinzenal**
 
-Se `MODO == "diario"`, pule. No fechamento, use o FLUXO 4 da `produtividade-clickup-ultra`:
+Se `MODO == "diario"`, **pule esta etapa**.
+
+Use o FLUXO 4 da skill `produtividade-clickup-ultra`:
 
 1. Copie `template-painel.html` para
-   `…\Relatórios - Estratégia e Growth\painel-produtividade-<mes>-<ano>.html`.
+   `C:\Users\Felipe Silva\Desktop\Relatórios - Estratégia e Growth\painel-produtividade-<mes>-<ano>.html`.
 2. Edite **somente o objeto `DADOS`** no topo do `<script>` com os valores de `dados.json`.
 3. **Não toque** em CSS, layout, render nem gráficos.
 4. Mesmos números, dois públicos: JSON = app lúdico (nível/tier/guild/emblema); HTML = gerencial
@@ -508,23 +524,27 @@ Se `MODO == "diario"`, pule. No fechamento, use o FLUXO 4 da `produtividade-clic
 
 ### 7. Atualizar `historico/acumulado.json` — **só no fechamento quinzenal**
 
-Ao fechar, o `xp_total` e o `entregaveis_total` de cada pessoa/frente viram o novo acumulado:
+Se `MODO == "diario"`, **pule esta etapa**.
 
 ```python
 novo_acumulado = {
-    nome: {f: {"xp": pessoas_rpg[nome][f]["xp_total"],
-               "entregaveis": pessoas_rpg[nome][f]["entregaveis_total"]}
-           for f in FRENTES}
+    nome: {
+        f: {
+            "xp":          pessoas_rpg[nome][f]["xp_total"],
+            "entregaveis": pessoas_rpg[nome][f]["entregaveis_total"],
+        }
+        for f in FRENTES
+    }
     for nome in NOMES
 }
 ACUM = r"C:\Users\Felipe Silva\Desktop\Growth RPG\historico\acumulado.json"
 with open(ACUM, "w", encoding="utf-8") as f:
     json.dump(novo_acumulado, f, ensure_ascii=False, indent=2)
-print(f"✓ acumulado.json atualizado em {ACUM}")
+print(f"✓ acumulado.json atualizado → {ACUM}")
 ```
 
-> Como o acumulado já inclui a quinzena fechada, a **próxima** execução parte dele e a janela
-> seguinte conta só as novas entregas — sem dupla contagem.
+> O acumulado já inclui a quinzena fechada. Na próxima execução, a janela nova conta só as
+> entregas futuras — sem dupla contagem.
 
 ---
 
@@ -532,28 +552,28 @@ print(f"✓ acumulado.json atualizado em {ACUM}")
 
 Sempre ao final, três seções:
 
-**1. Quinzena** — `<label> | <de> → <ate> | próxima reunião: <ancora>` (+ "baseline zero" se 1ª execução).
+**1. Quinzena** — `<label> | <de> → <ate> | próxima reunião: <ancora>`
+(acrescente "baseline zero — primeira execução" se `acumulado.json` não existia)
 
-**2. Destaques** — níveis/tiers subidos por pessoa; emblemas da quinzena; camada do guild por frente;
-hordas concluídas.
+**2. Destaques** — níveis/tiers subidos por pessoa; emblemas conquistados na quinzena;
+camada do guild por frente; hordas concluídas.
 
-**3. Missões de organização** — lista (`nome`, `assignee`, `motivo`). Se vazia:
-"✓ Nenhuma missão aberta — todas as concluídas têm tags válidas."
+**3. Missões de organização** — lista (`nome`, `assignee`, `motivo`).
+Se vazia: "✓ Nenhuma missão aberta — todas as concluídas têm tags válidas."
 
 ---
 
 ## Guardrails (hard constraints — sem exceção)
 
 - **Read-only no ClickUp.** Só ferramentas de leitura. Precisou escrever? **PARE** e reporte.
-- **Determinismo.** Os números vêm do código; mesmo input → mesmo `dados.json` (exceto `gerado_em`).
+- **Determinismo.** Mesmo input → mesmo `dados.json` (exceto `gerado_em`). Números vêm do código.
 - **NUNCA somar entre frentes.** Sem XP total por pessoa, sem ranking cross-frente.
-- **Crédito colaborativo + de-dup:** indivíduos creditam cada assignee; o **total da guild** conta a
-  tarefa uma vez (`total_equipe ≤ soma das contribuições`).
+- **Crédito colaborativo + de-dup:** cada assignee é creditado individualmente; o total da guild
+  conta a tarefa uma vez (`total_equipe ≤ soma das contribuições`).
 - **Janela da quinzena:** só `date_done ∈ [de, ate]` pontua. Histórico fica no `acumulado.json`.
-- **Hierarquia:** subtarefa sem tag sob pai tagueado = ignorada; guarda-chuva tagueado com filhos
-  tagueados = conta as folhas (sem dobra).
-- **Ambiguidade = inválida:** ≥2 frentes (`frente_ambigua`) ou ≥2 sizings (`sizing_ambiguo`) não
-  pontuam — viram missão.
+- **Hierarquia:** subtarefa sem tag sob pai tagueado = ignorada (não missão); guarda-chuva com
+  filhos tagueados = conta as folhas, sem dobra.
+- **Ambiguidade = inválida:** ≥2 frentes ou ≥2 sizings não pontuam — viram missão.
 - **Anti-inflação do guild.** Camadas vêm do `backlog_quinzena.json` travado. Nunca inflar.
 - **Hordas são cosméticas.** Palavra-chave no título só agrupa; o score vem das tags.
 - **Nenhum segredo no output.** `dados.json` só tem nomes + scores. Tokens em variáveis de ambiente.

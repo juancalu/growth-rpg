@@ -61,7 +61,7 @@ MAX_ITERS=40 bash run-ralph-loop.sh
 3. **Deploy** (só agora, com credenciais reais, fora do container do loop):
    - Confirme Caddy/Authelia na VPS e ajuste `deploy/Caddyfile.snippet` (subdomínio).
    - `VPS_USER=... VPS_HOST=... bash deploy/deploy.sh`
-4. Configure a **skill produtora** (`skill_growth_rpg.md` → `.claude/skills/growth-rpg-producer/SKILL.md`)
+4. Configure a **skill produtora** (`.claude/skills/growth-rpg-producer/SKILL.md`) no Cowork
    para rodar diária/quinzenalmente, gerando `dados.json` + `painel.html` e publicando na VPS.
 
 ## Estado atual do M0 (já verde nesta máquina)

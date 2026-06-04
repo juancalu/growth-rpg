@@ -100,7 +100,7 @@ growth-rpg/
 
 ## 4. Motor de scoring — vive no COWORK (não no repo)
 
-O cálculo (validade, hierarquia, pontos, nível, título, vazão, guild, emblemas, ranking, hordas e a montagem do `dados.json`) é feito pela **skill do cowork** (`growth-rpg-producer` + `produtividade-clickup-ultra`), reusando o código do **FLUXO 3** — o mesmo motor do painel. Código e passo a passo em **`skill_growth_rpg.md`**. O repo **não reimplementa** isso (evita dois motores divergentes); a paridade com o painel é **por construção**.
+O cálculo (validade, hierarquia, pontos, nível, título, vazão, guild, emblemas, ranking, hordas e a montagem do `dados.json`) é feito pela **skill do cowork** (`growth-rpg-producer` + `produtividade-clickup-ultra`), reusando o código do **FLUXO 3** — o mesmo motor do painel. Código e passo a passo em **`.claude/skills/growth-rpg-producer/SKILL.md`**. O repo **não reimplementa** isso (evita dois motores divergentes); a paridade com o painel é **por construção**.
 
 O que fica no repo: o **validador** (`contract/validate.py`) que confere o `dados.json` recebido contra o schema + invariantes. **Parâmetros canônicos** (custos **6/8/6**, sizing **baixa 1 / média 3 / alta 8**, classes/tiers, limiares de emblema, `marcadores_titulo`) vivem em `config/*.json` — lidos pelo cowork e validados pelo schema do repo.
 
@@ -108,7 +108,7 @@ O que fica no repo: o **validador** (`contract/validate.py`) que confere o `dado
 
 ## 5. Ingestão do ClickUp — no COWORK (read-only)
 
-A leitura do ClickUp (space PROJETOS - DEG) é do **cowork**, via MCP, **somente-leitura** (sem create/update/delete/move/tag/comment). O cowork normaliza tags (caixa/acento), `date_done`, `parent`/`top_level_parent` (hierarquia) e coleta o histórico completo para o `xp_total` vitalício (recomputado da fonte, sem persistir totais → sem drift). **O repo não toca o ClickUp.** Detalhe em `skill_growth_rpg.md` §2.
+A leitura do ClickUp (space PROJETOS - DEG) é do **cowork**, via MCP, **somente-leitura** (sem create/update/delete/move/tag/comment). O cowork normaliza tags (caixa/acento), `date_done`, `parent`/`top_level_parent` (hierarquia) e coleta o histórico completo para o `xp_total` vitalício (recomputado da fonte, sem persistir totais → sem drift). **O repo não toca o ClickUp.** Detalhe em `.claude/skills/growth-rpg-producer/SKILL.md` §2.
 
 ---
 
