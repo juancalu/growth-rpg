@@ -1,25 +1,24 @@
 {
+  "_nota": "Indexado por quinzena. 'janela' define o periodo: a skill/scheduler seleciona a quinzena cuja janela [de, ate] contem a data de hoje (ignore chaves que comecam com '_'). 'camadas' = backlog comprometido por frente, TRAVADO no planejamento ANTES da reuniao com o diretor. Anti-inflacao: NUNCA inflar; dimensionar pela vazao das ultimas 1-2 quinzenas (comprometida=piso/alta confianca, alvo, stretch=heroico). Para abrir uma quinzena nova: copie um bloco, ajuste 'janela' e 'camadas', e adicione a mesma chave em disponibilidade.json. O prompt do scheduler NAO muda.",
   "Maio/2026 (ref.)": {
-    "operacional": {
-      "camadas": {
-        "comprometida": 80,
-        "alvo": 110,
-        "stretch": 140
-      }
+    "janela": {
+      "de": "2026-05-01",
+      "ate": "2026-05-31",
+      "ancora": "Baseline de referencia (nao e reuniao oficial)"
     },
-    "projeto": {
-      "camadas": {
-        "comprometida": 120,
-        "alvo": 180,
-        "stretch": 240
-      }
+    "operacional": { "camadas": { "comprometida": 80, "alvo": 110, "stretch": 140 } },
+    "projeto": { "camadas": { "comprometida": 120, "alvo": 180, "stretch": 240 } },
+    "analise": { "camadas": { "comprometida": 25, "alvo": 40, "stretch": 60 } }
+  },
+  "Junho/2026 (01-18)": {
+    "_status": "PROVISORIO — camadas dimensionadas por ~0.7x Maio (~14 dias uteis vs 20). TRAVAR os valores reais no planejamento de 18/06; este bloco e so para o run diario ja funcionar.",
+    "janela": {
+      "de": "2026-06-01",
+      "ate": "2026-06-18",
+      "ancora": "Reuniao 'alinhamento e resultados' (10h BRT) com o diretor Marcos, 18/06"
     },
-    "analise": {
-      "camadas": {
-        "comprometida": 25,
-        "alvo": 40,
-        "stretch": 60
-      }
-    }
+    "operacional": { "camadas": { "comprometida": 55, "alvo": 75, "stretch": 100 } },
+    "projeto": { "camadas": { "comprometida": 85, "alvo": 125, "stretch": 170 } },
+    "analise": { "camadas": { "comprometida": 18, "alvo": 28, "stretch": 42 } }
   }
 }

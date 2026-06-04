@@ -17,5 +17,20 @@
       "dias_disponiveis": 20,
       "afastamentos": []
     }
+  },
+  "Junho/2026 (01-18)": {
+    "_status": "PROVISORIO — dias uteis cheios (01-18/06 = ~14 dias uteis). Ajustar feriados/afastamentos no planejamento (ex.: Corpus Christi 04/06 e ponto facultativo 05/06, se aplicaveis).",
+    "Felipe": {
+      "dias_disponiveis": 14,
+      "afastamentos": []
+    },
+    "Juan": {
+      "dias_disponiveis": 14,
+      "afastamentos": []
+    },
+    "Vinicius": {
+      "dias_disponiveis": 14,
+      "afastamentos": []
+    }
   }
 }
