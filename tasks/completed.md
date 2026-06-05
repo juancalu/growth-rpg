@@ -91,3 +91,57 @@ aura violeta 85%/90%, gradiente base direcional 160°. Tokens adicionados ao `:r
 em `.guild-card[data-frente]` e `.frente-card[data-frente]`. Nenhuma URL `http(s)://` no CSS.
 **Aceite atingido:** `ruff check .` ✅ · `pytest -v` 49/49 ✅ ·
 aura tokens ✅ · multicamadas ✅ · sem URL externa ✅ · WCAG AA mantido ✅.
+
+---
+
+## BLK-A10 — Tipografia épica (Cinzel vendorizada) ✅ (2026-06-05, BLK-A10)
+`@font-face` Cinzel 400/700 via `vendor/fonts/` (zero CDN). Token `--font-display: 'Cinzel', Georgia, serif`
+em `:root`. Cinzel + `letter-spacing` + `text-transform: uppercase` aplicados a `.site-title` e
+`.section-title`; `.nivel` com Cinzel + text-shadow sutil. Body permanece em system stack.
+**Aceite atingido:** `ruff check .` ✅ · `pytest -v` 56/56 ✅ ·
+@font-face vendor ✅ · sem CDN ✅ · token display ✅ · aplicação em títulos/números ✅.
+
+---
+
+## BLK-A11 — Molduras & componentes ornamentados ✅ (2026-06-05, BLK-A11)
+`frente-card`: borda esquerda → `::before` gradient (por frente) + `overflow: hidden`. `class-glyph-wrap`
+com glyph SVG inline (espada/engrenagem/cajado) colorido por frente. `.emblema-chip` → medalhão
+(`linear-gradient` metálico + `box-shadow` glow por frente). `.xp-bar__fill` → gradient + glow; altura 6→8px.
+**Aceite atingido:** `ruff check .` ✅ · `pytest -v` 63/63 ✅ ·
+SVG glyphs ✅ · medalhão emblema ✅ · XP brilhante ✅ · sem asset externo ✅.
+
+---
+
+## BLK-A12 — Objetivos de guild temáticos ✅ (2026-06-05, BLK-A12)
+`guildHexGridViz` (operacional), `guildBuildingBlocksViz` (projeto), `guildFogMapViz` (análise),
+`guildThematicViz` dispatcher. Progresso das zonas comprometida/alvo/stretch em opacidade graduada.
+Injetado no template guild card acima dos stats. `guild h3` com Cinzel.
+**Aceite atingido:** `ruff check .` ✅ · `pytest -v` 71/71 ✅ ·
+tratamento distinto por frente ✅ · data-driven ✅ · SVG/CSS inline ✅.
+
+---
+
+## BLK-A13 — Hero épico + motion de conquista + coesão ✅ (2026-06-05, BLK-A13)
+`site-header`: gradiente + `::after` linha glow tricolor (ciano/âmbar/violeta). `site-title`: text-2xl +
+glow duplo. `quinzena-label`: Cinzel + color-op. `renderMeta`: formato "Capitulo: <label>".
+Novos `@keyframes`: `level-up` (nível), `emblema-cunhado` (emblema), `horda-derrota` (evento concluído).
+**Aceite atingido:** `ruff check .` ✅ · `pytest -v` 78/78 ✅ ·
+hero ✅ · keyframes conquista ✅ · reduced-motion ✅ · contraste mantido ✅.
+
+---
+
+## BLK-A14 — Mapa de Campanha (overview no topo) ✅ (2026-06-05, BLK-A14)
+Section `#mapa-campanha` antes de `#personagens`. `mapaCampanhaSVG`: 3 regiões inline (hexgrid/blocos/névoa),
+marcadores `mapa-problema` = `missoes.length + sum(backlog.tarefas)`. Progresso dos checkpoints via
+`camadas.comprometida/alvo/stretch`. Fog map para análise com dots revelados.
+**Aceite atingido:** `ruff check .` ✅ · `pytest -v` 85/85 ✅ ·
+SVG inline ✅ · data-driven ✅ · no topo ✅ · seções originais intactas ✅.
+
+---
+
+## BLK-A15 — Avatares de classe (slot + fallback glyph) ✅ (2026-06-05, BLK-A15)
+`CLASSES` const + `avatarHtml(frente, classe)`: tenta `vendor/img/classe-${slug}.png`, cai para
+glyph SVG via `onerror` (fallback funciona hoje sem nenhuma imagem). `renderHeroAvatars()` injeta
+3 slots no header. `personagem-avatares` (3 slots) no topo de cada personagem-card.
+**Aceite atingido:** `ruff check .` ✅ · `pytest -v` 93/93 ✅ ·
+slot presente ✅ · fallback glyph ✅ · vendor/img local ✅ · zero request externa ✅.

@@ -511,6 +511,74 @@ body {
 .historico-section li { margin-bottom: var(--space-1); }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   AVATAR SLOTS (BLK-A15)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.avatar-slot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  background: var(--color-surface-3);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.avatar-slot[data-frente="operacional"] {
+  border-color: var(--color-op);
+  box-shadow: 0 0 10px var(--aura-op);
+}
+.avatar-slot[data-frente="projeto"] {
+  border-color: var(--color-prj);
+  box-shadow: 0 0 10px var(--aura-prj);
+}
+.avatar-slot[data-frente="analise"] {
+  border-color: var(--color-ana);
+  box-shadow: 0 0 10px var(--aura-ana);
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-glyph {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.avatar-slot[data-frente="operacional"] .avatar-glyph { color: var(--color-op); }
+.avatar-slot[data-frente="projeto"]     .avatar-glyph { color: var(--color-prj); }
+.avatar-slot[data-frente="analise"]     .avatar-glyph { color: var(--color-ana); }
+
+/* — Avatares no card de personagem — */
+.personagem-avatares {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: center;
+  margin-bottom: var(--space-3);
+}
+
+/* — Avatares no hero — */
+.hero-avatars {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  margin-left: auto;
+}
+
+.hero-avatars .avatar-slot {
+  width: 36px;
+  height: 36px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    MAPA DE CAMPANHA (BLK-A14)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .mapa-campanha-svg {

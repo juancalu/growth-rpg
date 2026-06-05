@@ -18,11 +18,35 @@ const TOKEN_FRENTE = {
   analise:     '--color-ana',
 };
 
+const CLASSES = {
+  operacional: 'Guerreiro',
+  projeto: 'Engenheiro',
+  analise: 'Mago',
+};
+
 const OBJETIVO_LABEL = {
   territorio: 'Conquista de Território',
   construcao: 'Construção da Base',
   mapa_insights: 'Mapa de Insights',
 };
+
+/* BLK-A15: slot de avatar por classe (imagem vendor/img/ ou glyph como fallback) */
+function avatarHtml(frente, classe) {
+  const slug = classe.toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '');
+  const glyph = CLASS_GLYPH[frente];
+  return `<div class="avatar-slot" data-frente="${frente}" title="${classe}"><img class="avatar-img" src="vendor/img/classe-${slug}.png" alt="${classe}" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><div class="avatar-glyph" hidden>${glyph}</div></div>`;
+}
+
+function renderHeroAvatars() {
+  const inner = document.querySelector('.header-inner');
+  if (!inner || inner.querySelector('.hero-avatars')) return;
+  const wrap = document.createElement('div');
+  wrap.className = 'hero-avatars';
+  wrap.setAttribute('aria-hidden', 'true');
+  wrap.innerHTML = FRENTES.map(f => avatarHtml(f, CLASSES[f])).join('');
+  inner.appendChild(wrap);
+}
 
 /* BLK-A11: glyphs de classe (SVG inline — zero request externa) */
 const CLASS_GLYPH = {
@@ -47,6 +71,7 @@ async function main() {
 
 function renderApp(dados) {
   renderMeta(dados.meta);
+  renderHeroAvatars();
   renderMapaCampanha(dados);
   renderPersonagens(dados.pessoas, dados.emblemas_catalogo);
   renderGuild(dados.guild);
@@ -129,8 +154,10 @@ function personagemCard(p, emblemasCatalogo) {
     `<li>${h.quinzena}: ${h.ids.length ? h.ids.join(', ') : 'nenhum'}</li>`
   ).join('');
 
+  const cardAvatars = FRENTES.map(f => avatarHtml(f, p.frentes[f].classe)).join('');
   return `
     <article class="personagem-card" id="personagem-${p.id}">
+      <div class="personagem-avatares" aria-hidden="true">${cardAvatars}</div>
       <header class="personagem-header">
         <h3 class="personagem-nome">${p.nome}</h3>
         <span class="dias-disp">${p.dias_disponiveis} dias disponíveis ${afast}</span>
