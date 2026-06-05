@@ -24,6 +24,13 @@ const OBJETIVO_LABEL = {
   mapa_insights: 'Mapa de Insights',
 };
 
+/* BLK-A11: glyphs de classe (SVG inline — zero request externa) */
+const CLASS_GLYPH = {
+  operacional: `<svg class="class-glyph" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><line x1="5" y1="19" x2="19" y2="5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="12" x2="7" y2="17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="7" y1="17" x2="5" y2="15" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>`,
+  projeto: `<svg class="class-glyph" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/><path stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" d="M12 2v2.5M12 19.5V22M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M2 12h2.5M19.5 12H22M4.93 19.07l1.77-1.77M17.3 6.7l1.77-1.77"/></svg>`,
+  analise: `<svg class="class-glyph" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/><line x1="12" y1="11" x2="12" y2="22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="9" y1="16" x2="15" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+};
+
 async function main() {
   try {
     const resp = await fetch('dados.json');
@@ -93,6 +100,7 @@ function personagemCard(p, emblemasCatalogo) {
           <span class="frente-label">${LABEL_FRENTE[f]}</span>
           <span class="frente-classe">${fr.classe}</span>
         </div>
+        <div class="class-glyph-wrap">${CLASS_GLYPH[f]}</div>
         <div class="frente-nivel">
           <span class="nivel">Nível ${fr.nivel}</span>
           <span class="titulo-tier">${fr.titulo}</span>
