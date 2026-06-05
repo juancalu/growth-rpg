@@ -98,25 +98,49 @@ function renderMeta(meta) {
 function renderPersonagens(pessoas, emblemasCatalogo) {
   const grid = document.getElementById('personagens-grid');
   if (!grid) return;
-  grid.innerHTML = pessoas.map(p => personagemCard(p, emblemasCatalogo)).join('');
+  grid.innerHTML = pessoas.map((p, i) => personagemCard(p, emblemasCatalogo, i)).join('');
 }
 
-function xpBarHtml(xp_no_nivel, xp_para_proximo) {
+function xpBarHtml(fr) {
+  const xp_no_nivel = fr.xp_no_nivel;
+  const xp_para_proximo = fr.xp_para_proximo;
   const total = xp_no_nivel + xp_para_proximo;
   const pct = total > 0 ? Math.round(xp_no_nivel / total * 100) : 0;
+  const almost = xp_para_proximo > 0 && xp_para_proximo <= 2;
+  const unid = xp_para_proximo === 1
+    ? (fr.unidade === 'itens' ? 'item' : 'ponto')
+    : fr.unidade;
+  const hook = xp_para_proximo > 0
+    ? `<span class="xp-hook${almost ? ' xp-hook--almost' : ''}">${almost ? '⚔ ' : ''}${xp_para_proximo} ${unid} até o Nível ${fr.nivel + 1}</span>`
+    : `<span class="xp-hook">Nível recém-conquistado ✦</span>`;
   return `
-    <div class="xp-bar" role="progressbar"
+    <div class="xp-bar${almost ? ' xp-bar--almost' : ''}" role="progressbar"
          aria-valuenow="${xp_no_nivel}" aria-valuemin="0" aria-valuemax="${total}"
          title="${xp_no_nivel}/${total} XP">
-      <div class="xp-bar__fill" style="width:${pct}%"></div>
+      <div class="xp-bar__fill" style="--xp-target:${pct}%"></div>
     </div>
-    <span class="xp-text">${xp_no_nivel} / ${total} XP</span>`;
+    <span class="xp-text">${xp_no_nivel} / ${total} XP</span>
+    ${hook}`;
 }
 
-function personagemCard(p, emblemasCatalogo) {
+function personagemCard(p, emblemasCatalogo, idx = 0) {
   const afast = p.afastamentos.length
     ? `<span class="tag tag--afastamento">${p.afastamentos.map(a => `${a.dias}d ${a.tipo}`).join(', ')}</span>`
     : '';
+
+  // Banner de herói: retratos das 3 classes + epíteto multiclasse (3 títulos, sem ranking)
+  const portraitsHtml = FRENTES.map(f => {
+    const fr = p.frentes[f];
+    return `
+      <div class="hero-portrait" data-frente="${f}" title="${fr.classe} — ${fr.titulo} (Nível ${fr.nivel})">
+        ${avatarHtml(f, fr.classe)}
+        <span class="hero-portrait__classe">${fr.classe}</span>
+      </div>`;
+  }).join('');
+
+  const epitetoHtml = FRENTES.map(f =>
+    `<span class="epiteto-parte" data-frente="${f}">${p.frentes[f].titulo}</span>`
+  ).join('<span class="epiteto-sep">·</span>');
 
   const frentesHtml = FRENTES.map(f => {
     const fr = p.frentes[f];
@@ -131,11 +155,11 @@ function personagemCard(p, emblemasCatalogo) {
           <span class="nivel">Nível ${fr.nivel}</span>
           <span class="titulo-tier">${fr.titulo}</span>
         </div>
-        ${xpBarHtml(fr.xp_no_nivel, fr.xp_para_proximo)}
+        ${xpBarHtml(fr)}
         <ul class="frente-stats">
-          <li>Quinzena: <strong>${fr.entregue_quinzena} ${fr.unidade}</strong></li>
-          <li>Vazão: <strong>${fr.vazao_quinzena} ${fr.unidade}/dia</strong></li>
-          <li>Total XP: <strong>${fr.xp_total}</strong></li>
+          <li>Nesta quinzena: <strong>${fr.entregue_quinzena} ${fr.unidade}</strong></li>
+          <li>Ritmo: <strong>${fr.vazao_quinzena} ${fr.unidade}/dia</strong></li>
+          <li>XP acumulado: <strong>${fr.xp_total}</strong></li>
         </ul>
       </div>`;
   }).join('');
@@ -148,27 +172,29 @@ function personagemCard(p, emblemasCatalogo) {
         const nome = emb ? emb.nome : id;
         return `<span class="emblema-chip" data-frente="${frente}">${nome}</span>`;
       }).join('')
-    : '<em style="font-size:0.75rem;color:var(--color-text-muted)">Nenhum emblema esta quinzena</em>';
+    : '<em style="font-size:0.75rem;color:var(--color-text-muted)">Nenhuma conquista esta quinzena</em>';
 
   const historicoHtml = p.emblemas_historico.map(h =>
     `<li>${h.quinzena}: ${h.ids.length ? h.ids.join(', ') : 'nenhum'}</li>`
   ).join('');
 
-  const cardAvatars = FRENTES.map(f => avatarHtml(f, p.frentes[f].classe)).join('');
   return `
-    <article class="personagem-card" id="personagem-${p.id}">
-      <div class="personagem-avatares" aria-hidden="true">${cardAvatars}</div>
-      <header class="personagem-header">
-        <h3 class="personagem-nome">${p.nome}</h3>
-        <span class="dias-disp">${p.dias_disponiveis} dias disponíveis ${afast}</span>
+    <article class="personagem-card hero-card" id="personagem-${p.id}" style="animation-delay:${idx * 0.07}s">
+      <header class="hero-banner">
+        <div class="hero-portraits" aria-hidden="true">${portraitsHtml}</div>
+        <div class="hero-id">
+          <h3 class="personagem-nome">${p.nome}</h3>
+          <p class="hero-epiteto">${epitetoHtml}</p>
+          <span class="dias-disp">⛺ ${p.dias_disponiveis} dias em campanha ${afast}</span>
+        </div>
       </header>
       <div class="frentes-grid">${frentesHtml}</div>
-      <section class="emblemas-section" aria-label="Emblemas da Quinzena">
-        <h4>Emblemas da Quinzena</h4>
+      <section class="emblemas-section" aria-label="Conquistas da Quinzena">
+        <h4>Conquistas da Quinzena</h4>
         <div class="emblemas-row">${emblemasHtml}</div>
       </section>
-      <section class="historico-section" aria-label="Histórico de Emblemas">
-        <h4>Histórico de Emblemas</h4>
+      <section class="historico-section" aria-label="Crônica de Conquistas">
+        <h4>Crônica de Conquistas</h4>
         <ul>${historicoHtml}</ul>
       </section>
     </article>`;
