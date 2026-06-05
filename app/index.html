@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Growth RPG — DEG</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <h1 class="site-title">Growth RPG</h1>
+      <div class="meta-quinzena">
+        <span id="quinzena-label" class="quinzena-label">—</span>
+        <span id="quinzena-dates" class="quinzena-dates">—</span>
+      </div>
+    </div>
+    <p id="quinzena-ancora" class="quinzena-ancora"></p>
+  </header>
+
+  <main id="main">
+    <div id="app-error" class="app-error" hidden>
+      <strong>Erro ao carregar dados.</strong>
+      <span id="app-error-msg"></span>
+    </div>
+
+    <section id="personagens" class="section" aria-labelledby="personagens-titulo">
+      <h2 id="personagens-titulo" class="section-title">Personagens</h2>
+      <div id="personagens-grid" class="personagens-grid"></div>
+    </section>
+
+    <section id="guild" class="section" aria-labelledby="guild-titulo">
+      <h2 id="guild-titulo" class="section-title">Objetivos da Guild</h2>
+      <div id="guild-grid" class="guild-grid"></div>
+    </section>
+
+    <section id="eventos" class="section" aria-labelledby="eventos-titulo">
+      <h2 id="eventos-titulo" class="section-title">Eventos / Hordas</h2>
+      <div id="eventos-lista"></div>
+    </section>
+
+    <section id="ranking" class="section" aria-labelledby="ranking-titulo">
+      <h2 id="ranking-titulo" class="section-title">Ranking por Frente</h2>
+      <p class="section-note">Secundário e cosmético — dentro da mesma frente (mesma unidade). Nunca combina frentes.</p>
+      <div id="ranking-grid" class="ranking-grid"></div>
+    </section>
+
+    <section id="missoes" class="section" aria-labelledby="missoes-titulo">
+      <h2 id="missoes-titulo" class="section-title">Missões de Organização</h2>
+      <p class="section-note">Tarefas sem classificação válida — higiene como gameplay.</p>
+      <ul id="missoes-lista" class="missoes-lista"></ul>
+    </section>
+
+    <section id="reconciliacao" class="section" aria-labelledby="reconciliacao-titulo">
+      <h2 id="reconciliacao-titulo" class="section-title">Painel de Reconciliação</h2>
+      <p class="section-note">Contribuições individuais × total de equipe (de-dup), por frente.</p>
+      <div id="reconciliacao-grid" class="reconciliacao-grid"></div>
+    </section>
+  </main>
+
+  <script src="vendor/chart.min.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

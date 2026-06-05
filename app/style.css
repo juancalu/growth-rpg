@@ -1,0 +1,277 @@
+/* Growth RPG — BLK-A2: base funcional (design refinado no BLK-A3) */
+
+/* ── Tokens base ── */
+:root {
+  --color-bg: #0f1117;
+  --color-surface: #1a1d27;
+  --color-surface-2: #222638;
+  --color-border: #2e3348;
+  --color-text: #e2e8f0;
+  --color-text-muted: #94a3b8;
+
+  --color-op: #06b6d4;
+  --color-prj: #f59e0b;
+  --color-ana: #8b5cf6;
+
+  --radius: 8px;
+  --radius-sm: 4px;
+  --gap: 1rem;
+  --gap-sm: 0.5rem;
+}
+
+/* ── Reset mínimo ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+ul { list-style: none; }
+h1, h2, h3, h4 { line-height: 1.3; }
+
+/* ── Header ── */
+.site-header {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 1rem 1.5rem;
+}
+.header-inner {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.site-title { font-size: 1.4rem; font-weight: 700; }
+.quinzena-label { font-weight: 600; color: var(--color-text-muted); }
+.quinzena-dates { font-size: 0.85rem; color: var(--color-text-muted); }
+.quinzena-ancora { font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.25rem; }
+
+/* ── Layout ── */
+#main { max-width: 1280px; margin: 0 auto; padding: 1.5rem 1rem; }
+
+.section { margin-bottom: 2.5rem; }
+.section-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; border-bottom: 1px solid var(--color-border); padding-bottom: 0.5rem; }
+.section-note { font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 0.75rem; }
+
+/* ── Cards genéricos ── */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+
+/* ── Erro ── */
+.app-error {
+  background: #2d1a1a;
+  border: 1px solid #7f1d1d;
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  color: #fca5a5;
+}
+
+/* ── Personagens ── */
+.personagens-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--gap);
+}
+.personagem-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+.personagem-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+.personagem-nome { font-size: 1.1rem; font-weight: 700; }
+.dias-disp { font-size: 0.8rem; color: var(--color-text-muted); }
+.tag { font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: var(--radius-sm); }
+.tag--afastamento { background: #3f2a00; color: #fbbf24; }
+
+/* ── Frentes (dentro do personagem) ── */
+.frentes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.frente-card {
+  background: var(--color-surface-2);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem;
+  border-left: 3px solid transparent;
+}
+.frente-card[data-frente="operacional"] { border-color: var(--color-op); }
+.frente-card[data-frente="projeto"]     { border-color: var(--color-prj); }
+.frente-card[data-frente="analise"]     { border-color: var(--color-ana); }
+
+.frente-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  margin-bottom: 0.25rem;
+}
+.frente-label { font-weight: 700; color: var(--color-text-muted); }
+.frente-classe { color: var(--color-text-muted); font-style: italic; }
+.frente-nivel { margin-bottom: 0.25rem; }
+.nivel { font-size: 0.85rem; font-weight: 700; }
+.titulo-tier { font-size: 0.7rem; color: var(--color-text-muted); display: block; }
+.frente-stats { font-size: 0.7rem; color: var(--color-text-muted); margin-top: 0.25rem; }
+.frente-stats li { margin-bottom: 0.1rem; }
+.frente-stats strong { color: var(--color-text); }
+
+/* ── Barra XP ── */
+.xp-bar {
+  height: 6px;
+  background: var(--color-border);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 0.25rem 0;
+}
+.xp-bar__fill {
+  height: 100%;
+  background: currentColor;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+.frente-card[data-frente="operacional"] .xp-bar__fill { background: var(--color-op); }
+.frente-card[data-frente="projeto"]     .xp-bar__fill { background: var(--color-prj); }
+.frente-card[data-frente="analise"]     .xp-bar__fill { background: var(--color-ana); }
+.xp-text { font-size: 0.65rem; color: var(--color-text-muted); }
+
+/* ── Emblemas ── */
+.emblemas-section, .historico-section { margin-top: 0.75rem; }
+.emblemas-section h4, .historico-section h4 { font-size: 0.8rem; font-weight: 600; color: var(--color-text-muted); margin-bottom: 0.35rem; }
+.emblemas-row { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.emblema-chip {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+}
+.emblema-chip[data-frente="operacional"] { border-color: var(--color-op); color: var(--color-op); }
+.emblema-chip[data-frente="projeto"]     { border-color: var(--color-prj); color: var(--color-prj); }
+.emblema-chip[data-frente="analise"]     { border-color: var(--color-ana); color: var(--color-ana); }
+.historico-section ul { font-size: 0.75rem; color: var(--color-text-muted); }
+.historico-section li { margin-bottom: 0.15rem; }
+
+/* ── Guild ── */
+.guild-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--gap);
+}
+.guild-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  border-top: 3px solid transparent;
+}
+.guild-card[data-frente="operacional"] { border-top-color: var(--color-op); }
+.guild-card[data-frente="projeto"]     { border-top-color: var(--color-prj); }
+.guild-card[data-frente="analise"]     { border-top-color: var(--color-ana); }
+.guild-card h3 { font-size: 0.95rem; margin-bottom: 0.5rem; }
+.guild-stats { font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 0.75rem; }
+.guild-stats li { margin-bottom: 0.2rem; }
+.guild-stats strong { color: var(--color-text); }
+.guild-contrib { margin-top: 0.75rem; font-size: 0.8rem; }
+.guild-contrib h4 { font-size: 0.75rem; font-weight: 600; color: var(--color-text-muted); margin-bottom: 0.25rem; }
+.guild-contrib ul { color: var(--color-text-muted); margin-bottom: 0.25rem; }
+.guild-contrib li { margin-bottom: 0.1rem; }
+.guild-contrib strong { color: var(--color-text); }
+
+/* ── Eventos ── */
+.evento-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: var(--gap-sm);
+}
+.evento-card[data-frente="operacional"] { border-left: 3px solid var(--color-op); }
+.evento-card[data-frente="projeto"]     { border-left: 3px solid var(--color-prj); }
+.evento-card[data-frente="analise"]     { border-left: 3px solid var(--color-ana); }
+.evento-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
+.evento-header h3 { font-size: 0.95rem; }
+.evento-status { font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: var(--radius-sm); }
+.evento-status--done { background: #1a3a2a; color: #4ade80; }
+.evento-status--open { background: #2a1a00; color: #fbbf24; }
+.evento-stats { font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 0.5rem; }
+.evento-tarefas { font-size: 0.8rem; }
+.evento-tarefas h4 { font-size: 0.75rem; font-weight: 600; color: var(--color-text-muted); margin-bottom: 0.25rem; }
+.evento-tarefas li { color: var(--color-text-muted); padding: 0.2rem 0; border-bottom: 1px solid var(--color-border); }
+.evento-tarefas li:last-child { border-bottom: none; }
+
+/* ── Ranking ── */
+.ranking-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--gap);
+}
+.ranking-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+.ranking-card[data-frente="operacional"] { border-top: 3px solid var(--color-op); }
+.ranking-card[data-frente="projeto"]     { border-top: 3px solid var(--color-prj); }
+.ranking-card[data-frente="analise"]     { border-top: 3px solid var(--color-ana); }
+.ranking-card h3 { font-size: 0.9rem; margin-bottom: 0.5rem; }
+.ranking-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+.ranking-table th { text-align: left; color: var(--color-text-muted); padding: 0.2rem 0.3rem; font-weight: 600; border-bottom: 1px solid var(--color-border); }
+.ranking-table td { padding: 0.25rem 0.3rem; color: var(--color-text-muted); }
+.ranking-table td:first-child { font-weight: 700; color: var(--color-text); }
+.ranking-unidade { font-size: 0.7rem; color: var(--color-text-muted); margin-top: 0.25rem; }
+
+/* ── Missões ── */
+.missoes-lista { display: flex; flex-direction: column; gap: 0.35rem; }
+.missao-item {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.missao-motivo { font-size: 0.7rem; color: var(--color-text-muted); padding: 0.1rem 0.4rem; background: var(--color-surface-2); border-radius: var(--radius-sm); }
+
+/* ── Reconciliação ── */
+.reconciliacao-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--gap);
+}
+.reconciliacao-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+.reconciliacao-card[data-frente="operacional"] { border-top: 3px solid var(--color-op); }
+.reconciliacao-card[data-frente="projeto"]     { border-top: 3px solid var(--color-prj); }
+.reconciliacao-card[data-frente="analise"]     { border-top: 3px solid var(--color-ana); }
+.reconciliacao-card h3 { font-size: 0.9rem; margin-bottom: 0.5rem; }
+.reconciliacao-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+.reconciliacao-table th { text-align: left; color: var(--color-text-muted); padding: 0.2rem 0.3rem; font-weight: 600; border-bottom: 1px solid var(--color-border); }
+.reconciliacao-table td { padding: 0.25rem 0.3rem; color: var(--color-text-muted); }
+.reconciliacao-total td { font-weight: 700; color: var(--color-text); border-top: 1px solid var(--color-border); }
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
