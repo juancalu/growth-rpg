@@ -509,9 +509,23 @@ body {
 .guild-card[data-frente="analise"]     { border-top-color: var(--color-ana); }
 
 .guild-card h3 {
+  font-family: var(--font-display);
   font-size: var(--text-base);
+  letter-spacing: 0.05em;
   margin-bottom: var(--space-2);
 }
+
+/* — Visualização temática da guild (BLK-A12) — */
+.guild-viz {
+  display: block;
+  width: 100%;
+  margin: var(--space-2) 0;
+  border-radius: var(--radius-sm);
+}
+
+.guild-viz--hexgrid { max-height: 44px; }
+.guild-viz--blocks  { max-height: 92px; }
+.guild-viz--fog     { max-height: 48px; }
 
 .guild-stats {
   font-size: var(--text-sm);

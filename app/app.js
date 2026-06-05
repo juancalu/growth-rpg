@@ -146,6 +146,60 @@ function personagemCard(p, emblemasCatalogo) {
     </article>`;
 }
 
+// ── Guild — visualizações temáticas (BLK-A12) ─────────────────────────────────
+
+function guildHexGridViz(g, color) {
+  const row1 = [10, 27, 44, 61, 78, 95, 112].map(x => [x, 12]);
+  const row2 = [18, 35, 52, 70, 86, 103, 120].map(x => [x, 28]);
+  const positions = [...row1, ...row2];
+  const N = positions.length;
+  const pct = Math.min(1, g.entregue_quinzena / g.camadas.stretch);
+  const lit = Math.round(pct * N);
+  const cmpN = Math.round(g.camadas.comprometida / g.camadas.stretch * N);
+  const alvoN = Math.round(g.camadas.alvo / g.camadas.stretch * N);
+  const hexes = positions.map(([cx, cy], i) => {
+    const on = i < lit;
+    const op = on ? (i < cmpN ? '0.85' : i < alvoN ? '0.65' : '0.45') : '0.12';
+    return `<polygon points="10,0 5,9 -5,9 -10,0 -5,-9 5,-9" transform="translate(${cx},${cy})" fill="${on ? color : 'none'}" stroke="${color}" stroke-width="1" opacity="${op}"/>`;
+  }).join('');
+  return `<svg class="guild-viz guild-viz--hexgrid" viewBox="0 0 130 40" aria-hidden="true">${hexes}</svg>`;
+}
+
+function guildBuildingBlocksViz(g, color) {
+  const N = 10;
+  const pct = Math.min(1, g.entregue_quinzena / g.camadas.stretch);
+  const lit = Math.round(pct * N);
+  const cmpN = Math.round(g.camadas.comprometida / g.camadas.stretch * N);
+  const alvoN = Math.round(g.camadas.alvo / g.camadas.stretch * N);
+  const blocks = Array.from({ length: N }, (_, i) => {
+    const col = i % 2;
+    const row = Math.floor(i / 2);
+    const x = col * 55 + 8;
+    const y = (4 - row) * 16 + 4;
+    const on = i < lit;
+    const op = on ? (i < cmpN ? '0.8' : i < alvoN ? '0.6' : '0.4') : '0.12';
+    return `<rect x="${x}" y="${y}" width="44" height="12" rx="2" fill="${on ? color : 'none'}" stroke="${color}" stroke-width="1" opacity="${op}"/>`;
+  }).join('');
+  return `<svg class="guild-viz guild-viz--blocks" viewBox="0 0 115 88" aria-hidden="true">${blocks}</svg>`;
+}
+
+function guildFogMapViz(g, color) {
+  const pct = Math.min(1, g.entregue_quinzena / g.camadas.stretch);
+  const fogOp = Math.max(0.08, 0.82 - pct * 0.74).toFixed(2);
+  const nodes = [[20, 15, 5], [45, 28, 4], [70, 12, 6], [95, 32, 4], [120, 18, 5], [145, 28, 3]];
+  const dots = nodes.map(([x, y, r], i) => {
+    const op = Math.min(1, pct * 1.5 + i * 0.04).toFixed(2);
+    return `<circle cx="${x}" cy="${y}" r="${r}" fill="${color}" opacity="${op}"/>`;
+  }).join('');
+  return `<svg class="guild-viz guild-viz--fog" viewBox="0 0 165 44" aria-hidden="true"><rect x="0" y="0" width="165" height="44" rx="4" fill="${color}" opacity="0.06"/>${dots}<rect x="0" y="0" width="165" height="44" rx="4" fill="var(--color-bg)" opacity="${fogOp}"/></svg>`;
+}
+
+function guildThematicViz(f, g, color) {
+  if (f === 'operacional') return guildHexGridViz(g, color);
+  if (f === 'projeto') return guildBuildingBlocksViz(g, color);
+  return guildFogMapViz(g, color);
+}
+
 // ── Guild ─────────────────────────────────────────────────────────────────────
 
 function renderGuild(guild) {
@@ -161,6 +215,7 @@ function renderGuild(guild) {
     return `
       <div class="guild-card" data-frente="${f}">
         <h3>${LABEL_FRENTE[f]} — ${objLabel}</h3>
+        ${guildThematicViz(f, g, cssVar(TOKEN_FRENTE[f]))}
         <ul class="guild-stats">
           <li>Entregue: <strong>${g.entregue_quinzena} ${g.unidade}</strong></li>
           <li>Camada atingida: <strong>${g.camada_atingida || '—'}</strong></li>
