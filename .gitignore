@@ -22,6 +22,9 @@ dados.local.json
 # cópia local p/ servir o app em dev (o canônico fica na raiz)
 app/dados.json
 
+# refs de design (stock/terceiros — não versionar)
+Fotos Exemplo/
+
 # Sinalizador do ralph loop
 LOOP_DONE
 
