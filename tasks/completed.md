@@ -60,3 +60,13 @@ Transitions 0.15s ease em cards; focus-visible com outline --color-op.
 Estados de borda validados via fixtures: baseline-zero, sem missões, guild abaixo da comprometida.
 **Aceite atingido:** `ruff check .` ✅ · `pytest -v` 26/26 ✅ ·
 @keyframes ✅ · :hover ✅ · reduced-motion ✅ · fixtures de borda ✅.
+
+---
+
+## BLK-A7 — Acessibilidade & polish final ✅ (2026-06-05, BLK-A7)
+- `--color-text-faint` corrigido: #64748b → #8492a6 (3.97:1 → 5.97:1 no bg; 3.53:1 → 5.32:1 no surface).
+- `favicon.svg` criado (SVG local, dark bg + "G" ciano). index.html: meta description + favicon + role="main".
+- `tests/test_a11y.py`: lang, título, meta description, favicon local, sections aria-labelledby,
+  canvas aria-label, role=progressbar, WCAG AA text-faint.
+- Nenhum hex fora de :root; todos os testes antigos continuam verdes.
+**Aceite atingido:** `ruff check .` ✅ · `pytest -v` 35/35 ✅ · WCAG AA text-faint ✅ · favicon local ✅.

@@ -4,43 +4,36 @@
 Builder
 
 ## Bloco / Objetivo
-BLK-A6 — Micro-interações, motion & estados. Hover/focus, transições, animações CSS discretas, e todos os estados de borda renderizando sem quebrar.
+BLK-A7 — Acessibilidade & polish final. HTML semântico completo, aria-*, favicon local, WCAG AA em todos os pares de texto, limpeza final.
 
 ## Plano técnico
-1. **`app/style.css`** — Adicionar:
-   - **Hover states**: `personagem-card:hover` → `box-shadow: var(--shadow-md)`, `frente-card:hover` → fundo levemente mais claro.
-   - **Transições**: `personagem-card`, `frente-card`, `guild-card`, `emblema-chip` recebem `transition: box-shadow/background 0.15s ease`.
-   - **Focus-visible**: `a:focus-visible`, elementos clicáveis → `outline` com `--color-op`, `outline-offset: 2px`.
-   - **`@keyframes emblema-in`**: scale(0.8)+opacity(0) → scale(1)+opacity(1). Aplicado em `.emblema-chip`.
-   - **`@keyframes fade-in`**: opacity 0→1. Aplicado em `.personagem-card`, `.guild-card`, `.evento-card`.
-   - `prefers-reduced-motion` já desliga `transition` e `animation` — verificar que cobre as novas animações.
-2. **`app/app.js`** — Verificar/reforçar edge cases:
-   - `nivel = 0, xp_no_nivel = 0`: `xpBarHtml(0, N)` → pct=0, mostra "0/N XP" (já tratado).
-   - `missoes_organizacao = []` → "tudo tagueado" (já tratado).
-   - `camada_atingida = null/undefined` → `||'—'` (já tratado).
-   - `eventos.lista = []` → "nenhum evento" (já tratado).
-   - `emblemas_quinzena = []` → "nenhum emblema" (já tratado).
-   - Não há mudança necessária no JS — os estados já estão tratados; registrar no handoff.
-3. **`tests/test_estados.py`** — Novo teste Python:
-   - `test_prefers_reduced_motion()`: style.css tem `@media (prefers-reduced-motion: reduce)` com `animation: none`.
-   - `test_hover_states()`: style.css tem seletores `:hover` para cards.
-   - `test_animacoes_keyframes()`: style.css tem `@keyframes emblema-in` e `@keyframes fade-in`.
-   - `test_estado_baseline_zero()`: cria fixture com nivel=0, xp_total=0 baseado no golden; passa no `validar_arquivo`.
-   - `test_estado_sem_missoes()`: fixture com `missoes_organizacao=[]`; passa no validador.
-   - `test_estado_guild_abaixo()`: fixture com `entregue_quinzena < camadas.comprometida` e `camada_atingida=null`; passa no validador.
-   - `test_error_state_js()`: app.js tem `app-error` e `hidden` (tratamento de erro de fetch).
+1. **`app/style.css`** — Corrigir `--color-text-faint: #64748b → #8492a6` (atual falha AA: 3.97:1 no bg; novo: 5.97:1 no bg, 5.32:1 no surface). Atualizar só o token no :root.
+2. **`app/index.html`** — Adicionar:
+   - `<link rel="icon" href="favicon.svg" type="image/svg+xml">`
+   - `<meta name="description" content="Growth RPG — painel gamificado de produtividade do time DEG">`
+   - `role="main"` em `<main>` se não presente.
+3. **`app/favicon.svg`** — Criar SVG simples: fundo dark (#1a1d27), letra "G" ou ícone em cyan (#06b6d4). Sem URLs externas.
+4. **`tests/test_a11y.py`** — Novo teste:
+   - `test_titulo_html()`: index.html tem `<title>` com "Growth RPG".
+   - `test_meta_description()`: index.html tem `<meta name="description"`.
+   - `test_favicon_local()`: index.html referencia `favicon.svg` local; o arquivo existe em app/.
+   - `test_sections_aria_labelledby()`: sections principais têm `aria-labelledby`.
+   - `test_canvas_aria_labels()`: app.js não tem `<canvas` sem `aria-label`.
+   - `test_xp_bar_role_progressbar()`: app.js tem `role="progressbar"` com `aria-valuenow`.
+   - `test_wcag_aa_text_faint()`: --color-text-faint ≥ 4.5:1 em --color-bg e --color-surface.
+   - `test_lang_atributo()`: index.html tem `lang="pt-BR"`.
 
-## Arquivos a alterar
-- `app/style.css` (modificar — hover/focus/transitions/keyframes)
-- `tests/test_estados.py` (criar)
-- `app/app.js` (sem mudança necessária — estados já tratados)
+## Arquivos a alterar/criar
+- `app/style.css` (modificar — --color-text-faint)
+- `app/index.html` (modificar — favicon, meta description)
+- `app/favicon.svg` (criar)
+- `tests/test_a11y.py` (criar)
 
 ## Critérios de aceite
 - `ruff check .` verde
-- `pytest -q` verde (inclui test_estados.py)
-- `@keyframes emblema-in` e `fade-in` em style.css
-- `:hover` em cards de personagem, guild, frente
-- `prefers-reduced-motion` anula animações
+- `pytest -q` verde (inclui test_a11y.py)
+- --color-text-faint ≥ 4.5:1 em bg e surface
+- favicon.svg existe e é referenciado
 
 ## Validações obrigatórias
 - `ruff check .`
@@ -50,11 +43,10 @@ BLK-A6 — Micro-interações, motion & estados. Hover/focus, transições, anim
 Normal
 
 ## Fora de escopo
-- Acessibilidade completa (aria, teclado) → BLK-A7
 - Deploy → BLK-A8
+- Auditoria visual (review humano)
 
 ## Resultado Builder
-Implementado. `ruff check .` ✅ · `pytest -v` 26/26 ✅.
-CSS: @keyframes emblema-in, fade-in; :hover para cards; focus-visible; transitions 0.15s.
-Estados: baseline-zero, sem missões, guild abaixo da comprometida — todos passam no validador.
-BLK-A6 movido para completed.md.
+Implementado. `ruff check .` ✅ · `pytest -v` 35/35 ✅.
+--color-text-faint corrigido (5.97:1). favicon.svg criado. index.html: meta desc + favicon.
+BLK-A7 movido para completed.md.
