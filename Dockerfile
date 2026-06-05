@@ -12,6 +12,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN npm install -g @anthropic-ai/claude-code && \
     pip install --no-cache-dir pytest ruff jsonschema
 
+# Usuário não-root: o Claude Code RECUSA --dangerously-skip-permissions rodando como root.
+RUN useradd --create-home --uid 1000 loop
+USER loop
+ENV HOME=/home/loop
+# Identidade p/ os commits do loop + libera o git no volume montado (UID do host != container).
+RUN git config --global user.name  "ralph-loop" && \
+    git config --global user.email "ralph-loop@growth-rpg.local" && \
+    git config --global --add safe.directory /repo
+
 WORKDIR /repo
 # O repositório é montado como volume em runtime — o agente escreve SÓ aqui.
 ENTRYPOINT ["bash", "run-ralph-loop.sh"]

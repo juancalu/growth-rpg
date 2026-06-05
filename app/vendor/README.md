@@ -13,3 +13,16 @@ terceiros ficam aqui, baixadas e versionadas no repo.
 > Vendorizado **fora** do container do ralph loop (que roda com egress restrito e não baixaria CDN).
 > Para atualizar: troque a versão, rebaixe do cdnjs, recompute o SHA-256 e atualize este arquivo.
 > Use via `<script src="vendor/chart.min.js"></script>` — nunca por CDN.
+
+## fonts/cinzel-{400,700}.woff2
+- **Fonte:** Cinzel (display, serifada, "pôster de fantasia"). Para títulos/headers/números de destaque.
+- **Licença:** SIL Open Font License 1.1
+- **Origem:** `@fontsource/cinzel` (subset `latin`) via jsdelivr:
+  - https://cdn.jsdelivr.net/npm/@fontsource/cinzel@5/files/cinzel-latin-700-normal.woff2
+  - https://cdn.jsdelivr.net/npm/@fontsource/cinzel@5/files/cinzel-latin-400-normal.woff2
+- **SHA-256:**
+  - `8efa224fe70fef188a39c095e218b81fd31061809f2752537e33a9ec7b9c2263`  cinzel-700.woff2
+  - `b873cdd90d6bd9ca4793c805b4175abfae00b3611ee8afccf63067133dcf1217`  cinzel-400.woff2
+
+> Use via `@font-face` apontando para `vendor/fonts/` — nunca CDN de fonte. Body permanece em
+> *system font stack* (Cinzel é só display).
