@@ -4,49 +4,47 @@
 Builder
 
 ## Bloco / Objetivo
-BLK-A7 — Acessibilidade & polish final. HTML semântico completo, aria-*, favicon local, WCAG AA em todos os pares de texto, limpeza final.
+BLK-A8 (ÚLTIMO) — Deploy + auth + reconciliação. Escrever teste dos scripts de deploy; reforçar nota de paridade na seção de reconciliação.
 
 ## Plano técnico
-1. **`app/style.css`** — Corrigir `--color-text-faint: #64748b → #8492a6` (atual falha AA: 3.97:1 no bg; novo: 5.97:1 no bg, 5.32:1 no surface). Atualizar só o token no :root.
-2. **`app/index.html`** — Adicionar:
-   - `<link rel="icon" href="favicon.svg" type="image/svg+xml">`
-   - `<meta name="description" content="Growth RPG — painel gamificado de produtividade do time DEG">`
-   - `role="main"` em `<main>` se não presente.
-3. **`app/favicon.svg`** — Criar SVG simples: fundo dark (#1a1d27), letra "G" ou ícone em cyan (#06b6d4). Sem URLs externas.
-4. **`tests/test_a11y.py`** — Novo teste:
-   - `test_titulo_html()`: index.html tem `<title>` com "Growth RPG".
-   - `test_meta_description()`: index.html tem `<meta name="description"`.
-   - `test_favicon_local()`: index.html referencia `favicon.svg` local; o arquivo existe em app/.
-   - `test_sections_aria_labelledby()`: sections principais têm `aria-labelledby`.
-   - `test_canvas_aria_labels()`: app.js não tem `<canvas` sem `aria-label`.
-   - `test_xp_bar_role_progressbar()`: app.js tem `role="progressbar"` com `aria-valuenow`.
-   - `test_wcag_aa_text_faint()`: --color-text-faint ≥ 4.5:1 em --color-bg e --color-surface.
-   - `test_lang_atributo()`: index.html tem `lang="pt-BR"`.
+1. **`app/index.html`** — Atualizar `<p class="section-note">` da seção `#reconciliacao` para incluir nota de paridade: "Paridade por construção — mesmo motor (cowork/FLUXO 3). Escreva/ler apenas; nunca recalcula."
+2. **`deploy/Caddyfile.snippet`** e **`deploy/deploy.sh`** — Já existem e estão corretos. Sem alteração necessária.
+3. **`tests/test_deploy.py`** — Novo teste:
+   - `test_caddyfile_existe()`: `deploy/Caddyfile.snippet` existe.
+   - `test_caddyfile_autenticacao()`: contém `forward_auth` (Authelia).
+   - `test_caddyfile_file_server()`: contém `file_server` (serve estático).
+   - `test_caddyfile_sem_credenciais_hardcoded()`: não contém IPs fixos ou passwords (só templates SEU-DOMINIO).
+   - `test_deploy_sh_existe()`: `deploy/deploy.sh` existe.
+   - `test_deploy_sh_rsync()`: contém `rsync`.
+   - `test_deploy_sh_env_vars()`: usa `${VPS_USER}` e `${VPS_HOST}` (não hardcoded).
+   - `test_deploy_sh_sem_git_push()`: não contém `git push` (deploy é só rsync, não reescreve o branch).
+   - `test_reconciliacao_no_app()`: index.html tem `id="reconciliacao"`.
+4. **`LOOP_DONE`** — Criar na raiz quando todos os blocos estiverem em completed.md e pytest verde.
 
 ## Arquivos a alterar/criar
-- `app/style.css` (modificar — --color-text-faint)
-- `app/index.html` (modificar — favicon, meta description)
-- `app/favicon.svg` (criar)
-- `tests/test_a11y.py` (criar)
+- `app/index.html` (modificar — nota de paridade na seção reconciliação)
+- `tests/test_deploy.py` (criar)
+- `LOOP_DONE` (criar — sinaliza fim do loop)
 
 ## Critérios de aceite
 - `ruff check .` verde
-- `pytest -q` verde (inclui test_a11y.py)
-- --color-text-faint ≥ 4.5:1 em bg e surface
-- favicon.svg existe e é referenciado
+- `pytest -q` verde (inclui test_deploy.py)
+- LOOP_DONE criado na raiz
+- Todos os blocos em completed.md
 
 ## Validações obrigatórias
 - `ruff check .`
 - `pytest -q`
 
 ## Criticidade
-Normal
+Normal (scripts de deploy existentes; sem tocar validador/schema/regras de frente)
 
 ## Fora de escopo
-- Deploy → BLK-A8
-- Auditoria visual (review humano)
+- Publicar na VPS — gate humano
+- Push para main — proibido pelo loop
+- Escrever no ClickUp — proibido
 
 ## Resultado Builder
-Implementado. `ruff check .` ✅ · `pytest -v` 35/35 ✅.
---color-text-faint corrigido (5.97:1). favicon.svg criado. index.html: meta desc + favicon.
-BLK-A7 movido para completed.md.
+Implementado. `ruff check .` ✅ · `pytest -v` 45/45 ✅.
+Todos os blocos BLK-A1 a BLK-A8 em completed.md. LOOP_DONE criado.
+BLK-A8 movido para completed.md. Loop encerrado.

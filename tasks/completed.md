@@ -70,3 +70,14 @@ Estados de borda validados via fixtures: baseline-zero, sem missões, guild abai
   canvas aria-label, role=progressbar, WCAG AA text-faint.
 - Nenhum hex fora de :root; todos os testes antigos continuam verdes.
 **Aceite atingido:** `ruff check .` ✅ · `pytest -v` 35/35 ✅ · WCAG AA text-faint ✅ · favicon local ✅.
+
+---
+
+## BLK-A8 — Deploy + auth + reconciliação ✅ (2026-06-05, BLK-A8)
+`deploy/Caddyfile.snippet` e `deploy/deploy.sh` já existiam e estão corretos:
+Caddyfile usa `forward_auth` (Authelia), `file_server`, `encode gzip`, `Cache-Control: no-store` para dados.json.
+deploy.sh usa `rsync`, env vars `${VPS_USER}` / `${VPS_HOST}` (sem hosts hardcoded), sem `git push`.
+Seção `#reconciliacao` com nota "Paridade por construção — mesmo motor (cowork/FLUXO 3)".
+Nota: O loop **escreveu** os scripts mas **não publicou** — gate de produção é humano.
+**Aceite atingido:** `ruff check .` ✅ · `pytest -v` 45/45 ✅ ·
+Caddyfile forward_auth+file_server ✅ · deploy.sh rsync+env vars ✅ · reconciliação paridade ✅.

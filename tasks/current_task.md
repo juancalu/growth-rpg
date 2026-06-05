@@ -1,8 +1,11 @@
 # Current Task
 
-Status: BLK-A7 CONCLUÍDO — próximo: BLK-A8
+Status: TODOS OS BLOCOS CONCLUÍDOS ✅ — LOOP_DONE criado
 
-BLK-A7 — Acessibilidade & polish final
-- Atualizado: `app/style.css` (--color-text-faint #8492a6), `app/index.html` (favicon, meta desc)
-- Criado: `app/favicon.svg`, `tests/test_a11y.py`
-- `ruff check .` ✅ · `pytest -v` 35/35 ✅
+BLK-A8 — Deploy + auth + reconciliação
+- `deploy/Caddyfile.snippet` + `deploy/deploy.sh` verificados e corretos
+- `app/index.html` (nota de paridade na reconciliação)
+- Criado: `tests/test_deploy.py`, `LOOP_DONE`
+- `ruff check .` ✅ · `pytest -v` 45/45 ✅
+
+Todos os blocos (BLK-A1 a BLK-A8) em tasks/completed.md. Suite verde. Loop encerrado.
