@@ -81,3 +81,13 @@ Seção `#reconciliacao` com nota "Paridade por construção — mesmo motor (co
 Nota: O loop **escreveu** os scripts mas **não publicou** — gate de produção é humano.
 **Aceite atingido:** `ruff check .` ✅ · `pytest -v` 45/45 ✅ ·
 Caddyfile forward_auth+file_server ✅ · deploy.sh rsync+env vars ✅ · reconciliação paridade ✅.
+
+---
+
+## BLK-A9 — Atmosfera dark-fantasy ✅ (2026-06-05, BLK-A9)
+Fundo em camadas no `body`: SVG grain (base64, zero URL externa), vinheta radial, aura ciano 15%/10%,
+aura violeta 85%/90%, gradiente base direcional 160°. Tokens adicionados ao `:root`:
+`--aura-op/prj/ana` (rgba), `--shadow-glow-op/prj/ana`, `--shadow-lg`. Hover glow frente-específico
+em `.guild-card[data-frente]` e `.frente-card[data-frente]`. Nenhuma URL `http(s)://` no CSS.
+**Aceite atingido:** `ruff check .` ✅ · `pytest -v` 49/49 ✅ ·
+aura tokens ✅ · multicamadas ✅ · sem URL externa ✅ · WCAG AA mantido ✅.
