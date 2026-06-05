@@ -19,7 +19,8 @@ config/secrets.json
 # Dados derivados / histórico (regeneráveis; backup vive em 2 cópias, não no git)
 historico/
 dados.local.json
-app/dados.json   # cópia local p/ servir o app em dev (o canônico fica na raiz)
+# cópia local p/ servir o app em dev (o canônico fica na raiz)
+app/dados.json
 
 # Sinalizador do ralph loop
 LOOP_DONE
