@@ -4,56 +4,51 @@
 Builder
 
 ## Bloco / Objetivo
-BLK-A2 — App: fundação funcional. Front que carrega `dados.json` e renderiza TODAS as seções do contrato (correto antes de bonito).
+BLK-A3 — Design system & tema. Tokens CSS coesos em `:root`; zero hex fora do bloco de tokens; WCAG AA verificável por teste Python.
 
 ## Plano técnico
-1. **`app/index.html`** — HTML semântico: header (meta/quinzena), main com 7 sections (`#personagens`, `#guild`, `#eventos`, `#ranking`, `#missoes`, `#reconciliacao`, `#error`). Referencia `style.css`, `vendor/chart.min.js` (script global), `app.js` (type=module). Zero CDN.
-2. **`app/style.css`** — Dark theme funcional (não finalizado; BLK-A3 refina). CSS custom properties mínimas para cores de frente (ciano/âmbar/violeta), cartões, barra de XP, chips de emblema. `prefers-reduced-motion` presente.
-3. **`app/app.js`** — ES module. `fetch('dados.json')` → `renderApp(dados)`. Funções:
-   - `renderMeta(meta)` → quinzena label/datas/ancora no header
-   - `renderPersonagens(pessoas, emblemasCatalogo)` → cards com 3 frentes cada: classe, nível, titulo do tier, barra XP (`xp_no_nivel`/`xp_para_proximo`), vazão, emblemas_quinzena, emblemas_historico
-   - `renderGuild(guild)` → 3 frentes: camadas (comprometida/alvo/stretch), entregue_quinzena, camada_atingida, Chart.js bar chart horizontal (4 barras: comprometida/alvo/stretch/entregue), contribuicoes_quinzena
-   - `renderEventos(eventos, emblemasCatalogo)` → lista de hordas: nome, frente, hp, restante, concluido, tarefas com assignee/pontos/complexidade
-   - `renderRanking(ranking_quinzena)` → tabela por frente (mesma unidade), pos/pessoa/valor/vazão — secundário/cosmético
-   - `renderMissoes(missoes_organizacao)` → lista de missões com motivo
-   - `renderReconciliacao(guild)` → contribuições por pessoa × frente vs total_equipe_quinzena
-   - Estado de erro: `#app-error` visível se fetch falha
-4. **`tests/test_app.py`** — Teste Python leve:
-   - `test_sem_url_externa()`: nenhum `https?://` em `app/**/*.{html,css,js}`
-   - `test_campos_do_contrato()`: `app.js` contém campos-chave do contrato (`xp_no_nivel`, `xp_para_proximo`, `vazao_quinzena`, `emblemas_quinzena`, `guild`, `ranking_quinzena`, `missoes_organizacao`, `eventos`)
-   - `test_vendor_chart_usado()`: `index.html` referencia `vendor/chart.min.js`, sem `cdn`
+1. **`app/style.css`** — Reescrever `:root {}` com sistema de tokens completo:
+   - Paleta de cores (frentes + neutros + status); **TODOS os hexes aqui**
+   - Escala de espaçamento (--space-1…--space-12, múltiplos de 4px/0.25rem)
+   - Escala tipográfica (--text-xs…--text-2xl)
+   - Pesos de fonte (--fw-normal…--fw-bold)
+   - Raios (--radius-sm, --radius, --radius-lg, --radius-full)
+   - Sombras (--shadow-sm, --shadow-md) — usa rgba(), não hex
+   - Line-heights (--leading-tight, --leading-normal, --leading-relaxed)
+   - Nos componentes: substituir **todos** os hex por `var()`. Mágicos de espaçamento → tokens onde possível.
+2. **`app/app.js`** — Atualizar `guildChart()` para ler cores via `getComputedStyle` ao invés de hex hardcoded (--color-op/prj/ana). Ticks e grid do Chart.js lêem --color-text-muted / --color-border via CSS var.
+3. **`tests/test_design.py`** — Novo teste Python:
+   - `test_sem_hex_fora_root()`: parse style.css; remove bloco `:root {…}`; verifica que nenhum `#[0-9a-fA-F]{3,8}` aparece no restante.
+   - `test_wcag_aa()`: parse tokens hex do `:root`; calcula luminância relativa; verifica contraste ≥ 4.5:1 para pares texto/fundo principais: --color-text × --color-bg, --color-text × --color-surface, --color-text-muted × --color-bg, --color-text-muted × --color-surface. Pares de status (≥ 3.0:1 large text mínimo): --color-success × --color-success-bg, --color-warning × --color-warning-bg, --color-error-text × --color-error-bg.
+   - `test_fontes_sem_cdn()`: style.css não contém `fonts.googleapis` nem `fonts.gstatic` nem `@import url(http`.
 
-## Arquivos a alterar/criar
-- `app/index.html` (criar)
-- `app/style.css` (criar)
-- `app/app.js` (criar)
-- `tests/test_app.py` (criar)
-- `context/handoff.md` (este arquivo — atualizar após build)
+## Arquivos a alterar
+- `app/style.css` (modificar — reescrita total do :root + componentes)
+- `app/app.js` (modificar — guildChart lê CSS vars)
+- `tests/test_design.py` (criar)
 
 ## Critérios de aceite
 - `ruff check .` verde
-- `pytest -q` verde (inclui `test_app.py`, `test_smoke.py`, `test_contract.py`)
-- `tests/test_app.py::test_sem_url_externa` passa (zero `http(s)://` em `app/`)
-- `tests/test_app.py::test_campos_do_contrato` passa (campos do contrato referenciados)
-- `tests/test_app.py::test_vendor_chart_usado` passa
+- `pytest -q` verde (inclui test_design.py)
+- `test_sem_hex_fora_root` passa (zero hex fora do :root em style.css)
+- `test_wcag_aa` passa (≥ 4.5:1 text+bg pares principais)
+- `test_fontes_sem_cdn` passa
 
 ## Validações obrigatórias
 - `ruff check .`
 - `pytest -q`
 
 ## Criticidade
-Normal (não toca `contract/validate.py`, `config/schema/dados.schema.json` nem regra não-soma-entre-frentes no motor)
+Normal
 
 ## Fora de escopo
-- Design refinado (tokens, paleta final) → BLK-A3
-- Layout responsivo completo → BLK-A4
+- Layout/responsividade completa → BLK-A4
 - Animações/motion → BLK-A6
-- Acessibilidade completa → BLK-A7
+- Acessibilidade completa (aria, teclado) → BLK-A7
 - Deploy → BLK-A8
-- Recalcular scoring — o motor é o cowork; este repo só apresenta
-- Suposições de produto novas (registrar no handoff se aparecerem)
+- Recalcular scoring
 
 ## Resultado Builder
-Implementado. `ruff check .` ✅ · `pytest -v` 6/6 ✅.
-QA aprovado: zero URL externa, sem mistura de frentes, ranking só por frente, zero soma cruzada.
-BLK-A2 movido para completed.md.
+Implementado. `ruff check .` ✅ · `pytest -v` 10/10 ✅.
+QA: zero hex fora de :root (19 tokens), WCAG AA passando (texto ≥ 4.5:1, status ≥ 3.0:1), sem CDN de fontes.
+BLK-A3 movido para completed.md.

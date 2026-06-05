@@ -1,4 +1,4 @@
-// Growth RPG — BLK-A2: fundação funcional
+// Growth RPG — BLK-A3: lê cores do design system via CSS custom properties
 
 const FRENTES = ['operacional', 'projeto', 'analise'];
 
@@ -8,10 +8,14 @@ const LABEL_FRENTE = {
   analise: 'Análise',
 };
 
-const COR_FRENTE = {
-  operacional: '#06b6d4',
-  projeto: '#f59e0b',
-  analise: '#8b5cf6',
+function cssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
+const TOKEN_FRENTE = {
+  operacional: '--color-op',
+  projeto:     '--color-prj',
+  analise:     '--color-ana',
 };
 
 const OBJETIVO_LABEL = {
@@ -177,7 +181,9 @@ function guildChart(f, g) {
   if (!canvas || typeof Chart === 'undefined') return;
   const { comprometida, alvo, stretch } = g.camadas;
   const entregue = g.entregue_quinzena;
-  const cor = COR_FRENTE[f];
+  const cor = cssVar(TOKEN_FRENTE[f]);
+  const tickColor = cssVar('--color-text-muted');
+  const gridColor = cssVar('--color-border');
 
   new Chart(canvas, {
     type: 'bar',
@@ -204,11 +210,11 @@ function guildChart(f, g) {
       scales: {
         x: {
           beginAtZero: true,
-          ticks: { color: '#94a3b8' },
-          grid: { color: '#2e3348' },
+          ticks: { color: tickColor },
+          grid: { color: gridColor },
         },
         y: {
-          ticks: { color: '#94a3b8' },
+          ticks: { color: tickColor },
           grid: { display: false },
         },
       },

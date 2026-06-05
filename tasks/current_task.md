@@ -1,8 +1,8 @@
 # Current Task
 
-Status: BLK-A2 CONCLUÍDO — próximo: BLK-A3
+Status: BLK-A3 CONCLUÍDO — próximo: BLK-A4
 
-BLK-A2 — App: fundação funcional
-- Criados: `app/index.html`, `app/style.css`, `app/app.js`, `tests/test_app.py`
-- `ruff check .` ✅ · `pytest -v` 6/6 ✅
-- Zero URL externa; campos do contrato referenciados; vendor/chart.min.js usado localmente
+BLK-A3 — Design system & tema
+- Atualizado: `app/style.css` (19 tokens hex em :root, zero hex fora), `app/app.js` (CSS vars no Chart)
+- Criado: `tests/test_design.py`
+- `ruff check .` ✅ · `pytest -v` 10/10 ✅

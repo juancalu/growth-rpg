@@ -21,3 +21,13 @@ eventos/hordas, ranking por frente (secundário, mesma unidade, sem mistura de f
 missões de organização, painel de reconciliação.
 **Aceite atingido:** `ruff check .` ✅ · `pytest -v` 6/6 ✅ ·
 `test_sem_url_externa` (zero CDN) ✅ · `test_campos_do_contrato` ✅ · `test_vendor_chart_usado` ✅.
+
+---
+
+## BLK-A3 — Design system & tema ✅ (2026-06-05, BLK-A3)
+Linguagem visual coesa via tokens CSS em `:root`. 19 tokens hex centralizados (cores, status).
+Escalas de espaçamento (--space-1…12), tipografia (--text-xs…2xl), raios, sombras, pesos, line-heights.
+Zero hex fora do `:root`; componentes usam `var()`. app.js atualizado: guildChart lê
+--color-op/prj/ana e ticks/grid do Chart.js via `getComputedStyle`. `prefers-reduced-motion` mantido.
+**Aceite atingido:** `ruff check .` ✅ · `pytest -v` 10/10 ✅ ·
+`test_sem_hex_fora_root` ✅ · `test_wcag_aa_texto_principal` ✅ · `test_wcag_aa_status` ✅ · `test_fontes_sem_cdn` ✅.
