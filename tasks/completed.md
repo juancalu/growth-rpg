@@ -31,3 +31,12 @@ Zero hex fora do `:root`; componentes usam `var()`. app.js atualizado: guildChar
 --color-op/prj/ana e ticks/grid do Chart.js via `getComputedStyle`. `prefers-reduced-motion` mantido.
 **Aceite atingido:** `ruff check .` ✅ · `pytest -v` 10/10 ✅ ·
 `test_sem_hex_fora_root` ✅ · `test_wcag_aa_texto_principal` ✅ · `test_wcag_aa_status` ✅ · `test_fontes_sem_cdn` ✅.
+
+---
+
+## BLK-A4 — Layout, hierarquia & responsividade ✅ (2026-06-05, BLK-A4)
+Grid/flex responsivo mobile-first: base 1-coluna (muito estreito), frentes-grid 3-col ≥ 360px,
+grids auto-fill ≥ 768px, layout 3-col fixo ≥ 1280px. `overflow-x: hidden` em html/body.
+Seções em ordem: personagens → guild → eventos → ranking → missões → reconciliação.
+**Aceite atingido:** `ruff check .` ✅ · `pytest -v` 14/14 ✅ ·
+breakpoints 360/768/1280 ✅ · overflow-x ✅ · ordem sections ✅ · viewport meta ✅.

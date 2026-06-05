@@ -643,6 +643,91 @@ body {
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   OVERFLOW HORIZONTAL — prevenção global
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+html,
+body {
+  overflow-x: hidden;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   RESPONSIVIDADE — mobile-first
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* — Base (estreito, ≤ 359 px) — */
+.personagens-grid,
+.guild-grid,
+.ranking-grid,
+.reconciliacao-grid {
+  grid-template-columns: 1fr;
+}
+
+.frentes-grid {
+  grid-template-columns: 1fr;
+}
+
+.site-header {
+  padding: var(--space-3) var(--space-4);
+}
+
+#main {
+  padding: var(--space-4) var(--space-3);
+}
+
+/* — Pequeno mobile (≥ 360 px): frentes volta a 3 colunas — */
+@media (min-width: 360px) {
+  .frentes-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* — Tablet (≥ 768 px) — */
+@media (min-width: 768px) {
+  .site-header {
+    padding: var(--space-4) var(--space-8);
+  }
+
+  #main {
+    padding: var(--space-6) var(--space-8);
+  }
+
+  .personagens-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  }
+
+  .guild-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  }
+
+  .ranking-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+  }
+
+  .reconciliacao-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  }
+}
+
+/* — Desktop (≥ 1280 px) — */
+@media (min-width: 1280px) {
+  .site-header {
+    padding: var(--space-4) var(--space-12);
+  }
+
+  #main {
+    padding: var(--space-8) var(--space-6);
+  }
+
+  .personagens-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .guild-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    REDUCED MOTION
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 @media (prefers-reduced-motion: reduce) {
