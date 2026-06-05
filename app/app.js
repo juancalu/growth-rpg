@@ -62,7 +62,7 @@ function renderMeta(meta) {
   const lbl = document.getElementById('quinzena-label');
   const dates = document.getElementById('quinzena-dates');
   const ancora = document.getElementById('quinzena-ancora');
-  if (lbl) lbl.textContent = q.label;
+  if (lbl) lbl.textContent = `Capitulo: ${q.label}`;
   if (dates) dates.textContent = `${q.de} → ${q.ate}`;
   if (ancora) ancora.textContent = q.ancora;
 }

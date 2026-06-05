@@ -141,13 +141,32 @@ body {
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   HEADER
+   HERO ÉPICO (BLK-A13)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .site-header {
-  background: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
-  padding: var(--space-4) var(--space-6);
-  box-shadow: var(--shadow-sm);
+  background: linear-gradient(180deg, rgba(10, 11, 22, 0.98) 0%, var(--color-surface) 100%);
+  border-bottom: none;
+  padding: var(--space-6) var(--space-6) var(--space-5);
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
+/* Linha de glow tricolor na borda inferior */
+.site-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(6, 182, 212, 0.5) 20%,
+    rgba(245, 158, 11, 0.4) 50%,
+    rgba(139, 92, 246, 0.5) 80%,
+    transparent 100%
+  );
 }
 
 .header-inner {
@@ -159,17 +178,22 @@ body {
 
 .site-title {
   font-family: var(--font-display);
-  font-size: var(--text-xl);
+  font-size: var(--text-2xl);
   font-weight: var(--fw-bold);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  text-shadow: 0 0 14px rgba(6, 182, 212, 0.55), 0 1px 4px rgba(0, 0, 0, 0.9);
+  text-shadow:
+    0 0 12px rgba(6, 182, 212, 0.7),
+    0 0 32px rgba(6, 182, 212, 0.3),
+    0 2px 6px rgba(0, 0, 0, 0.95);
 }
 
 .quinzena-label {
+  font-family: var(--font-display);
   font-size: var(--text-base);
   font-weight: var(--fw-semibold);
-  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+  color: var(--color-op);
 }
 
 .quinzena-dates {
@@ -771,6 +795,28 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* BLK-A13: conquista motions */
+@keyframes level-up {
+  0%   { transform: scale(1); }
+  25%  { transform: scale(1.18); text-shadow: 0 0 18px rgba(255, 255, 255, 0.9); }
+  60%  { transform: scale(0.96); }
+  100% { transform: scale(1); }
+}
+
+@keyframes emblema-cunhado {
+  0%   { transform: scale(0.4) rotate(-18deg); opacity: 0; }
+  55%  { transform: scale(1.12) rotate(3deg);  opacity: 1; }
+  78%  { transform: scale(0.96) rotate(-1deg); }
+  100% { transform: scale(1)    rotate(0deg);  opacity: 1; }
+}
+
+@keyframes horda-derrota {
+  0%   { transform: scale(1); }
+  18%  { transform: scale(1.08); box-shadow: 0 0 16px rgba(74, 222, 128, 0.5); }
+  50%  { transform: scale(0.97); }
+  100% { transform: scale(1); box-shadow: none; }
+}
+
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    MICRO-INTERAÇÕES — hover, focus, transições (BLK-A6)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -790,7 +836,15 @@ body {
 
 .emblema-chip {
   transition: transform 0.15s ease, border-color 0.15s ease;
-  animation: emblema-in 0.2s ease both;
+  animation: emblema-cunhado 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+.nivel {
+  animation: level-up 0.5s ease 0.1s both;
+}
+
+.evento-status--done {
+  animation: horda-derrota 0.5s ease 0.15s both;
 }
 
 /* — Hover states — */
