@@ -1,8 +1,8 @@
 # Current Task
 
-Status: BLK-A5 CONCLUÍDO — próximo: BLK-A6
+Status: BLK-A6 CONCLUÍDO — próximo: BLK-A7
 
-BLK-A5 — Data-viz & gráficos
-- Atualizado: `app/app.js` (guild chart stacked, guildContribChart, 2 Chart por frente)
-- Criado: `tests/test_dataviz.py`
-- `ruff check .` ✅ · `pytest -v` 19/19 ✅
+BLK-A6 — Micro-interações, motion & estados
+- Atualizado: `app/style.css` (@keyframes emblema-in/fade-in, :hover, transitions, focus-visible)
+- Criado: `tests/test_estados.py` (fixtures de borda + checks CSS)
+- `ruff check .` ✅ · `pytest -v` 26/26 ✅

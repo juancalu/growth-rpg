@@ -643,6 +643,75 @@ body {
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ANIMAÇÕES (BLK-A6)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@keyframes emblema-in {
+  from { transform: scale(0.8); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MICRO-INTERAÇÕES — hover, focus, transições (BLK-A6)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* — Transições em cards — */
+.personagem-card,
+.guild-card,
+.evento-card,
+.ranking-card,
+.reconciliacao-card {
+  transition: box-shadow 0.15s ease;
+}
+
+.frente-card {
+  transition: background 0.15s ease;
+}
+
+.emblema-chip {
+  transition: transform 0.15s ease, border-color 0.15s ease;
+  animation: emblema-in 0.2s ease both;
+}
+
+/* — Hover states — */
+.personagem-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.frente-card:hover {
+  background: var(--color-surface-3);
+}
+
+.guild-card:hover,
+.ranking-card:hover,
+.reconciliacao-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.emblema-chip:hover {
+  transform: scale(1.05);
+}
+
+/* — Cards com fade-in ao aparecer — */
+.personagem-card,
+.guild-card {
+  animation: fade-in 0.2s ease both;
+}
+
+/* — Focus visible (acessibilidade de teclado) — */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-op);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    OVERFLOW HORIZONTAL — prevenção global
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 html,

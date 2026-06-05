@@ -49,3 +49,14 @@ Guild chart melhorado: stacked bar com 3 datasets (comprometida / delta-alvo / d
 CSS colors lidas via `cssVar()` (getComputedStyle). 2 instâncias de Chart por frente = 6 total.
 **Aceite atingido:** `ruff check .` ✅ · `pytest -v` 19/19 ✅ ·
 camadas stacked ✅ · contrib chart ✅ · sem CDN ✅.
+
+---
+
+## BLK-A6 — Micro-interações, motion & estados ✅ (2026-06-05, BLK-A6)
+CSS: `@keyframes emblema-in` (scale+opacity) e `fade-in` (slide+opacity) para chips e cards.
+Hover: shadow-md em personagem/guild/ranking/reconciliação; fundo mais claro em frente-card.
+Transitions 0.15s ease em cards; focus-visible com outline --color-op.
+`prefers-reduced-motion` desliga todas as transições + animações.
+Estados de borda validados via fixtures: baseline-zero, sem missões, guild abaixo da comprometida.
+**Aceite atingido:** `ruff check .` ✅ · `pytest -v` 26/26 ✅ ·
+@keyframes ✅ · :hover ✅ · reduced-motion ✅ · fixtures de borda ✅.
