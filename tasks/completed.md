@@ -40,3 +40,12 @@ grids auto-fill ≥ 768px, layout 3-col fixo ≥ 1280px. `overflow-x: hidden` em
 Seções em ordem: personagens → guild → eventos → ranking → missões → reconciliação.
 **Aceite atingido:** `ruff check .` ✅ · `pytest -v` 14/14 ✅ ·
 breakpoints 360/768/1280 ✅ · overflow-x ✅ · ordem sections ✅ · viewport meta ✅.
+
+---
+
+## BLK-A5 — Data-viz & gráficos ✅ (2026-06-05, BLK-A5)
+Guild chart melhorado: stacked bar com 3 datasets (comprometida / delta-alvo / delta-stretch, stack='meta')
++ entregue (stack='real'). Novo `guildContribChart()`: horizontal bar por pessoa com `contribuicoes_quinzena`.
+CSS colors lidas via `cssVar()` (getComputedStyle). 2 instâncias de Chart por frente = 6 total.
+**Aceite atingido:** `ruff check .` ✅ · `pytest -v` 19/19 ✅ ·
+camadas stacked ✅ · contrib chart ✅ · sem CDN ✅.

@@ -160,10 +160,12 @@ function renderGuild(guild) {
           <li>Comprometida: ${g.camadas.comprometida} · Alvo: ${g.camadas.alvo} · Stretch: ${g.camadas.stretch}</li>
         </ul>
         <canvas id="guild-chart-${f}" height="80"
-                aria-label="Gráfico de progresso guild ${f}"></canvas>
+                aria-label="Gráfico de camadas guild ${f}"></canvas>
         <div class="guild-contrib">
           <h4>Contribuições da quinzena</h4>
-          <ul>
+          <canvas id="guild-contrib-${f}" height="60"
+                  aria-label="Contribuições por pessoa — ${f}"></canvas>
+          <ul class="guild-contrib-lista" aria-hidden="true">
             ${Object.entries(g.contribuicoes_quinzena).map(([nome, val]) =>
               `<li>${nome}: <strong>${val} ${g.unidade}</strong></li>`
             ).join('')}
@@ -173,7 +175,10 @@ function renderGuild(guild) {
       </div>`;
   }).join('');
 
-  FRENTES.forEach(f => guildChart(f, guild[f]));
+  FRENTES.forEach(f => {
+    guildChart(f, guild[f]);
+    guildContribChart(f, guild[f]);
+  });
 }
 
 function guildChart(f, g) {
@@ -188,11 +193,86 @@ function guildChart(f, g) {
   new Chart(canvas, {
     type: 'bar',
     data: {
-      labels: ['Comprometida', 'Alvo', 'Stretch', 'Entregue'],
+      labels: ['Meta (camadas)', 'Entregue'],
+      datasets: [
+        {
+          label: `Comprometida (${comprometida})`,
+          data: [comprometida, null],
+          backgroundColor: cor + '33',
+          borderColor: cor + '77',
+          borderWidth: 1,
+          stack: 'meta',
+        },
+        {
+          label: `Alvo (+${alvo - comprometida})`,
+          data: [alvo - comprometida, null],
+          backgroundColor: cor + '55',
+          borderColor: cor,
+          borderWidth: 1,
+          stack: 'meta',
+        },
+        {
+          label: `Stretch (+${stretch - alvo})`,
+          data: [stretch - alvo, null],
+          backgroundColor: cor + '22',
+          borderColor: cor + '55',
+          borderWidth: 1,
+          borderDash: [4, 4],
+          stack: 'meta',
+        },
+        {
+          label: `Entregue (${entregue})`,
+          data: [null, entregue],
+          backgroundColor: cor,
+          stack: 'real',
+        },
+      ],
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom', labels: { boxWidth: 10, color: tickColor } },
+        tooltip: {
+          callbacks: {
+            label: ctx => `${ctx.dataset.label}: ${ctx.parsed.x} ${g.unidade}`,
+          },
+        },
+      },
+      scales: {
+        x: {
+          stacked: true,
+          beginAtZero: true,
+          ticks: { color: tickColor },
+          grid: { color: gridColor },
+        },
+        y: {
+          stacked: true,
+          ticks: { color: tickColor },
+          grid: { display: false },
+        },
+      },
+    },
+  });
+}
+
+function guildContribChart(f, g) {
+  const canvas = document.getElementById(`guild-contrib-${f}`);
+  if (!canvas || typeof Chart === 'undefined') return;
+  const entries = Object.entries(g.contribuicoes_quinzena);
+  const cor = cssVar(TOKEN_FRENTE[f]);
+  const tickColor = cssVar('--color-text-muted');
+  const gridColor = cssVar('--color-border');
+
+  new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: entries.map(([nome]) => nome),
       datasets: [{
-        data: [comprometida, alvo, stretch, entregue],
-        backgroundColor: [cor + '33', cor + '66', cor + '22', cor],
-        borderColor: [cor, cor, cor, cor],
+        label: `${g.unidade} entregues`,
+        data: entries.map(([, val]) => val),
+        backgroundColor: cor + '88',
+        borderColor: cor,
         borderWidth: 1,
       }],
     },

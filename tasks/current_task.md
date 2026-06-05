@@ -1,8 +1,8 @@
 # Current Task
 
-Status: BLK-A4 CONCLUÍDO — próximo: BLK-A5
+Status: BLK-A5 CONCLUÍDO — próximo: BLK-A6
 
-BLK-A4 — Layout, hierarquia & responsividade
-- Atualizado: `app/style.css` (media queries 360/768/1280, overflow-x: hidden, grids responsivos)
-- Criado: `tests/test_layout.py`
-- `ruff check .` ✅ · `pytest -v` 14/14 ✅
+BLK-A5 — Data-viz & gráficos
+- Atualizado: `app/app.js` (guild chart stacked, guildContribChart, 2 Chart por frente)
+- Criado: `tests/test_dataviz.py`
+- `ruff check .` ✅ · `pytest -v` 19/19 ✅
