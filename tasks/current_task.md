@@ -1,6 +1,6 @@
 # Current Task
 
-Status: BLK-A13 ✅ — próximo: BLK-A14
+Status: BLK-A14 ✅ — próximo: BLK-A15
 
 BLK-A9 — Atmosfera dark-fantasy (fundo, profundidade, aura)
 - `app/style.css`: tokens `--aura-op/prj/ana` + `--shadow-glow-*` + `--shadow-lg`

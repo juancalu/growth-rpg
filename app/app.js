@@ -47,6 +47,7 @@ async function main() {
 
 function renderApp(dados) {
   renderMeta(dados.meta);
+  renderMapaCampanha(dados);
   renderPersonagens(dados.pessoas, dados.emblemas_catalogo);
   renderGuild(dados.guild);
   renderEventos(dados.eventos, dados.emblemas_catalogo);
@@ -144,6 +145,83 @@ function personagemCard(p, emblemasCatalogo) {
         <ul>${historicoHtml}</ul>
       </section>
     </article>`;
+}
+
+// ── Mapa de Campanha (BLK-A14) ────────────────────────────────────────────────
+
+function renderMapaCampanha(dados) {
+  const container = document.getElementById('mapa-campanha-container');
+  if (!container) return;
+  const missoes = dados.missoes_organizacao || [];
+  const opBacklog = dados.pessoas.reduce(
+    (acc, p) => acc + (p.frentes.operacional.backlog.tarefas || 0), 0
+  );
+  const numProblemas = missoes.length + opBacklog;
+  container.innerHTML = mapaCampanhaSVG(
+    dados.guild, numProblemas,
+    cssVar('--color-op'), cssVar('--color-prj'), cssVar('--color-ana')
+  );
+}
+
+function mapaCampanhaSVG(guild, numProblemas, cOp, cPrj, cAna) {
+  const gOp = guild.operacional;
+  const gPrj = guild.projeto;
+  const gAna = guild.analise;
+  const pOp = Math.min(1, gOp.entregue_quinzena / gOp.camadas.stretch);
+  const pPrj = Math.min(1, gPrj.entregue_quinzena / gPrj.camadas.stretch);
+  const pAna = Math.min(1, gAna.entregue_quinzena / gAna.camadas.stretch);
+
+  // Operacional: hex grid (7 hexes showing progress toward stretch)
+  const hexLit = Math.round(pOp * 7);
+  const hexSVG = [15, 33, 51, 69, 87, 105, 123].map((cx, i) => {
+    const on = i < hexLit;
+    return `<polygon points="9,0 4.5,8 -4.5,8 -9,0 -4.5,-8 4.5,-8" transform="translate(${cx},40)" fill="${on ? cOp : 'none'}" stroke="${cOp}" stroke-width="1" opacity="${on ? '0.82' : '0.12'}"/>`;
+  }).join('');
+
+  // Problema markers (one per open op task + per missao)
+  const markerSVG = Array.from({ length: numProblemas }, (_, i) => {
+    const col = i % 10;
+    const row = Math.floor(i / 10);
+    const mx = 6 + col * 17;
+    const my = 60 + row * 12;
+    return `<polygon class="mapa-problema" points="${mx + 4},${my} ${mx + 8},${my + 8} ${mx},${my + 8}" fill="${cOp}" opacity="0.65"/>`;
+  }).join('');
+
+  // Projeto: building blocks (5 cols × 2 rows, fills bottom-up)
+  const blkLit = Math.round(pPrj * 10);
+  const blockSVG = Array.from({ length: 10 }, (_, i) => {
+    const col = i % 5;
+    const row = Math.floor(i / 5);
+    const bx = 12 + col * 34;
+    const by = row === 0 ? 68 : 28;
+    const on = i < blkLit;
+    return `<rect x="${bx}" y="${by}" width="28" height="35" rx="3" fill="${on ? cPrj : 'none'}" stroke="${cPrj}" stroke-width="1" opacity="${on ? '0.75' : '0.12'}"/>`;
+  }).join('');
+
+  // Análise: fog recedes with progress
+  const fogOp = Math.max(0.08, 0.82 - pAna * 0.74).toFixed(2);
+  const dotSVG = [[20, 45], [45, 60], [70, 35], [95, 65], [120, 45], [150, 60], [165, 40]].map(([x, y]) =>
+    `<circle cx="${x}" cy="${y}" r="5" fill="${cAna}" opacity="${Math.min(1, pAna * 1.8).toFixed(2)}"/>`
+  ).join('');
+
+  return `<svg class="mapa-campanha-svg" viewBox="0 0 570 120" role="img"
+    aria-label="Mapa de Campanha — Op ${Math.round(pOp * 100)}%, Prj ${Math.round(pPrj * 100)}%, Ana ${Math.round(pAna * 100)}%">
+    <rect x="1" y="1" width="179" height="118" rx="5" fill="${cOp}" opacity="0.04" stroke="${cOp}" stroke-width="1" stroke-opacity="0.3"/>
+    <text x="89" y="13" text-anchor="middle" font-size="8" fill="${cOp}" opacity="0.85">TERRITORIO</text>
+    ${hexSVG}${markerSVG}
+    <g transform="translate(190,0)">
+      <rect x="1" y="1" width="179" height="118" rx="5" fill="${cPrj}" opacity="0.04" stroke="${cPrj}" stroke-width="1" stroke-opacity="0.3"/>
+      <text x="89" y="13" text-anchor="middle" font-size="8" fill="${cPrj}" opacity="0.85">CONSTRUCAO</text>
+      ${blockSVG}
+    </g>
+    <g transform="translate(380,0)">
+      <rect x="1" y="1" width="179" height="118" rx="5" fill="${cAna}" opacity="0.04" stroke="${cAna}" stroke-width="1" stroke-opacity="0.3"/>
+      <text x="89" y="13" text-anchor="middle" font-size="8" fill="${cAna}" opacity="0.85">MAPA ENEVOADO</text>
+      <rect x="3" y="18" width="174" height="98" rx="3" fill="${cAna}" opacity="0.05"/>
+      ${dotSVG}
+      <rect x="3" y="18" width="174" height="98" rx="3" fill="var(--color-bg)" opacity="${fogOp}"/>
+    </g>
+  </svg>`;
 }
 
 // ── Guild — visualizações temáticas (BLK-A12) ─────────────────────────────────
