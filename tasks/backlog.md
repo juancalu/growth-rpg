@@ -9,7 +9,8 @@ cada bloco só fecha com `ruff` + `pytest` verdes. Não somar entre frentes. Nã
 > micro-interações, a11y, scripts de deploy). Ver `tasks/completed.md`. O app já renderiza tudo,
 > mas ficou com **cara de dashboard/relatório**.
 >
-> **Rodada 2 — REFINO VISUAL (BLK-A9…A13):** elevar para **dark-fantasy épico** (estilo RPG).
+> **Rodada 2 — REFINO VISUAL (BLK-A9…A15):** elevar para **dark-fantasy épico** (estilo RPG),
+> incluindo o **Mapa de Campanha** (A14, ideia do time) e **avatares de classe** (A15).
 > O **deploy de produção é passo HUMANO**, DEPOIS do refino — não é bloco do loop.
 
 ---
@@ -86,6 +87,36 @@ como "capítulo"); animações de conquista (`@keyframes`): level-up flourish, e
 brilhos consistentes). Tudo sob `prefers-reduced-motion`.
 **Aceite:** hero presente; animações de conquista via `@keyframes`; `prefers-reduced-motion` desliga o
 motion; contraste/a11y mantidos; `ruff`/`pytest` verdes.
+
+### BLK-A14 — Mapa de Campanha (overview no topo) — ideia do time
+**Objetivo:** uma visão de "mapa de campanha" no **topo** do app (acima das seções atuais, sem
+remover nada), realizando a metáfora do time — **dirigida só pelos dados do contrato**.
+**Escopo:** bloco em destaque, mapa **estilizado em SVG inline** com 3 regiões temáticas:
+- **Operacional → Base & Território:** hexágonos que **acendem** na proporção
+  `guild.operacional.entregue_quinzena ÷ camada` (alvo/stretch). Cada **tarefa operacional aberta**
+  (somar `pessoas[].frentes.operacional.backlog.tarefas`) e cada item de `missoes_organizacao` viram
+  um marcador de **"problema na base"** (ícone/selo SVG — ex.: janela quebrada / monstro na entrada).
+- **Projeto → Construção:** módulos/tijolos preenchidos proporcional ao progresso da guild de projeto;
+  tarefas de projeto abertas = andaimes/obstáculos.
+- **Análise → Mapa Enevoado:** overlay de **névoa que recua** conforme o progresso da guild de análise;
+  o restante fica escuro.
+- Camadas comprometida/alvo/stretch = **checkpoints** marcados; legenda/tooltip com os números exatos.
+> **Fidelidade (inviolável):** tarefa é **binária** (não há % parcial no contrato). O "progresso" do
+> mapa vem do **nível de frente** (`entregue ÷ camada` da guild) e os "obstáculos" do **nº de tarefas
+> abertas** + `missoes_organizacao`. **Nada de % inventado por tarefa.**
+> **Honesto:** é um mapa **estilizado (SVG/CSS)**, bonito e "de jogo" — **não** um mapa pintado à mão
+> (isso seria arte raster, fora do loop). É o bloco mais experimental; espere iterar visualmente.
+**Aceite:** mapa SVG/CSS **inline** (zero asset externo); estados (aceso/escuro/problemas) derivam SÓ
+de `guild` + `backlog.tarefas` + `missoes_organizacao`; fica no topo, seções atuais intactas; a11y/contraste
+mantidos; `ruff`/`pytest` verdes. Teste: nº de marcadores de "problema" == (missões + tarefas op abertas).
+
+### BLK-A15 — Avatares de classe (slot + fallback)
+**Objetivo:** dar rosto às classes, com mecanismo pronto pra arte **sem bloquear** (arte é passo humano).
+**Escopo:** cada card de personagem (e o hero) ganha um **slot de avatar** por classe, com moldura/glow
+da cor da frente. Comportamento: se existir `app/vendor/img/classe-{guerreiro,engenheiro,mago}.{png,webp,svg}`,
+exibe a imagem; **senão, mostra o glyph SVG da classe (A11)** como fallback estilizado.
+**Aceite:** slot presente nos cards e no hero; **fallback para glyph funciona HOJE** (sem nenhuma imagem);
+se a imagem existir em `vendor/img/`, é usada; **zero request externa**; `ruff`/`pytest` verdes.
 
 ---
 
