@@ -484,6 +484,10 @@ body {
   font-size: var(--text-xs);
   font-weight: var(--fw-medium);
   font-style: italic;
+  /* reserva 2 linhas: epíteto curto (1 linha) ou longo (2 linhas) ocupam
+     a mesma altura, então os 3 banners ficam iguais e as fichas alinham */
+  line-height: 1.35;
+  min-height: 2.7em;
 }
 
 .epiteto-parte[data-frente="operacional"] { color: var(--color-op); }
