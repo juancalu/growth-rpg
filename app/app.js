@@ -57,9 +57,21 @@ const CLASS_GLYPH = {
 
 async function main() {
   try {
-    const resp = await fetch('dados.json');
+    // cache-busting: dados.json muda todo dia; evita o navegador reusar uma
+    // cópia velha/corrompida em cache (mesma origem, sem request externa).
+    const resp = await fetch(`dados.json?t=${Date.now()}`, { cache: 'no-store' });
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-    const dados = await resp.json();
+    let dados;
+    try {
+      dados = await resp.json();
+    } catch (parseErr) {
+      // Rede de segurança: o produtor às vezes anexa lixo após o JSON (visto
+      // em snapshots). Recupera o objeto JSON válido do prefixo do texto.
+      const txt = await (await fetch(`dados.json?t=${Date.now()}`, { cache: 'no-store' })).text();
+      const fim = txt.lastIndexOf('}');
+      if (fim === -1) throw parseErr;
+      dados = JSON.parse(txt.slice(0, fim + 1));
+    }
     renderApp(dados);
   } catch (err) {
     const el = document.getElementById('app-error');
