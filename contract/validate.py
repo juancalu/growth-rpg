@@ -63,5 +63,32 @@ def validar(dados: dict, schema: dict | None = None) -> list[str]:
     return erros
 
 
+def validar_progressao(dados: dict, anterior: dict) -> list[str]:
+    """Invariante VITALÍCIO: ``xp_total`` e ``nivel`` por (pessoa, frente) nunca
+    regridem entre o ``dados.json`` anterior e o atual.
+
+    XP/nível é vitalício (sem reset, sem decay). Uma queda indica bug no produtor —
+    tipicamente o fold do acumulado (fechamento quinzenal) que não rodou, ou a janela
+    da quinzena avançada sem incorporar a anterior. NÃO recalcula scoring: só compara.
+    """
+    erros: list[str] = []
+    prev = {p.get("nome"): p.get("frentes", {}) for p in anterior.get("pessoas", [])}
+    for p in dados.get("pessoas", []):
+        nome = p.get("nome", "?")
+        antes = prev.get(nome)
+        if not antes:
+            continue
+        for f, fd in p.get("frentes", {}).items():
+            fa = antes.get(f, {})
+            for campo in ("xp_total", "nivel"):
+                atual, velho = fd.get(campo), fa.get(campo)
+                if atual is not None and velho is not None and atual < velho:
+                    erros.append(
+                        f"vitalício: '{nome}/{f}' {campo} regrediu {velho} -> {atual} "
+                        "(XP/nível nunca cai; verifique o fold do acumulado e a janela da quinzena)"
+                    )
+    return erros
+
+
 def validar_arquivo(path: str | Path) -> list[str]:
     return validar(_load(path))

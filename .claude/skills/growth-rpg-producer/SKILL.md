@@ -73,8 +73,19 @@ Histórico (lido; escrito só no fechamento quinzenal):
 - Carregue a skill `produtividade-clickup-ultra`.
 - Leia todos os arquivos de `CONFIG_DIR`.
 - Leia `historico/acumulado.json` (se ausente → `{}`, zeros implícitos).
-- Leia o `dados.json` anterior, se existir, **só** para recuperar `emblemas_historico` por pessoa
-  (acumula entre quinzenas e nunca é apagado).
+- Leia o `dados.json` anterior, se existir, para **(a)** recuperar `emblemas_historico` por pessoa
+  (acumula entre quinzenas e nunca é apagado) e **(b)** obter o `xp_total` anterior por
+  (pessoa, frente), usado como **piso vitalício** (guarda no passo Pessoas, §4):
+
+  ```python
+  def xp_total_anterior(nome, frente):
+      # 0 se não houver dados.json anterior ou a pessoa/frente for nova
+      try:
+          return next(p for p in dados_anterior["pessoas"] if p["nome"] == nome) \
+              ["frentes"][frente]["xp_total"]
+      except (KeyError, StopIteration, TypeError):
+          return 0
+  ```
 - **Selecione a quinzena corrente AUTOMATICAMENTE pela data de hoje** (não preencha à mão). A
   quinzena atual é a entrada de `backlog_quinzena.json` cuja `janela` `{de, ate}` contém hoje
   (ignore chaves iniciadas por `_`). Daí saem `QUINZENA_LABEL` e `janela.de/ate/ancora`:
@@ -294,6 +305,12 @@ for nome in NOMES:
         valor_q       = acc["valor"]
         entregaveis_q = valor_q if frente == "operacional" else acc["qtd"]
         xp_total          = hist(nome, frente, "xp") + valor_q
+        # GUARDA VITALÍCIA (inviolável): XP/nível nunca regride. Se o acumulado
+        # ainda não incorporou uma quinzena fechada (passo 7 não rodou) ou a janela
+        # avançou sem fold, isto impede a queda em vez de despencar o nível.
+        # Se disparar de forma persistente, o acumulado/janela está errado: CORRIJA
+        # a causa (fold + janela nova) — a guarda é rede de segurança, não conserto.
+        xp_total          = max(xp_total, xp_total_anterior(nome, frente))
         entregaveis_total = hist(nome, frente, "entregaveis") + entregaveis_q
         custo = CUSTOS[frente]
         nivel, xp_no_nivel, xp_para_proximo = nivel_e_resto(xp_total, custo)
@@ -545,6 +562,23 @@ print(f"✓ acumulado.json atualizado → {ACUM}")
 
 > O acumulado já inclui a quinzena fechada. Na próxima execução, a janela nova conta só as
 > entregas futuras — sem dupla contagem.
+
+> ⚠️ **ARMADILHA JÁ OCORRIDA (não repetir).** O gatilho `hoje == QUINZENA_ATE` só folda se o
+> produtor rodar **exatamente no dia do fechamento** E houver uma **janela nova** já cadastrada
+> para o dia seguinte. Se um fechamento é pulado (não rodou no dia, ou a janela seguinte não foi
+> adicionada), o acumulado fica defasado e, quando a contagem avança, o XP da quinzena fechada
+> **evapora → o nível regride** (aconteceu em Jun/2026: Juan Op L21→L13, Vinícius Op L23→L15).
+> Regras para não repetir:
+> 1. **Sempre** cadastre a janela seguinte em `backlog_quinzena.json` + `disponibilidade.json`
+>    **antes** do fechamento (no planejamento da reunião do diretor).
+> 2. O fold deve ser **idempotente/recuperável**: se `acumulado` estiver anterior a uma quinzena
+>    já fechada (existe janela cujo `ate < hoje` ainda não incorporada), folde-a antes de contar a
+>    atual — não dependa só de "rodou no dia exato".
+> 3. A **guarda vitalícia** (`max(xp_total, xp_total_anterior)`, §4) é a rede final: impede a
+>    regressão de aparecer no app mesmo se 1–2 falharem. Mas ela **congela** no pico — o conserto
+>    real é o fold correto + janela nova.
+> 4. Rode `contract.validate.validar_progressao(dados_novo, dados_anterior)` antes de publicar;
+>    se acusar regressão, **não publique** — corrija o acumulado/janela.
 
 ---
 

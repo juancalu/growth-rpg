@@ -1,9 +1,8 @@
 """BLK-A6: estados de borda renderizam sem quebrar; motion/hover/animações presentes."""
 import json
-import tempfile
 from pathlib import Path
 
-from contract.validate import validar_arquivo
+from contract.validate import validar
 
 ROOT = Path(__file__).resolve().parents[1]
 APP = ROOT / "app"
@@ -16,10 +15,8 @@ def _golden() -> dict:
 
 
 def _validar(dados: dict) -> list[str]:
-    with tempfile.NamedTemporaryFile(suffix=".json", mode="w", encoding="utf-8") as f:
-        json.dump(dados, f)
-        f.flush()
-        return validar_arquivo(Path(f.name))
+    # valida o dict em memória (evita lock de NamedTemporaryFile no Windows)
+    return validar(dados)
 
 
 # ── CSS — motion / hover / animações ─────────────────────────────────────────
