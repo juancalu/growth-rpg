@@ -2,221 +2,755 @@
   "meta": {
     "schema_version": "1.3",
     "motor_versao": "cowork/produtividade-clickup-ultra",
-    "gerado_em": "2026-06-03T08:00:00-03:00",
+    "gerado_em": "2026-07-07T15:51:06.445629-03:00",
     "fonte": "ClickUp PROJETOS-DEG (read-only) via cowork",
     "quinzena": {
-      "label": "Maio/2026 (ref.)",
-      "de": "2026-05-01",
-      "ate": "2026-05-31",
-      "ancora": "Reuniao 'alinhamento e resultados - Estrategia e Growth' (com o diretor Marcos), a cada 2 quintas de manha (10h BRT). Backlog e camadas travados no planejamento dessa reuniao.",
-      "cadencia": "quinzenal — quintas: 18/06, 02/07, 16/07, 30/07... Cada quinzena vai de uma reuniao a proxima."
+      "label": "Julho/2026 (02-16)",
+      "de": "2026-07-02",
+      "ate": "2026-07-16",
+      "ancora": "Reuniao 'alinhamento e resultados' com o diretor Marcos, 02/07",
+      "cadencia": "quinzenal — quintas: 02/07, 16/07, 30/07..."
     },
-    "xp_base": { "operacional_por_item": 1, "projeto_por_ponto": 1, "analise_por_ponto": 1 },
-    "custos_por_nivel": { "operacional": 6, "projeto": 8, "analise": 6 }
+    "xp_base": {
+      "operacional_por_item": 1,
+      "projeto_por_ponto": 1,
+      "analise_por_ponto": 1
+    },
+    "custos_por_nivel": {
+      "operacional": 6,
+      "projeto": 8,
+      "analise": 6
+    },
+    "_nota_parametros": "Tarefa agendada recebeu QUINZENA_LABEL 'Julho/2026 (Q1)'; motor corrigiu para quinzena ativa per backlog_quinzena.json: 'Julho/2026 (02-16)'."
   },
   "classes": {
     "operacional": {
       "nome": "Guerreiro",
       "tema": "a horda e a conquista de territorio",
       "trilha": [
-        { "tier": 1,  "de": 0,   "ate": 0,    "titulo": "Recruta" },
-        { "tier": 2,  "de": 1,   "ate": 2,    "titulo": "Soldado" },
-        { "tier": 3,  "de": 3,   "ate": 5,    "titulo": "Combatente" },
-        { "tier": 4,  "de": 6,   "ate": 9,    "titulo": "Veterano" },
-        { "tier": 5,  "de": 10,  "ate": 14,   "titulo": "Ceifador de Hordas" },
-        { "tier": 6,  "de": 15,  "ate": 21,   "titulo": "Barbaro" },
-        { "tier": 7,  "de": 22,  "ate": 30,   "titulo": "Campeao" },
-        { "tier": 8,  "de": 31,  "ate": 45,   "titulo": "Comandante" },
-        { "tier": 9,  "de": 46,  "ate": 65,   "titulo": "Senhor da Guerra" },
-        { "tier": 10, "de": 66,  "ate": 90,   "titulo": "Conquistador" },
-        { "tier": 11, "de": 91,  "ate": 129,  "titulo": "Marechal das Fronteiras" },
-        { "tier": 12, "de": 130, "ate": null, "titulo": "Lenda da Vanguarda" }
+        {
+          "tier": 1,
+          "de": 0,
+          "ate": 0,
+          "titulo": "Recruta"
+        },
+        {
+          "tier": 2,
+          "de": 1,
+          "ate": 2,
+          "titulo": "Soldado"
+        },
+        {
+          "tier": 3,
+          "de": 3,
+          "ate": 5,
+          "titulo": "Combatente"
+        },
+        {
+          "tier": 4,
+          "de": 6,
+          "ate": 9,
+          "titulo": "Veterano"
+        },
+        {
+          "tier": 5,
+          "de": 10,
+          "ate": 14,
+          "titulo": "Ceifador de Hordas"
+        },
+        {
+          "tier": 6,
+          "de": 15,
+          "ate": 21,
+          "titulo": "Barbaro"
+        },
+        {
+          "tier": 7,
+          "de": 22,
+          "ate": 30,
+          "titulo": "Campeao"
+        },
+        {
+          "tier": 8,
+          "de": 31,
+          "ate": 45,
+          "titulo": "Comandante"
+        },
+        {
+          "tier": 9,
+          "de": 46,
+          "ate": 65,
+          "titulo": "Senhor da Guerra"
+        },
+        {
+          "tier": 10,
+          "de": 66,
+          "ate": 90,
+          "titulo": "Conquistador"
+        },
+        {
+          "tier": 11,
+          "de": 91,
+          "ate": 129,
+          "titulo": "Marechal das Fronteiras"
+        },
+        {
+          "tier": 12,
+          "de": 130,
+          "ate": null,
+          "titulo": "Lenda da Vanguarda"
+        }
       ]
     },
     "projeto": {
       "nome": "Engenheiro",
       "tema": "a construcao e a criacao da base",
       "trilha": [
-        { "tier": 1,  "de": 0,   "ate": 0,    "titulo": "Aprendiz" },
-        { "tier": 2,  "de": 1,   "ate": 2,    "titulo": "Tecnico" },
-        { "tier": 3,  "de": 3,   "ate": 5,    "titulo": "Engenheiro Junior" },
-        { "tier": 4,  "de": 6,   "ate": 9,    "titulo": "Engenheiro" },
-        { "tier": 5,  "de": 10,  "ate": 14,   "titulo": "Engenheiro Senior" },
-        { "tier": 6,  "de": 15,  "ate": 21,   "titulo": "Mestre de Obras" },
-        { "tier": 7,  "de": 22,  "ate": 30,   "titulo": "Mecanista" },
-        { "tier": 8,  "de": 31,  "ate": 45,   "titulo": "Arquiteto de Sistemas" },
-        { "tier": 9,  "de": 46,  "ate": 65,   "titulo": "Engenheiro-Chefe" },
-        { "tier": 10, "de": 66,  "ate": 90,   "titulo": "Grande Engenheiro" },
-        { "tier": 11, "de": 91,  "ate": 129,  "titulo": "Engenheiro-Mor" },
-        { "tier": 12, "de": 130, "ate": null, "titulo": "Demiurgo" }
+        {
+          "tier": 1,
+          "de": 0,
+          "ate": 0,
+          "titulo": "Aprendiz"
+        },
+        {
+          "tier": 2,
+          "de": 1,
+          "ate": 2,
+          "titulo": "Tecnico"
+        },
+        {
+          "tier": 3,
+          "de": 3,
+          "ate": 5,
+          "titulo": "Engenheiro Junior"
+        },
+        {
+          "tier": 4,
+          "de": 6,
+          "ate": 9,
+          "titulo": "Engenheiro"
+        },
+        {
+          "tier": 5,
+          "de": 10,
+          "ate": 14,
+          "titulo": "Engenheiro Senior"
+        },
+        {
+          "tier": 6,
+          "de": 15,
+          "ate": 21,
+          "titulo": "Mestre de Obras"
+        },
+        {
+          "tier": 7,
+          "de": 22,
+          "ate": 30,
+          "titulo": "Mecanista"
+        },
+        {
+          "tier": 8,
+          "de": 31,
+          "ate": 45,
+          "titulo": "Arquiteto de Sistemas"
+        },
+        {
+          "tier": 9,
+          "de": 46,
+          "ate": 65,
+          "titulo": "Engenheiro-Chefe"
+        },
+        {
+          "tier": 10,
+          "de": 66,
+          "ate": 90,
+          "titulo": "Grande Engenheiro"
+        },
+        {
+          "tier": 11,
+          "de": 91,
+          "ate": 129,
+          "titulo": "Engenheiro-Mor"
+        },
+        {
+          "tier": 12,
+          "de": 130,
+          "ate": null,
+          "titulo": "Demiurgo"
+        }
       ]
     },
     "analise": {
       "nome": "Mago",
       "tema": "a magia e o mapa de insights",
       "trilha": [
-        { "tier": 1,  "de": 0,   "ate": 0,    "titulo": "Aprendiz de Feiticos" },
-        { "tier": 2,  "de": 1,   "ate": 2,    "titulo": "Conjurador" },
-        { "tier": 3,  "de": 3,   "ate": 5,    "titulo": "Feiticeiro" },
-        { "tier": 4,  "de": 6,   "ate": 9,    "titulo": "Bruxo" },
-        { "tier": 5,  "de": 10,  "ate": 14,   "titulo": "Arcanista" },
-        { "tier": 6,  "de": 15,  "ate": 21,   "titulo": "Necromante" },
-        { "tier": 7,  "de": 22,  "ate": 30,   "titulo": "Mago" },
-        { "tier": 8,  "de": 31,  "ate": 45,   "titulo": "Mago Superior" },
-        { "tier": 9,  "de": 46,  "ate": 65,   "titulo": "Magus" },
-        { "tier": 10, "de": 66,  "ate": 90,   "titulo": "Grande Mago" },
-        { "tier": 11, "de": 91,  "ate": 129,  "titulo": "Arquimago" },
-        { "tier": 12, "de": 130, "ate": null, "titulo": "Senhor do Arcano" }
+        {
+          "tier": 1,
+          "de": 0,
+          "ate": 0,
+          "titulo": "Aprendiz de Feiticos"
+        },
+        {
+          "tier": 2,
+          "de": 1,
+          "ate": 2,
+          "titulo": "Conjurador"
+        },
+        {
+          "tier": 3,
+          "de": 3,
+          "ate": 5,
+          "titulo": "Feiticeiro"
+        },
+        {
+          "tier": 4,
+          "de": 6,
+          "ate": 9,
+          "titulo": "Bruxo"
+        },
+        {
+          "tier": 5,
+          "de": 10,
+          "ate": 14,
+          "titulo": "Arcanista"
+        },
+        {
+          "tier": 6,
+          "de": 15,
+          "ate": 21,
+          "titulo": "Necromante"
+        },
+        {
+          "tier": 7,
+          "de": 22,
+          "ate": 30,
+          "titulo": "Mago"
+        },
+        {
+          "tier": 8,
+          "de": 31,
+          "ate": 45,
+          "titulo": "Mago Superior"
+        },
+        {
+          "tier": 9,
+          "de": 46,
+          "ate": 65,
+          "titulo": "Magus"
+        },
+        {
+          "tier": 10,
+          "de": 66,
+          "ate": 90,
+          "titulo": "Grande Mago"
+        },
+        {
+          "tier": 11,
+          "de": 91,
+          "ate": 129,
+          "titulo": "Arquimago"
+        },
+        {
+          "tier": 12,
+          "de": 130,
+          "ate": null,
+          "titulo": "Senhor do Arcano"
+        }
       ]
     }
   },
   "emblemas_catalogo": {
     "_nota": "Conquistas por ENTREGA na quinzena (deterministicas). Um membro ganha o emblema se entregue_quinzena na frente >= limiar. Salvos no historico do personagem. Limiares = ponto de partida, ajustaveis [DH].",
     "lista": [
-      { "id": "op_batedor",          "nome": "Batedor",           "frente": "operacional", "metrica": "itens",  "limiar": 10 },
-      { "id": "op_ceifador",         "nome": "Ceifador",          "frente": "operacional", "metrica": "itens",  "limiar": 25 },
-      { "id": "op_senhor_hordas",    "nome": "Senhor das Hordas", "frente": "operacional", "metrica": "itens",  "limiar": 50 },
-      { "id": "prj_construtor",      "nome": "Construtor",        "frente": "projeto",     "metrica": "pontos", "limiar": 8  },
-      { "id": "prj_engenheiro_mestre","nome": "Engenheiro Mestre","frente": "projeto",     "metrica": "pontos", "limiar": 20 },
-      { "id": "prj_arquiteto_chefe", "nome": "Arquiteto-Chefe",   "frente": "projeto",     "metrica": "pontos", "limiar": 40 },
-      { "id": "ana_alquimista",      "nome": "Alquimista",        "frente": "analise",     "metrica": "pontos", "limiar": 10 },
-      { "id": "ana_vidente",         "nome": "Vidente",           "frente": "analise",     "metrica": "pontos", "limiar": 20 },
-      { "id": "ana_oraculo",         "nome": "Oraculo",           "frente": "analise",     "metrica": "pontos", "limiar": 30 }
+      {
+        "id": "op_batedor",
+        "nome": "Batedor",
+        "frente": "operacional",
+        "metrica": "itens",
+        "limiar": 10
+      },
+      {
+        "id": "op_ceifador",
+        "nome": "Ceifador",
+        "frente": "operacional",
+        "metrica": "itens",
+        "limiar": 25
+      },
+      {
+        "id": "op_senhor_hordas",
+        "nome": "Senhor das Hordas",
+        "frente": "operacional",
+        "metrica": "itens",
+        "limiar": 50
+      },
+      {
+        "id": "prj_construtor",
+        "nome": "Construtor",
+        "frente": "projeto",
+        "metrica": "pontos",
+        "limiar": 8
+      },
+      {
+        "id": "prj_engenheiro_mestre",
+        "nome": "Engenheiro Mestre",
+        "frente": "projeto",
+        "metrica": "pontos",
+        "limiar": 20
+      },
+      {
+        "id": "prj_arquiteto_chefe",
+        "nome": "Arquiteto-Chefe",
+        "frente": "projeto",
+        "metrica": "pontos",
+        "limiar": 40
+      },
+      {
+        "id": "ana_alquimista",
+        "nome": "Alquimista",
+        "frente": "analise",
+        "metrica": "pontos",
+        "limiar": 10
+      },
+      {
+        "id": "ana_vidente",
+        "nome": "Vidente",
+        "frente": "analise",
+        "metrica": "pontos",
+        "limiar": 20
+      },
+      {
+        "id": "ana_oraculo",
+        "nome": "Oraculo",
+        "frente": "analise",
+        "metrica": "pontos",
+        "limiar": 30
+      }
     ]
   },
   "pessoas": [
     {
-      "id": 296609800, "nome": "Felipe", "jogavel": true,
-      "dias_disponiveis": 20, "afastamentos": [],
+      "id": 296609800,
+      "nome": "Felipe",
+      "jogavel": true,
+      "dias_disponiveis": 11,
+      "afastamentos": [],
       "frentes": {
-        "operacional": { "classe": "Guerreiro", "unidade": "itens", "nivel": 0, "custo_por_nivel": 6,
-          "xp_total": 2, "xp_no_nivel": 2, "xp_para_proximo": 4,
-          "entregaveis_total": 2, "entregue_quinzena": 2, "entregaveis_quinzena": 2,
-          "vazao_quinzena": 0.10, "tier": 1, "titulo": "Recruta", "backlog": { "valor": 0, "tarefas": 0 } },
-        "projeto": { "classe": "Engenheiro", "unidade": "pontos", "nivel": 21, "custo_por_nivel": 8,
-          "xp_total": 173, "xp_no_nivel": 5, "xp_para_proximo": 3,
-          "entregaveis_total": 71, "entregue_quinzena": 173, "entregaveis_quinzena": 71,
-          "vazao_quinzena": 8.65, "tier": 6, "titulo": "Mestre de Obras", "backlog": { "valor": 30, "tarefas": 7 } },
-        "analise": { "classe": "Mago", "unidade": "pontos", "nivel": 0, "custo_por_nivel": 6,
-          "xp_total": 5, "xp_no_nivel": 5, "xp_para_proximo": 1,
-          "entregaveis_total": 3, "entregue_quinzena": 5, "entregaveis_quinzena": 3,
-          "vazao_quinzena": 0.25, "tier": 1, "titulo": "Aprendiz de Feiticos", "backlog": { "valor": 4, "tarefas": 2 } }
+        "operacional": {
+          "classe": "Guerreiro",
+          "unidade": "itens",
+          "nivel": 1,
+          "custo_por_nivel": 6,
+          "xp_total": 6,
+          "xp_no_nivel": 0,
+          "xp_para_proximo": 6,
+          "entregaveis_total": 6,
+          "entregue_quinzena": 0,
+          "entregaveis_quinzena": 0,
+          "vazao_quinzena": 0.0,
+          "tier": 2,
+          "titulo": "Soldado",
+          "backlog": {
+            "valor": 2,
+            "tarefas": 1
+          }
+        },
+        "projeto": {
+          "classe": "Engenheiro",
+          "unidade": "pontos",
+          "nivel": 29,
+          "custo_por_nivel": 8,
+          "xp_total": 234,
+          "xp_no_nivel": 2,
+          "xp_para_proximo": 6,
+          "entregaveis_total": 88,
+          "entregue_quinzena": 0,
+          "entregaveis_quinzena": 0,
+          "vazao_quinzena": 0.0,
+          "tier": 7,
+          "titulo": "Mecanista",
+          "backlog": {
+            "valor": 37,
+            "tarefas": 7
+          }
+        },
+        "analise": {
+          "classe": "Mago",
+          "unidade": "pontos",
+          "nivel": 5,
+          "custo_por_nivel": 6,
+          "xp_total": 34,
+          "xp_no_nivel": 4,
+          "xp_para_proximo": 2,
+          "entregaveis_total": 10,
+          "entregue_quinzena": 0,
+          "entregaveis_quinzena": 0,
+          "vazao_quinzena": 0.0,
+          "tier": 3,
+          "titulo": "Feiticeiro",
+          "backlog": {
+            "valor": 24,
+            "tarefas": 3
+          }
+        }
       },
-      "emblemas_quinzena": ["prj_construtor", "prj_engenheiro_mestre", "prj_arquiteto_chefe"],
+      "emblemas_quinzena": [],
       "emblemas_historico": [
-        { "quinzena": "Maio/2026 (ref.)", "ids": ["prj_construtor", "prj_engenheiro_mestre", "prj_arquiteto_chefe"] }
+        {
+          "quinzena": "Maio/2026 (ref.)",
+          "ids": [
+            "prj_construtor",
+            "prj_engenheiro_mestre",
+            "prj_arquiteto_chefe"
+          ]
+        },
+        {
+          "quinzena": "Junho/2026 (01-18)",
+          "ids": [
+            "prj_construtor",
+            "prj_engenheiro_mestre",
+            "ana_alquimista",
+            "ana_vidente"
+          ]
+        }
       ],
-      "prestigio": { "badges": [] }
+      "prestigio": {
+        "badges": []
+      }
     },
     {
-      "id": 101182134, "nome": "Juan", "jogavel": true,
-      "dias_disponiveis": 16, "afastamentos": [{ "tipo": "atestado", "dias": 4 }],
+      "id": 101182134,
+      "nome": "Juan",
+      "jogavel": true,
+      "dias_disponiveis": 11,
+      "afastamentos": [],
       "frentes": {
-        "operacional": { "classe": "Guerreiro", "unidade": "itens", "nivel": 8, "custo_por_nivel": 6,
-          "xp_total": 48, "xp_no_nivel": 0, "xp_para_proximo": 6,
-          "entregaveis_total": 48, "entregue_quinzena": 48, "entregaveis_quinzena": 48,
-          "vazao_quinzena": 3.00, "tier": 4, "titulo": "Veterano", "backlog": { "valor": 20, "tarefas": 20 } },
-        "projeto": { "classe": "Engenheiro", "unidade": "pontos", "nivel": 0, "custo_por_nivel": 8,
-          "xp_total": 1, "xp_no_nivel": 1, "xp_para_proximo": 7,
-          "entregaveis_total": 1, "entregue_quinzena": 1, "entregaveis_quinzena": 1,
-          "vazao_quinzena": 0.06, "tier": 1, "titulo": "Aprendiz", "backlog": { "valor": 0, "tarefas": 0 } },
-        "analise": { "classe": "Mago", "unidade": "pontos", "nivel": 4, "custo_por_nivel": 6,
-          "xp_total": 29, "xp_no_nivel": 5, "xp_para_proximo": 1,
-          "entregaveis_total": 15, "entregue_quinzena": 29, "entregaveis_quinzena": 15,
-          "vazao_quinzena": 1.81, "tier": 3, "titulo": "Feiticeiro", "backlog": { "valor": 0, "tarefas": 0 } }
+        "operacional": {
+          "classe": "Guerreiro",
+          "unidade": "itens",
+          "nivel": 24,
+          "custo_por_nivel": 6,
+          "xp_total": 145,
+          "xp_no_nivel": 1,
+          "xp_para_proximo": 5,
+          "entregaveis_total": 145,
+          "entregue_quinzena": 8,
+          "entregaveis_quinzena": 8,
+          "vazao_quinzena": 0.73,
+          "tier": 7,
+          "titulo": "Campeao",
+          "backlog": {
+            "valor": 1,
+            "tarefas": 1
+          }
+        },
+        "projeto": {
+          "classe": "Engenheiro",
+          "unidade": "pontos",
+          "nivel": 2,
+          "custo_por_nivel": 8,
+          "xp_total": 18,
+          "xp_no_nivel": 2,
+          "xp_para_proximo": 6,
+          "entregaveis_total": 5,
+          "entregue_quinzena": 0,
+          "entregaveis_quinzena": 0,
+          "vazao_quinzena": 0.0,
+          "tier": 2,
+          "titulo": "Tecnico",
+          "backlog": {
+            "valor": 11,
+            "tarefas": 2
+          }
+        },
+        "analise": {
+          "classe": "Mago",
+          "unidade": "pontos",
+          "nivel": 6,
+          "custo_por_nivel": 6,
+          "xp_total": 36,
+          "xp_no_nivel": 0,
+          "xp_para_proximo": 6,
+          "entregaveis_total": 18,
+          "entregue_quinzena": 0,
+          "entregaveis_quinzena": 0,
+          "vazao_quinzena": 0.0,
+          "tier": 4,
+          "titulo": "Bruxo",
+          "backlog": {
+            "valor": 8,
+            "tarefas": 1
+          }
+        }
       },
-      "emblemas_quinzena": ["op_batedor", "op_ceifador", "ana_alquimista", "ana_vidente"],
+      "emblemas_quinzena": [],
       "emblemas_historico": [
-        { "quinzena": "Maio/2026 (ref.)", "ids": ["op_batedor", "op_ceifador", "ana_alquimista", "ana_vidente"] }
+        {
+          "quinzena": "Maio/2026 (ref.)",
+          "ids": [
+            "op_batedor",
+            "op_ceifador",
+            "ana_alquimista",
+            "ana_vidente"
+          ]
+        },
+        {
+          "quinzena": "Junho/2026 (01-18)",
+          "ids": [
+            "op_batedor",
+            "op_ceifador",
+            "op_senhor_hordas",
+            "prj_construtor"
+          ]
+        }
       ],
-      "prestigio": { "badges": [] }
+      "prestigio": {
+        "badges": []
+      }
     },
     {
-      "id": 101182135, "nome": "Vinicius", "jogavel": true,
-      "dias_disponiveis": 20, "afastamentos": [],
+      "id": 101182135,
+      "nome": "Vinicius",
+      "jogavel": true,
+      "dias_disponiveis": 11,
+      "afastamentos": [],
       "frentes": {
-        "operacional": { "classe": "Guerreiro", "unidade": "itens", "nivel": 11, "custo_por_nivel": 6,
-          "xp_total": 71, "xp_no_nivel": 5, "xp_para_proximo": 1,
-          "entregaveis_total": 71, "entregue_quinzena": 71, "entregaveis_quinzena": 71,
-          "vazao_quinzena": 3.55, "tier": 5, "titulo": "Ceifador de Hordas", "backlog": { "valor": 19, "tarefas": 19 } },
-        "projeto": { "classe": "Engenheiro", "unidade": "pontos", "nivel": 4, "custo_por_nivel": 8,
-          "xp_total": 37, "xp_no_nivel": 5, "xp_para_proximo": 3,
-          "entregaveis_total": 10, "entregue_quinzena": 37, "entregaveis_quinzena": 10,
-          "vazao_quinzena": 1.85, "tier": 3, "titulo": "Engenheiro Junior", "backlog": { "valor": 0, "tarefas": 0 } },
-        "analise": { "classe": "Mago", "unidade": "pontos", "nivel": 2, "custo_por_nivel": 6,
-          "xp_total": 16, "xp_no_nivel": 4, "xp_para_proximo": 2,
-          "entregaveis_total": 8, "entregue_quinzena": 16, "entregaveis_quinzena": 8,
-          "vazao_quinzena": 0.80, "tier": 2, "titulo": "Conjurador", "backlog": { "valor": 6, "tarefas": 2 } }
+        "operacional": {
+          "classe": "Guerreiro",
+          "unidade": "itens",
+          "nivel": 27,
+          "custo_por_nivel": 6,
+          "xp_total": 167,
+          "xp_no_nivel": 5,
+          "xp_para_proximo": 1,
+          "entregaveis_total": 167,
+          "entregue_quinzena": 14,
+          "entregaveis_quinzena": 14,
+          "vazao_quinzena": 1.27,
+          "tier": 7,
+          "titulo": "Campeao",
+          "backlog": {
+            "valor": 1,
+            "tarefas": 1
+          }
+        },
+        "projeto": {
+          "classe": "Engenheiro",
+          "unidade": "pontos",
+          "nivel": 13,
+          "custo_por_nivel": 8,
+          "xp_total": 104,
+          "xp_no_nivel": 0,
+          "xp_para_proximo": 8,
+          "entregaveis_total": 28,
+          "entregue_quinzena": 6,
+          "entregaveis_quinzena": 2,
+          "vazao_quinzena": 0.55,
+          "tier": 5,
+          "titulo": "Engenheiro Senior",
+          "backlog": {
+            "valor": 15,
+            "tarefas": 4
+          }
+        },
+        "analise": {
+          "classe": "Mago",
+          "unidade": "pontos",
+          "nivel": 4,
+          "custo_por_nivel": 6,
+          "xp_total": 27,
+          "xp_no_nivel": 3,
+          "xp_para_proximo": 3,
+          "entregaveis_total": 13,
+          "entregue_quinzena": 0,
+          "entregaveis_quinzena": 0,
+          "vazao_quinzena": 0.0,
+          "tier": 3,
+          "titulo": "Feiticeiro",
+          "backlog": {
+            "valor": 0,
+            "tarefas": 0
+          }
+        }
       },
-      "emblemas_quinzena": ["op_batedor", "op_ceifador", "op_senhor_hordas", "prj_construtor", "prj_engenheiro_mestre", "ana_alquimista"],
-      "emblemas_historico": [
-        { "quinzena": "Maio/2026 (ref.)", "ids": ["op_batedor", "op_ceifador", "op_senhor_hordas", "prj_construtor", "prj_engenheiro_mestre", "ana_alquimista"] }
+      "emblemas_quinzena": [
+        "op_batedor"
       ],
-      "prestigio": { "badges": [] }
+      "emblemas_historico": [
+        {
+          "quinzena": "Maio/2026 (ref.)",
+          "ids": [
+            "op_batedor",
+            "op_ceifador",
+            "op_senhor_hordas",
+            "prj_construtor",
+            "prj_engenheiro_mestre",
+            "ana_alquimista"
+          ]
+        },
+        {
+          "quinzena": "Junho/2026 (01-18)",
+          "ids": [
+            "op_batedor",
+            "op_ceifador",
+            "op_senhor_hordas",
+            "prj_construtor",
+            "prj_engenheiro_mestre",
+            "prj_arquiteto_chefe"
+          ]
+        },
+        {
+          "quinzena": "Julho/2026 (02-16)",
+          "ids": [
+            "op_batedor"
+          ]
+        }
+      ],
+      "prestigio": {
+        "badges": []
+      }
     }
   ],
   "ranking_quinzena": {
-    "_nota": "Secundario e cosmetico. Sempre DENTRO da frente (mesma unidade). Nunca combinar frentes nem somar um total por pessoa. App pode ordenar por 'valor' ou por 'vazao' (vazao e mais justo com afastamentos).",
-    "operacional": { "unidade": "itens", "ordem": [
-      { "pos": 1, "pessoa": "Vinicius", "valor": 71, "vazao": 3.55 },
-      { "pos": 2, "pessoa": "Juan",     "valor": 48, "vazao": 3.00 },
-      { "pos": 3, "pessoa": "Felipe",   "valor": 2,  "vazao": 0.10 }
-    ] },
-    "projeto": { "unidade": "pontos", "ordem": [
-      { "pos": 1, "pessoa": "Felipe",   "valor": 173, "vazao": 8.65 },
-      { "pos": 2, "pessoa": "Vinicius", "valor": 37,  "vazao": 1.85 },
-      { "pos": 3, "pessoa": "Juan",     "valor": 1,   "vazao": 0.06 }
-    ] },
-    "analise": { "unidade": "pontos", "ordem": [
-      { "pos": 1, "pessoa": "Juan",     "valor": 29, "vazao": 1.81 },
-      { "pos": 2, "pessoa": "Vinicius", "valor": 16, "vazao": 0.80 },
-      { "pos": 3, "pessoa": "Felipe",   "valor": 5,  "vazao": 0.25 }
-    ] }
+    "operacional": {
+      "unidade": "itens",
+      "ordem": [
+        {
+          "pessoa": "Vinicius",
+          "valor": 14,
+          "vazao": 1.27,
+          "pos": 1
+        },
+        {
+          "pessoa": "Juan",
+          "valor": 8,
+          "vazao": 0.73,
+          "pos": 2
+        },
+        {
+          "pessoa": "Felipe",
+          "valor": 0,
+          "vazao": 0.0,
+          "pos": 3
+        }
+      ]
+    },
+    "projeto": {
+      "unidade": "pontos",
+      "ordem": [
+        {
+          "pessoa": "Vinicius",
+          "valor": 6,
+          "vazao": 0.55,
+          "pos": 1
+        },
+        {
+          "pessoa": "Felipe",
+          "valor": 0,
+          "vazao": 0.0,
+          "pos": 2
+        },
+        {
+          "pessoa": "Juan",
+          "valor": 0,
+          "vazao": 0.0,
+          "pos": 3
+        }
+      ]
+    },
+    "analise": {
+      "unidade": "pontos",
+      "ordem": [
+        {
+          "pessoa": "Felipe",
+          "valor": 0,
+          "vazao": 0.0,
+          "pos": 1
+        },
+        {
+          "pessoa": "Juan",
+          "valor": 0,
+          "vazao": 0.0,
+          "pos": 2
+        },
+        {
+          "pessoa": "Vinicius",
+          "valor": 0,
+          "vazao": 0.0,
+          "pos": 3
+        }
+      ]
+    }
   },
   "guild": {
-    "_nota": "Objetivo coletivo por frente. HP = backlog REAL comprometido e priorizado por valor da quinzena (estilo sprint planning, travado no planejamento ANTES da reuniao com o diretor). NUNCA inflar o backlog com item facil/baixo valor so para ter boss gordo. Camadas dimensionadas pela vazao das ultimas 1-2 quinzenas, em faixa. camada_atingida = maior camada com entregue_quinzena >= limiar. Valores das camadas abaixo sao ilustrativos.",
-    "operacional": { "unidade": "itens", "objetivo": "territorio",
-      "camadas": { "comprometida": 80, "alvo": 110, "stretch": 140 },
-      "entregue_quinzena": 117, "camada_atingida": "alvo",
-      "proxima_camada": "stretch", "restante_para_proxima": 23,
-      "contribuicoes_quinzena": { "Felipe": 2, "Juan": 48, "Vinicius": 71 },
-      "total_equipe_quinzena": 117 },
-    "projeto": { "unidade": "pontos", "objetivo": "construcao",
-      "camadas": { "comprometida": 120, "alvo": 180, "stretch": 240 },
-      "entregue_quinzena": 211, "camada_atingida": "alvo",
-      "proxima_camada": "stretch", "restante_para_proxima": 29,
-      "contribuicoes_quinzena": { "Felipe": 173, "Juan": 1, "Vinicius": 37 },
-      "total_equipe_quinzena": 211 },
-    "analise": { "unidade": "pontos", "objetivo": "mapa_insights",
-      "camadas": { "comprometida": 25, "alvo": 40, "stretch": 60 },
-      "entregue_quinzena": 42, "camada_atingida": "alvo",
-      "proxima_camada": "stretch", "restante_para_proxima": 18,
-      "contribuicoes_quinzena": { "Felipe": 5, "Juan": 29, "Vinicius": 16 },
-      "total_equipe_quinzena": 42 }
+    "operacional": {
+      "unidade": "itens",
+      "objetivo": "territorio",
+      "camadas": {
+        "comprometida": 40,
+        "alvo": 70,
+        "stretch": 110
+      },
+      "entregue_quinzena": 22,
+      "camada_atingida": null,
+      "proxima_camada": "comprometida",
+      "restante_para_proxima": 18,
+      "contribuicoes_quinzena": {
+        "Felipe": 0,
+        "Juan": 8,
+        "Vinicius": 14
+      },
+      "total_equipe_quinzena": 22
+    },
+    "projeto": {
+      "unidade": "pontos",
+      "objetivo": "construcao",
+      "camadas": {
+        "comprometida": 35,
+        "alvo": 55,
+        "stretch": 80
+      },
+      "entregue_quinzena": 6,
+      "camada_atingida": null,
+      "proxima_camada": "comprometida",
+      "restante_para_proxima": 29,
+      "contribuicoes_quinzena": {
+        "Felipe": 0,
+        "Juan": 0,
+        "Vinicius": 6
+      },
+      "total_equipe_quinzena": 6
+    },
+    "analise": {
+      "unidade": "pontos",
+      "objetivo": "mapa_insights",
+      "camadas": {
+        "comprometida": 12,
+        "alvo": 20,
+        "stretch": 32
+      },
+      "entregue_quinzena": 0,
+      "camada_atingida": null,
+      "proxima_camada": "comprometida",
+      "restante_para_proxima": 12,
+      "contribuicoes_quinzena": {
+        "Felipe": 0,
+        "Juan": 0,
+        "Vinicius": 0
+      },
+      "total_equipe_quinzena": 0
+    }
   },
   "eventos": {
-    "_nota": "Sub-chefes/hordas: trabalho urgente/bug NAO planejado. Deteccao por PALAVRA-CHAVE no titulo (lista fixa) e COSMETICA — so define em qual encontro a tarefa aparece. O SCORE vem sempre das tags (frente+complexidade, 1/3/8), deterministico; as tarefas tambem pontuam normal na sua frente (NAO ha XP separado, a horda e uma visao). HP = soma do sizing das tarefas do encontro.",
-    "marcadores_titulo": ["fix", "bug", "corrigir", "correcao", "hotfix", "blk-fix"],
-    "lista": [
-      {
-        "id": "horda_bugs_maio2026",
-        "nome": "Horda de Bugs",
-        "frente": "projeto",
-        "unidade": "pontos",
-        "hp": 2,
-        "restante": 0,
-        "concluido": true,
-        "contribuicoes_quinzena": { "Felipe": 2 },
-        "tarefas": [
-          { "task_id": "86e1mtv8b", "nome": "Corrigir MessageSizeError em UFs grandes", "assignee": "Felipe", "complexidade": "baixa", "pontos": 1, "concluida": true, "url": "https://app.clickup.com/t/86e1mtv8b" },
-          { "task_id": "86e1mhmh0", "nome": "BLK-FIX-06 - Hexagonos do litoral recortados pelo pipeline", "assignee": "Felipe", "complexidade": "baixa", "pontos": 1, "concluida": true, "url": "https://app.clickup.com/t/86e1mhmh0" }
-        ]
-      }
-    ]
+    "marcadores_titulo": [
+      "fix",
+      "bug",
+      "corrigir",
+      "correcao",
+      "hotfix",
+      "blk-fix"
+    ],
+    "lista": []
   },
-  "missoes_organizacao": [
-    { "task_id": "86e1mtv7r", "nome": "Melhorar match de nome - Engenharia do Corpo", "assignee": "Felipe", "motivo": "falta_frente", "url": "https://app.clickup.com/t/86e1mtv7r" },
-    { "task_id": "86e1kh84g", "nome": "Buildar e Subir containers no servidor", "assignee": "Felipe", "motivo": "falta_sizing", "url": "https://app.clickup.com/t/86e1kh84g" }
-  ],
-  "_nota_missoes": "So entra aqui tarefa sem frente que NAO e subtarefa de um ancestral tagueado, ou tarefa com frente mas sem sizing. Subtarefa sem tag sob pai tagueado (ex.: 'Ajuste' sob 'Alimentar Pipeline' [operacional]) NAO e missao: e detalhamento simples, ignorado."
+  "missoes_organizacao": [],
+  "_nota_missoes": "So entra aqui tarefa concluida na janela com tag invalida (falta_frente, frente_ambigua, falta_sizing, sizing_ambiguo). Subtarefa sem tag sob pai tagueado e ignorada silenciosamente."
 }

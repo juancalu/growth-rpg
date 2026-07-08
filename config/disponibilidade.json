@@ -19,7 +19,7 @@
     }
   },
   "Junho/2026 (01-18)": {
-    "_status": "PROVISORIO — dias uteis cheios (01-18/06 = ~14 dias uteis). Ajustar feriados/afastamentos no planejamento (ex.: Corpus Christi 04/06 e ponto facultativo 05/06, se aplicaveis).",
+    "_status": "FECHADO — fold aplicado em acumulado.json em 06/07/2026.",
     "Felipe": {
       "dias_disponiveis": 14,
       "afastamentos": []
@@ -30,6 +30,21 @@
     },
     "Vinicius": {
       "dias_disponiveis": 14,
+      "afastamentos": []
+    }
+  },
+  "Julho/2026 (02-16)": {
+    "_status": "PROVISORIO — 11 dias uteis estimados (02-16/07, excluindo fins de semana). Ajustar afastamentos e feriados locais no planejamento.",
+    "Felipe": {
+      "dias_disponiveis": 11,
+      "afastamentos": []
+    },
+    "Juan": {
+      "dias_disponiveis": 11,
+      "afastamentos": []
+    },
+    "Vinicius": {
+      "dias_disponiveis": 11,
       "afastamentos": []
     }
   }

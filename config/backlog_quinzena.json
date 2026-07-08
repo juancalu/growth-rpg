@@ -11,7 +11,7 @@
     "analise": { "camadas": { "comprometida": 25, "alvo": 40, "stretch": 60 } }
   },
   "Junho/2026 (01-18)": {
-    "_status": "PROVISORIO — camadas dimensionadas por ~0.7x Maio (~14 dias uteis vs 20). TRAVAR os valores reais no planejamento de 18/06; este bloco e so para o run diario ja funcionar.",
+    "_status": "FECHADO — fold aplicado em acumulado.json em 06/07/2026.",
     "janela": {
       "de": "2026-06-01",
       "ate": "2026-06-18",
@@ -20,5 +20,16 @@
     "operacional": { "camadas": { "comprometida": 55, "alvo": 75, "stretch": 100 } },
     "projeto": { "camadas": { "comprometida": 85, "alvo": 125, "stretch": 170 } },
     "analise": { "camadas": { "comprometida": 18, "alvo": 28, "stretch": 42 } }
+  },
+  "Julho/2026 (02-16)": {
+    "_status": "PROVISORIO — camadas dimensionadas pela velocidade da quinzena de 18/06 (~11 dias uteis). TRAVAR os valores reais com base na reuniao de 02/07 com o diretor Marcos; substituir este bloco pelos valores acordados.",
+    "janela": {
+      "de": "2026-07-02",
+      "ate": "2026-07-16",
+      "ancora": "Reuniao 'alinhamento e resultados' com o diretor Marcos, 02/07"
+    },
+    "operacional": { "camadas": { "comprometida": 40, "alvo": 70, "stretch": 110 } },
+    "projeto": { "camadas": { "comprometida": 35, "alvo": 55, "stretch": 80 } },
+    "analise": { "camadas": { "comprometida": 12, "alvo": 20, "stretch": 32 } }
   }
 }
