@@ -69,7 +69,32 @@
       }
     },
     "eventos": { "type": "object" },
-    "missoes_organizacao": { "type": "array" }
+    "missoes_organizacao": { "type": "array" },
+    "projetos": {
+      "type": "object",
+      "description": "Snapshot de progresso dos projetos (listas do ClickUp) para o Mapa de Campanha. Opcional; produzido pelo cowork, nunca pelo app. Progresso = tarefas concluídas ÷ total (binário, determinístico).",
+      "required": ["lista"],
+      "properties": {
+        "atualizado_em": { "type": "string" },
+        "fonte": { "type": "string" },
+        "lista": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["nome", "total", "concluidas", "abertas", "bloqueadas"],
+            "properties": {
+              "id": { "type": "string" },
+              "nome": { "type": "string" },
+              "total": { "type": "integer", "minimum": 0 },
+              "concluidas": { "type": "integer", "minimum": 0 },
+              "abertas": { "type": "integer", "minimum": 0 },
+              "bloqueadas": { "type": "integer", "minimum": 0 },
+              "progresso": { "type": "number", "minimum": 0, "maximum": 1 }
+            }
+          }
+        }
+      }
+    }
   },
   "$defs": {
     "frente": {

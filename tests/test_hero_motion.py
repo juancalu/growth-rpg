@@ -57,7 +57,11 @@ def test_prefers_reduced_motion_cobre_animacoes():
     assert "transition: none" in bloco, "transition: none ausente no bloco reduced-motion"
 
 
-def test_quinzena_capitulo_em_appjs():
-    """renderMeta deve formatar quinzena como 'Capitulo: ...'."""
+def test_quinzena_capitulo_banner():
+    """A quinzena é apresentada como 'Capítulo' (framing de jogo): banner + ícone
+    no header, e renderMeta popula o valor em #quinzena-label."""
+    html = (APP / "index.html").read_text(encoding="utf-8")
     js = _js()
-    assert "Capitulo:" in js, "'Capitulo:' ausente em renderMeta"
+    assert "capitulo-banner" in html, "banner de capítulo ausente no header"
+    assert "capitulo-kicker" in html and "Capítulo" in html, "kicker 'Capítulo' ausente"
+    assert "quinzena-label" in js, "renderMeta não popula #quinzena-label"

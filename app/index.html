@@ -6,19 +6,118 @@
   <meta name="description" content="Growth RPG — painel gamificado de produtividade do time DEG">
   <title>Growth RPG — DEG</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=a16-3">
+  <link rel="stylesheet" href="style.css?v=vis46">
 </head>
 <body>
+  <div class="site-frame" aria-hidden="true">
+    <svg class="site-frame__defs" width="0" height="0" focusable="false">
+      <symbol id="frame-corner" viewBox="0 0 64 64">
+        <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 60 V18 C4 10 10 4 18 4 H60"/>
+          <path d="M13 60 V25 C13 18 18 13 25 13 H60"/>
+          <path d="M4 34 C4 25 8 21 13 21"/>
+          <path d="M34 4 C25 4 21 8 21 13"/>
+        </g>
+        <path d="M12 6 L16 10 L12 14 L8 10 Z" fill="currentColor"/>
+      </symbol>
+    </svg>
+    <svg class="site-frame__corner sf-tl"><use href="#frame-corner"/></svg>
+    <svg class="site-frame__corner sf-tr"><use href="#frame-corner"/></svg>
+    <svg class="site-frame__corner sf-bl"><use href="#frame-corner"/></svg>
+    <svg class="site-frame__corner sf-br"><use href="#frame-corner"/></svg>
+  </div>
+
+  <!-- Gradientes do escudo de nível (preto no topo → cor profunda da frente na base).
+       Compartilhados por todos os escudos; as cores dos stops vêm de tokens no style.css. -->
+  <svg class="escudo-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="esc-fill-operacional" x1="0" y1="0" x2="0" y2="1">
+        <stop class="esc-stop-0" offset="0"/>
+        <stop class="esc-stop-1 esc-stop-1--op" offset="1"/>
+      </linearGradient>
+      <linearGradient id="esc-fill-projeto" x1="0" y1="0" x2="0" y2="1">
+        <stop class="esc-stop-0" offset="0"/>
+        <stop class="esc-stop-1 esc-stop-1--prj" offset="1"/>
+      </linearGradient>
+      <linearGradient id="esc-fill-analise" x1="0" y1="0" x2="0" y2="1">
+        <stop class="esc-stop-0" offset="0"/>
+        <stop class="esc-stop-1 esc-stop-1--ana" offset="1"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
   <header class="site-header">
     <div class="header-inner">
-      <h1 class="site-title">Growth RPG</h1>
+      <span class="guild-crest" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="46" height="46" focusable="false">
+          <!-- Coruja heráldica: inteligência & estratégia (visão que enxerga o tabuleiro) -->
+          <g class="crest-owl" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <!-- tufos de pena -->
+            <path d="M23 15 L19 6 L28 12" stroke-width="2"/>
+            <path d="M41 15 L45 6 L36 12" stroke-width="2"/>
+            <!-- corpo/silhueta -->
+            <path d="M32 11 C20 11 15 22 15 34 C15 47 22 55 32 55 C42 55 49 47 49 34 C49 22 44 11 32 11 Z"
+                  fill="currentColor" fill-opacity="0.12" stroke-width="2.2"/>
+            <!-- disco facial -->
+            <path d="M32 15 C24.5 15 20.5 21 20.5 28.5 C20.5 35 25.5 39 32 39 C38.5 39 43.5 35 43.5 28.5 C43.5 21 39.5 15 32 15 Z"
+                  fill="currentColor" fill-opacity="0.08" stroke-width="1.3"/>
+            <!-- sobrancelhas -->
+            <path d="M22 24 C25 20 30 20 32 24 C34 20 39 20 42 24" stroke-width="1.5"/>
+            <!-- olhos grandes -->
+            <circle cx="26" cy="28" r="4.6" stroke-width="1.8"/>
+            <circle cx="38" cy="28" r="4.6" stroke-width="1.8"/>
+            <circle cx="26" cy="28" r="1.8" fill="currentColor" stroke="none"/>
+            <circle cx="38" cy="28" r="1.8" fill="currentColor" stroke="none"/>
+            <!-- bico -->
+            <path d="M32 31 L29.3 35 L32 37.2 L34.7 35 Z" fill="currentColor" stroke="none"/>
+            <!-- penas do peito / asas -->
+            <path d="M20 37 C22 43 25 48 31 51" stroke-width="1.2"/>
+            <path d="M44 37 C42 43 39 48 33 51" stroke-width="1.2"/>
+            <path d="M27 43 h10 M26 47 h12" stroke-width="1"/>
+            <!-- garras no poleiro -->
+            <path d="M27 55 v3 M32 55 v3.5 M37 55 v3" stroke-width="1.6"/>
+            <path d="M19 58.5 H45" stroke-width="2"/>
+          </g>
+        </svg>
+      </span>
+      <div class="header-titles">
+        <h1 class="site-title">Growth RPG</h1>
+        <p class="site-subtitle">✦ Crônica da Guilda DEG ✦</p>
+      </div>
       <div class="meta-quinzena">
-        <span id="quinzena-label" class="quinzena-label">—</span>
-        <span id="quinzena-dates" class="quinzena-dates">—</span>
+        <div class="capitulo-banner">
+          <span class="capitulo-icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="26" height="26" focusable="false">
+              <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M12 6.4 C9.8 5 6.4 4.6 3.8 5.2 V18 C6.4 17.4 9.8 17.8 12 19.2" fill="currentColor" fill-opacity="0.1"/>
+                <path d="M12 6.4 C14.2 5 17.6 4.6 20.2 5.2 V18 C17.6 17.4 14.2 17.8 12 19.2" fill="currentColor" fill-opacity="0.1"/>
+                <path d="M12 6.4 V19.2"/>
+              </g>
+              <path d="M7.6 9 l.55 1.35 1.45.15 -1.1 .95 .35 1.4 -1.25 -.78 -1.25 .78 .35 -1.4 -1.1 -.95 1.45 -.15 z" fill="currentColor" stroke="none" fill-opacity="0.95"/>
+            </svg>
+          </span>
+          <span class="capitulo-info">
+            <span class="capitulo-kicker">Capítulo</span>
+            <span id="quinzena-label" class="quinzena-label">—</span>
+            <span id="quinzena-dates" class="quinzena-dates">—</span>
+          </span>
+        </div>
       </div>
     </div>
     <p id="quinzena-ancora" class="quinzena-ancora"></p>
   </header>
+
+  <nav class="site-nav" aria-label="Seções do painel">
+    <div class="site-nav__inner">
+      <a href="#mapa-campanha">Mapa</a>
+      <a href="#personagens">Heróis</a>
+      <a href="#guild">Guilda</a>
+      <a href="#eventos">Hordas</a>
+      <a href="#ranking">Recordes</a>
+      <a href="#missoes">Missões</a>
+      <a href="#reconciliacao">Pergaminho</a>
+    </div>
+  </nav>
 
   <main id="main" role="main">
     <div id="app-error" class="app-error" hidden>
@@ -28,6 +127,7 @@
 
     <section id="mapa-campanha" class="section" aria-labelledby="mapa-titulo">
       <h2 id="mapa-titulo" class="section-title">Mapa de Campanha</h2>
+      <p class="section-note">Cada projeto é um território. O território é conquistado conforme as tarefas são concluídas (só <em>concluído</em> conta); tarefas abertas e bloqueadas são os obstáculos que restam. Progresso de projeto — não é o XP das frentes.</p>
       <div id="mapa-campanha-container"></div>
     </section>
 
@@ -43,25 +143,36 @@
       <div id="guild-grid" class="guild-grid"></div>
     </section>
 
-    <section id="eventos" class="section" aria-labelledby="eventos-titulo">
+    <div class="painel-abas" role="tablist" aria-label="Seções alternáveis do painel">
+      <button type="button" class="painel-aba is-ativa" role="tab" id="aba-eventos"
+              aria-controls="eventos" aria-selected="true" data-aba-alvo="eventos">Encontros &amp; Hordas</button>
+      <button type="button" class="painel-aba" role="tab" id="aba-ranking"
+              aria-controls="ranking" aria-selected="false" tabindex="-1" data-aba-alvo="ranking">Salão dos Recordes</button>
+      <button type="button" class="painel-aba" role="tab" id="aba-missoes"
+              aria-controls="missoes" aria-selected="false" tabindex="-1" data-aba-alvo="missoes">Missões de Faxina</button>
+      <button type="button" class="painel-aba" role="tab" id="aba-reconciliacao"
+              aria-controls="reconciliacao" aria-selected="false" tabindex="-1" data-aba-alvo="reconciliacao">Pergaminho do Mestre</button>
+    </div>
+
+    <section id="eventos" class="section painel-aba-conteudo" role="tabpanel" aria-labelledby="eventos-titulo" tabindex="0">
       <h2 id="eventos-titulo" class="section-title">Encontros &amp; Hordas</h2>
       <p class="section-note">Urgências e bugs que surgem no meio da quinzena — encontros à parte do objetivo planejado.</p>
       <div id="eventos-lista"></div>
     </section>
 
-    <section id="ranking" class="section" aria-labelledby="ranking-titulo">
+    <section id="ranking" class="section painel-aba-conteudo" role="tabpanel" aria-labelledby="ranking-titulo" tabindex="0" hidden>
       <h2 id="ranking-titulo" class="section-title">Salão dos Recordes</h2>
       <p class="section-note">Cosmético e secundário — dentro da mesma frente (mesma unidade). Nunca combina frentes nem soma um total por herói.</p>
       <div id="ranking-grid" class="ranking-grid"></div>
     </section>
 
-    <section id="missoes" class="section" aria-labelledby="missoes-titulo">
+    <section id="missoes" class="section painel-aba-conteudo" role="tabpanel" aria-labelledby="missoes-titulo" tabindex="0" hidden>
       <h2 id="missoes-titulo" class="section-title">Missões de Faxina</h2>
       <p class="section-note">Tarefas sem classificação válida — destrave o XP que já é seu corrigindo a tag. Higiene como gameplay.</p>
       <ul id="missoes-lista" class="missoes-lista"></ul>
     </section>
 
-    <section id="reconciliacao" class="section" aria-labelledby="reconciliacao-titulo">
+    <section id="reconciliacao" class="section painel-aba-conteudo" role="tabpanel" aria-labelledby="reconciliacao-titulo" tabindex="0" hidden>
       <h2 id="reconciliacao-titulo" class="section-title">Pergaminho do Mestre</h2>
       <p class="section-note">Contribuições individuais × total de equipe (de-dup), por frente. Paridade por construção — mesmo motor (cowork/FLUXO 3); este app lê e apresenta, nunca recalcula.</p>
       <div id="reconciliacao-grid" class="reconciliacao-grid"></div>
@@ -69,6 +180,6 @@
   </main>
 
   <script src="vendor/chart.min.js"></script>
-  <script type="module" src="app.js?v=a16-3"></script>
+  <script type="module" src="app.js?v=vis46"></script>
 </body>
 </html>

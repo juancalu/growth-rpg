@@ -32,17 +32,11 @@ def test_imagem_aponta_para_vendor():
 
 
 def test_avatar_no_personagem_card():
-    """personagem-card template deve incluir avatares (banner de herói, BLK-A16)."""
+    """personagem-card: banner mostra o rosto único da classe dominante (sem redundância)."""
     js = JS.read_text(encoding="utf-8")
     assert "hero-portraits" in js, "hero-portraits ausente no template"
-    assert "avatarHtml(f, fr.classe)" in js, "avatarHtml não usado no banner de herói"
-
-
-def test_hero_avatars_presente():
-    """renderHeroAvatars deve adicionar .hero-avatars ao header."""
-    js = JS.read_text(encoding="utf-8")
-    assert "renderHeroAvatars" in js, "renderHeroAvatars ausente"
-    assert "hero-avatars" in js, "hero-avatars ausente"
+    assert "hero-face" in js, "hero-face (rosto da classe dominante) ausente"
+    assert "avatarHtml(dom, domFr.classe)" in js, "avatar da classe dominante não usado no banner"
 
 
 def test_avatar_slot_css():

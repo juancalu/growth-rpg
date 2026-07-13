@@ -1,4 +1,9 @@
-"""BLK-A14: mapa de campanha — SVG inline, data-driven, no topo."""
+"""Mapa de Campanha — territórios de projeto (data-driven de dados.projetos, SVG inline, no topo).
+
+Cada projeto (lista do ClickUp) é um território; o progresso vem de tarefas concluídas ÷ total
+(binário/determinístico). O app NUNCA lê o ClickUp — consome o snapshot em dados.projetos que o
+produtor grava. Estes testes checam estrutura (não estética; "ficou épico?" é julgamento humano).
+"""
 import json
 from pathlib import Path
 
@@ -6,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 APP = ROOT / "app"
 JS = APP / "app.js"
 HTML = APP / "index.html"
-GOLDEN = ROOT / "tests" / "golden" / "maio2026_expected.json"
+DADOS = ROOT / "dados.json"
 
 
 def test_mapa_campanha_em_html():
@@ -19,49 +24,52 @@ def test_mapa_campanha_em_html():
     assert mapa_pos < pers_pos, "#mapa-campanha deve vir antes de #personagens"
 
 
-def test_funcao_render_mapa_campanha_existe():
-    """app.js deve definir renderMapaCampanha e mapaCampanhaSVG."""
+def test_funcoes_render_mapa_existem():
+    """app.js deve definir renderMapaCampanha e o helper de território."""
     js = JS.read_text(encoding="utf-8")
-    assert "renderMapaCampanha" in js
-    assert "mapaCampanhaSVG" in js
+    assert "renderMapaCampanha" in js, "renderMapaCampanha ausente"
+    assert "projetoTerritorioHTML" in js, "projetoTerritorioHTML ausente"
 
 
-def test_mapa_usa_dados_contrato():
-    """mapaCampanhaSVG usa entregue_quinzena e camadas.stretch do contrato."""
+def test_mapa_usa_dados_projetos():
+    """O mapa é dirigido por dados.projetos e seus campos do contrato."""
     js = JS.read_text(encoding="utf-8")
-    assert "entregue_quinzena" in js
-    assert "camadas.stretch" in js
+    assert "dados.projetos" in js, "mapa não lê dados.projetos"
+    for campo in ("concluidas", "total", "abertas", "bloqueadas"):
+        assert campo in js, f"campo '{campo}' de projeto não referenciado em app.js"
 
 
-def test_marcadores_de_problema_usam_fontes_corretas():
-    """numProblemas é calculado a partir de missoes + backlog.tarefas."""
+def test_mapa_territorio_svg_inline():
+    """Território é SVG inline (zero asset externo) com a classe .mapa-territorio."""
     js = JS.read_text(encoding="utf-8")
-    assert "backlog.tarefas" in js, "backlog.tarefas ausente"
-    assert "numProblemas" in js, "numProblemas ausente"
-    assert "mapa-problema" in js, "Classe mapa-problema ausente"
+    assert "mapa-territorio" in js, "classe mapa-territorio ausente"
+    assert "<svg" in js, "SVG inline ausente em app.js"
+    assert "mapa-projeto" in js, "tile mapa-projeto ausente"
 
 
-def test_contagem_problema_golden():
-    """Golden: nº esperado de marcadores == missoes + op_backlog."""
-    with open(GOLDEN, encoding="utf-8") as f:
-        d = json.load(f)
-    missoes = len(d["missoes_organizacao"])
-    op_backlog = sum(
-        p["frentes"]["operacional"]["backlog"]["tarefas"] for p in d["pessoas"]
-    )
-    expected = missoes + op_backlog
+def test_mapa_tem_fallback():
+    """Sem dados.projetos, o mapa degrada com uma nota (não quebra)."""
     js = JS.read_text(encoding="utf-8")
-    assert "missoes" in js, "missoes não referenciado"
-    assert "backlog.tarefas" in js, "backlog.tarefas não referenciado"
-    assert expected >= 0  # determinístico com os dados do golden
+    assert "Sem dados de projetos" in js, "fallback do mapa ausente"
 
 
-def test_tres_regioes_tematicas_no_svg():
-    """mapaCampanhaSVG deve conter as 3 regiões temáticas."""
-    js = JS.read_text(encoding="utf-8")
-    assert "TERRITORIO" in js, "Região TERRITORIO ausente"
-    assert "CONSTRUCAO" in js, "Região CONSTRUCAO ausente"
-    assert "MAPA ENEVOADO" in js, "Região MAPA ENEVOADO ausente"
+def test_progresso_determinista_no_dados():
+    """dados.projetos (se presente): concluidas+abertas+bloqueadas == total e progresso em [0,1].
+
+    Garante a honestidade do contrato: nada de % inventado; só o que soma bate com o total.
+    """
+    if not DADOS.exists():
+        return
+    d = json.loads(DADOS.read_text(encoding="utf-8"))
+    proj = d.get("projetos")
+    if not proj:
+        return
+    for p in proj["lista"]:
+        soma = p["concluidas"] + p["abertas"] + p["bloqueadas"]
+        assert soma == p["total"], f"{p['nome']}: {soma} != total {p['total']}"
+        assert 0 <= p["concluidas"] <= p["total"], f"{p['nome']}: concluidas fora de faixa"
+        if "progresso" in p:
+            assert 0 <= p["progresso"] <= 1, f"{p['nome']}: progresso fora de [0,1]"
 
 
 def test_mapa_secoes_originais_intactas():

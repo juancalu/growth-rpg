@@ -752,5 +752,56 @@
     "lista": []
   },
   "missoes_organizacao": [],
-  "_nota_missoes": "So entra aqui tarefa concluida na janela com tag invalida (falta_frente, frente_ambigua, falta_sizing, sizing_ambiguo). Subtarefa sem tag sob pai tagueado e ignorada silenciosamente."
+  "_nota_missoes": "So entra aqui tarefa concluida na janela com tag invalida (falta_frente, frente_ambigua, falta_sizing, sizing_ambiguo). Subtarefa sem tag sob pai tagueado e ignorada silenciosamente.",
+  "projetos": {
+    "atualizado_em": "2026-07-08",
+    "fonte": "ClickUp — space PROJETOS - DEG (snapshot; futuramente gerado pelo produtor/cowork, nunca pelo app)",
+    "lista": [
+      {
+        "id": "901713535516",
+        "nome": "Motor de Expansão",
+        "total": 132,
+        "concluidas": 102,
+        "abertas": 28,
+        "bloqueadas": 2,
+        "progresso": 0.7727
+      },
+      {
+        "id": "901713535386",
+        "nome": "LTV e Churn",
+        "total": 8,
+        "concluidas": 8,
+        "abertas": 0,
+        "bloqueadas": 0,
+        "progresso": 1.0
+      },
+      {
+        "id": "901713535385",
+        "nome": "Dashboard Operacional",
+        "total": 7,
+        "concluidas": 6,
+        "abertas": 0,
+        "bloqueadas": 1,
+        "progresso": 0.8571
+      },
+      {
+        "id": "901713571204",
+        "nome": "Gestão Operacional",
+        "total": 7,
+        "concluidas": 7,
+        "abertas": 0,
+        "bloqueadas": 0,
+        "progresso": 1.0
+      },
+      {
+        "id": "901714370081",
+        "nome": "API GeoEspacial",
+        "total": 3,
+        "concluidas": 2,
+        "abertas": 1,
+        "bloqueadas": 0,
+        "progresso": 0.6667
+      }
+    ]
+  }
 }

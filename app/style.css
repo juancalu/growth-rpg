@@ -20,9 +20,19 @@
   --color-text-faint: #8492a6;
 
   /* — Frentes (acento) — */
-  --color-op:  #06b6d4;
-  --color-prj: #f59e0b;
-  --color-ana: #8b5cf6;
+  --color-op:  #e11d48;
+  --color-prj: #f5c542;
+  --color-ana: #9333ea;
+  --color-magenta: #f0409c; /* acento cromático decorativo (NÃO é frente — só título/detalhes) */
+
+  /* — Canais RGB por frente (base p/ rgb(var(--rgb-x) / alpha)) — */
+  --rgb-op:  225 29 72;    /* carmesim — Guerreiro/Operacional */
+  --rgb-prj: 245 197 66;   /* ouro     — Engenheiro/Projeto   */
+  --rgb-ana: 147 51 234;   /* roxo escuro — Mago/Análise      */
+  --rgb-op-deep:  120 12 40;
+  --rgb-prj-deep: 150 110 18;
+  --rgb-ana-deep: 76 29 149;
+  --rgb-magenta: 240 64 156;
 
   /* — Status — */
   --color-success:        #4ade80;
@@ -74,17 +84,25 @@
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
   --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
-  --shadow-glow-op:  0 0 20px rgba(6, 182, 212, 0.25);
-  --shadow-glow-prj: 0 0 20px rgba(245, 158, 11, 0.25);
-  --shadow-glow-ana: 0 0 20px rgba(139, 92, 246, 0.25);
+  --shadow-glow-op:  0 0 20px rgb(var(--rgb-op) / 0.25);
+  --shadow-glow-prj: 0 0 20px rgb(var(--rgb-prj) / 0.25);
+  --shadow-glow-ana: 0 0 20px rgb(var(--rgb-ana) / 0.25);
 
   /* — Auras (cor ambiente por frente) — */
-  --aura-op:  rgba(6, 182, 212, 0.15);
-  --aura-prj: rgba(245, 158, 11, 0.15);
-  --aura-ana: rgba(139, 92, 246, 0.15);
+  --aura-op:  rgb(var(--rgb-op) / 0.15);
+  --aura-prj: rgb(var(--rgb-prj) / 0.15);
+  --aura-ana: rgb(var(--rgb-ana) / 0.15);
 
   /* — Tipografia de display (BLK-A10) — */
   --font-display: 'Cinzel', Georgia, serif;
+
+  /* — Textura de pergaminho (ruído SVG base64, zero request externa) — */
+  --tex-noise: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48ZmlsdGVyIGlkPSJnIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC42NSIgbnVtT2N0YXZlcz0iMyIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjxmZUNvbG9yTWF0cml4IHR5cGU9InNhdHVyYXRlIiB2YWx1ZXM9IjAiLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsdGVyPSJ1cmwoI2cpIiBvcGFjaXR5PSIwLjA0Ii8+PC9zdmc+");
+
+  /* — Metal ornamentado (medalhões/molduras) — aro polido + recesso escuro — */
+  --metal-rim: radial-gradient(circle at 50% 28%, rgba(242, 246, 252, 0.95), rgba(150, 160, 182, 0.55) 46%, rgba(24, 27, 37, 0.96) 100%);
+  --metal-recess: radial-gradient(circle at 50% 38%, rgba(44, 48, 62, 1), rgba(15, 17, 25, 1));
+  --medal-bevel: inset 0 1.5px 2px rgba(255, 255, 255, 0.55), inset 0 -3px 5px rgba(0, 0, 0, 0.55), 0 2px 5px rgba(0, 0, 0, 0.6);
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -130,8 +148,8 @@ body {
   background:
     url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48ZmlsdGVyIGlkPSJnIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC42NSIgbnVtT2N0YXZlcz0iMyIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjxmZUNvbG9yTWF0cml4IHR5cGU9InNhdHVyYXRlIiB2YWx1ZXM9IjAiLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsdGVyPSJ1cmwoI2cpIiBvcGFjaXR5PSIwLjA0Ii8+PC9zdmc+"),
     radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.65) 100%),
-    radial-gradient(ellipse 60% 40% at 15% 10%, rgba(6, 182, 212, 0.06) 0%, transparent 100%),
-    radial-gradient(ellipse 50% 40% at 85% 90%, rgba(139, 92, 246, 0.05) 0%, transparent 100%),
+    radial-gradient(ellipse 60% 40% at 15% 10%, rgb(var(--rgb-op) / 0.06) 0%, transparent 100%),
+    radial-gradient(ellipse 50% 40% at 85% 90%, rgb(var(--rgb-ana) / 0.05) 0%, transparent 100%),
     linear-gradient(160deg, rgba(10, 11, 18, 1) 0%, rgba(15, 17, 23, 1) 50%, rgba(11, 13, 20, 1) 100%);
   color: var(--color-text);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -141,14 +159,81 @@ body {
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MOLDURA DECORATIVA DO SITE (entorno) — overlay fixo, não-interativo
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.site-frame {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  color: rgba(212, 185, 130, 0.8);
+}
+
+.site-frame__defs { position: absolute; width: 0; height: 0; }
+
+/* moldura fina dourada + vinheta nas bordas */
+.site-frame::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 10px;
+  border: 1px solid rgba(212, 185, 130, 0.16);
+  box-shadow: inset 0 0 3px rgba(212, 185, 130, 0.1), inset 0 0 90px rgba(0, 0, 0, 0.5);
+}
+
+/* linha tricolor no rodapé (espelha o glow do topo do header) */
+.site-frame::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgb(var(--rgb-op) / 0.5) 20%, rgb(var(--rgb-prj) / 0.4) 50%, rgb(var(--rgb-ana) / 0.5) 80%, transparent 100%);
+}
+
+.site-frame__corner {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  filter: drop-shadow(0 0 4px rgba(212, 185, 130, 0.35));
+}
+.sf-tl { top: 4px;    left: 4px; }
+.sf-tr { top: 4px;    right: 4px;  transform: scaleX(-1); }
+.sf-bl { bottom: 4px; left: 4px;   transform: scaleY(-1); }
+.sf-br { bottom: 4px; right: 4px;  transform: scale(-1, -1); }
+
+@media (max-width: 600px) {
+  .site-frame__corner { width: 34px; height: 34px; }
+  .site-frame::before { inset: 4px; }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    HERO ÉPICO (BLK-A13)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .site-header {
-  background: linear-gradient(180deg, rgba(10, 11, 22, 0.98) 0%, var(--color-surface) 100%);
+  /* glows radiais arcanos: carmesim no canto sup-esq, roxo no inf-dir */
+  background:
+    radial-gradient(ellipse 55% 130% at 6% -20%, rgb(var(--rgb-op) / 0.18), transparent 60%),
+    radial-gradient(ellipse 46% 120% at 50% -34%, rgb(var(--rgb-magenta) / 0.08), transparent 60%),
+    radial-gradient(ellipse 50% 140% at 96% 130%, rgb(var(--rgb-ana) / 0.18), transparent 62%),
+    linear-gradient(180deg, rgba(6, 7, 16, 0.98) 0%, var(--color-surface) 100%);
   border-bottom: none;
-  padding: var(--space-6) var(--space-6) var(--space-5);
+  padding: var(--space-8) var(--space-6) var(--space-6);
   box-shadow: var(--shadow-md);
   position: relative;
+  overflow: hidden;
+}
+
+/* fio decorativo fino no topo (magenta cromático) */
+.site-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgb(var(--rgb-magenta) / 0.55) 50%, transparent);
 }
 
 /* Linha de glow tricolor na borda inferior */
@@ -158,46 +243,186 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 1px;
+  height: 2px;
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(6, 182, 212, 0.5) 20%,
-    rgba(245, 158, 11, 0.4) 50%,
-    rgba(139, 92, 246, 0.5) 80%,
+    rgb(var(--rgb-op) / 0.7) 20%,
+    rgb(var(--rgb-prj) / 0.6) 50%,
+    rgb(var(--rgb-ana) / 0.7) 80%,
     transparent 100%
   );
+  box-shadow:
+    0 0 10px rgb(var(--rgb-op) / 0.35),
+    0 0 14px rgb(var(--rgb-ana) / 0.3);
 }
 
 .header-inner {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: var(--space-4);
   flex-wrap: wrap;
 }
 
+/* — Brasão da guilda — */
+.guild-crest {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  color: var(--color-op);
+  background:
+    radial-gradient(circle at 50% 26%, rgba(255, 255, 255, 0.10), transparent 42%),
+    radial-gradient(circle at 50% 55%, rgba(255, 255, 255, 0.04), rgba(4, 5, 12, 0.92) 78%);
+  border: 1.5px solid rgb(var(--rgb-op) / 0.6);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 0 16px rgb(var(--rgb-op) / 0.22),
+    0 0 18px rgb(var(--rgb-op) / 0.34),
+    0 3px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* anel interno */
+.guild-crest::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  border: 1px solid rgb(var(--rgb-op) / 0.3);
+  pointer-events: none;
+}
+
+/* rebites/ticks ao redor do aro (8 marcas via conic + máscara em anel) */
+.guild-crest::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: repeating-conic-gradient(currentColor 0 1.4deg, transparent 1.4deg 45deg);
+  -webkit-mask: radial-gradient(circle, transparent 0 45%, black 46% 49.5%, transparent 50%);
+          mask: radial-gradient(circle, transparent 0 45%, black 46% 49.5%, transparent 50%);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.guild-crest svg { position: relative; filter: drop-shadow(0 0 5px rgb(var(--rgb-op) / 0.45)); }
+.guild-crest .crest-shield { opacity: 0.7; }
+
+.header-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
 .site-title {
   font-family: var(--font-display);
-  font-size: var(--text-2xl);
+  font-size: clamp(2rem, 4.5vw, 3rem);
   font-weight: var(--fw-bold);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
+  line-height: 1.05;
   text-transform: uppercase;
-  text-shadow:
-    0 0 12px rgba(6, 182, 212, 0.7),
-    0 0 32px rgba(6, 182, 212, 0.3),
-    0 2px 6px rgba(0, 0, 0, 0.95);
+  /* Gradiente arcano (o ouro não casa com o fundo escuro): carmesim → magenta → roxo. */
+  background: linear-gradient(
+    100deg,
+    var(--color-op) 0%,
+    var(--color-magenta) 52%,
+    var(--color-ana) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  /* mantido para o gate (glow visual real vem do filter abaixo) */
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+  filter:
+    drop-shadow(0 0 14px rgb(var(--rgb-op) / 0.4))
+    drop-shadow(0 0 22px rgb(var(--rgb-ana) / 0.28))
+    drop-shadow(0 2px 4px rgba(0, 0, 0, 0.9));
+}
+
+.site-subtitle {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-normal);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.meta-quinzena {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-left: auto;
+  align-items: flex-end;
+}
+
+/* — Banner de Capítulo (marcador de fase, estilo de jogo) — */
+.capitulo-banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4) var(--space-2) var(--space-4);
+  border-radius: var(--radius);
+  border: 1px solid color-mix(in srgb, var(--color-magenta) 32%, var(--color-border));
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.01)),
+    rgba(6, 7, 16, 0.55);
+  box-shadow: 0 0 16px rgb(var(--rgb-magenta) / 0.13);
+  overflow: hidden;
+}
+
+/* barra de acento tricolor à esquerda */
+.capitulo-banner::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--color-op), var(--color-magenta), var(--color-ana));
+}
+
+.capitulo-icone {
+  display: flex;
+  color: var(--color-magenta);
+  filter: drop-shadow(0 0 6px rgb(var(--rgb-magenta) / 0.5));
+}
+
+.capitulo-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.capitulo-kicker {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--color-magenta);
+  text-shadow: 0 0 8px rgb(var(--rgb-magenta) / 0.5);
 }
 
 .quinzena-label {
   font-family: var(--font-display);
-  font-size: var(--text-base);
-  font-weight: var(--fw-semibold);
-  letter-spacing: 0.06em;
-  color: var(--color-op);
+  font-size: var(--text-lg);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.04em;
+  color: var(--color-text);
 }
 
 .quinzena-dates {
-  font-size: var(--text-sm);
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.02em;
   color: var(--color-text-muted);
 }
 
@@ -205,6 +430,112 @@ body {
   font-size: var(--text-xs);
   color: var(--color-text-faint);
   margin-top: var(--space-1);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   NAVEGAÇÃO FIXA (estrutura)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 60px;
+}
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: linear-gradient(180deg, rgba(13, 15, 22, 0.97), rgba(15, 17, 23, 0.88));
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* fio tricolor sob a nav */
+.site-nav::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(var(--rgb-op) / 0.6) 20%, rgb(var(--rgb-prj) / 0.5) 50%, rgb(var(--rgb-ana) / 0.6) 80%, transparent);
+}
+
+.site-nav__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-4);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.site-nav__inner::-webkit-scrollbar { display: none; }
+
+.site-nav a {
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.site-nav a:hover {
+  color: var(--color-text);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--color-border-strong);
+  box-shadow: 0 0 12px rgb(var(--rgb-op) / 0.2);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   PAINEL DE ABAS — seções alternáveis (uma por vez)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.painel-abas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.painel-aba {
+  flex: 0 0 auto;
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-4);
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.painel-aba:hover {
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+  box-shadow: 0 0 12px rgb(var(--rgb-op) / 0.2);
+}
+
+.painel-aba.is-ativa {
+  color: var(--color-text);
+  border-color: transparent;
+  background: linear-gradient(135deg, rgb(var(--rgb-op) / 0.9), rgb(var(--rgb-ana) / 0.7));
+  box-shadow: 0 0 16px rgb(var(--rgb-op) / 0.35);
+}
+
+.painel-aba:focus-visible {
+  outline: 2px solid var(--color-op);
+  outline-offset: 2px;
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -222,13 +553,48 @@ body {
 
 .section-title {
   font-family: var(--font-display);
-  font-size: var(--text-md);
+  font-size: var(--text-lg);
   font-weight: var(--fw-bold);
-  letter-spacing: 0.07em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  border-bottom: 1px solid var(--color-border);
+  position: relative;
+  padding-left: var(--space-4);
   padding-bottom: var(--space-2);
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-4);
+  text-shadow: 0 0 18px rgb(var(--rgb-op) / 0.25), 0 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Losango-flourish à esquerda do título */
+.section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.18em;
+  width: 9px;
+  height: 9px;
+  transform: rotate(45deg);
+  border-radius: 1px;
+  background: linear-gradient(135deg, rgba(226, 232, 240, 0.55), rgba(148, 163, 184, 0.25));
+  box-shadow: 0 0 7px rgba(148, 163, 184, 0.45);
+}
+
+/* Linha inferior tricolor forte */
+.section-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    rgb(var(--rgb-op) / 0.9) 0%,
+    rgb(var(--rgb-prj) / 0.7) 45%,
+    rgb(var(--rgb-ana) / 0.5) 75%,
+    transparent 100%
+  );
+  box-shadow: 0 0 10px rgb(var(--rgb-op) / 0.3);
 }
 
 .section-note {
@@ -279,38 +645,75 @@ body {
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    EMBLEMA CHIP (cosmético de conquista)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* Medalhão de conquista (BLK-A11 → refino): disco metálico + aro da frente + glyph */
 .emblema-chip {
+  /* gradiente metálico do disco, consumido por .emblema-disco */
+  --medal-metal: linear-gradient(150deg, var(--color-surface-3) 0%, var(--color-surface) 55%, var(--color-bg) 100%);
   display: inline-flex;
+  flex-direction: column;
   align-items: center;
-  font-size: var(--text-xs);
-  font-weight: var(--fw-semibold);
-  padding: var(--space-1) var(--space-3);
-  border-radius: var(--radius-full);
-  background: linear-gradient(135deg, var(--color-surface-3) 0%, var(--color-surface-2) 100%);
-  border: 1px solid var(--color-border);
+  gap: 4px;
+  width: 66px;
+  text-align: center;
   color: var(--color-text-muted);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
-/* Medalhões com glow frente-específico (BLK-A11) */
-.emblema-chip[data-frente="operacional"] {
-  background: linear-gradient(135deg, rgba(6, 182, 212, 0.2) 0%, rgba(6, 182, 212, 0.05) 100%);
-  border-color: var(--color-op);
-  color: var(--color-op);
-  box-shadow: 0 0 8px rgba(6, 182, 212, 0.25), inset 0 1px 0 rgba(6, 182, 212, 0.1);
+.emblema-disco svg { position: relative; z-index: 1; width: 26px; height: 26px; }
+
+.emblema-disco {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--metal-rim);
+  border: 1.5px solid rgba(0, 0, 0, 0.55);
+  box-shadow: var(--medal-bevel);
+  color: var(--color-text-muted);
 }
-.emblema-chip[data-frente="projeto"] {
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(245, 158, 11, 0.05) 100%);
-  border-color: var(--color-prj);
-  color: var(--color-prj);
-  box-shadow: 0 0 8px rgba(245, 158, 11, 0.25), inset 0 1px 0 rgba(245, 158, 11, 0.1);
+
+/* recesso interno escuro — o ícone brilha em cima */
+.emblema-disco::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: var(--metal-recess);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.7), inset 0 -1px 1px rgba(255, 255, 255, 0.06);
 }
-.emblema-chip[data-frente="analise"] {
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(139, 92, 246, 0.05) 100%);
-  border-color: var(--color-ana);
-  color: var(--color-ana);
-  box-shadow: 0 0 8px rgba(139, 92, 246, 0.25), inset 0 1px 0 rgba(139, 92, 246, 0.1);
+
+/* gema no topo (cor da frente) */
+.emblema-disco::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle at 40% 32%, rgba(255, 255, 255, 0.95), currentColor 62%, rgba(0, 0, 0, 0.5));
+  box-shadow: 0 0 7px currentColor, 0 1px 2px rgba(0, 0, 0, 0.6);
+  z-index: 2;
 }
+
+.emblema-nome {
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+
+/* glow + tinta do ícone/gema por frente (aro metálico permanece neutro) */
+.emblema-chip[data-frente="operacional"] .emblema-disco { color: var(--color-op);  box-shadow: var(--medal-bevel), 0 0 13px rgb(var(--rgb-op) / 0.55); }
+.emblema-chip[data-frente="projeto"]     .emblema-disco { color: var(--color-prj); box-shadow: var(--medal-bevel), 0 0 13px rgb(var(--rgb-prj) / 0.55); }
+.emblema-chip[data-frente="analise"]     .emblema-disco { color: var(--color-ana); box-shadow: var(--medal-bevel), 0 0 13px rgb(var(--rgb-ana) / 0.55); }
+
+.emblema-chip[data-frente="operacional"] .emblema-nome { color: var(--color-op); }
+.emblema-chip[data-frente="projeto"]     .emblema-nome { color: var(--color-prj); }
+.emblema-chip[data-frente="analise"]     .emblema-nome { color: var(--color-ana); }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    BARRA DE XP
@@ -356,7 +759,11 @@ body {
 }
 
 .xp-hook {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 2.4em; /* reserva 2 linhas p/ alinhar os mini-stats entre colunas */
   font-size: var(--text-xs);
   color: var(--color-text-faint);
   margin-top: 2px;
@@ -371,16 +778,16 @@ body {
 
 /* XP bar: gradiente + glow por frente (BLK-A11) */
 .frente-card[data-frente="operacional"] .xp-bar__fill {
-  background: linear-gradient(90deg, rgba(3, 130, 148, 1) 0%, var(--color-op) 100%);
-  box-shadow: 0 0 8px rgba(6, 182, 212, 0.5);
+  background: linear-gradient(90deg, rgb(var(--rgb-op-deep) / 1) 0%, var(--color-op) 100%);
+  box-shadow: 0 0 8px rgb(var(--rgb-op) / 0.5);
 }
 .frente-card[data-frente="projeto"] .xp-bar__fill {
-  background: linear-gradient(90deg, rgba(180, 90, 0, 1) 0%, var(--color-prj) 100%);
-  box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+  background: linear-gradient(90deg, rgb(var(--rgb-prj-deep) / 1) 0%, var(--color-prj) 100%);
+  box-shadow: 0 0 8px rgb(var(--rgb-prj) / 0.5);
 }
 .frente-card[data-frente="analise"] .xp-bar__fill {
-  background: linear-gradient(90deg, rgba(90, 40, 170, 1) 0%, var(--color-ana) 100%);
-  box-shadow: 0 0 8px rgba(139, 92, 246, 0.5);
+  background: linear-gradient(90deg, rgb(var(--rgb-ana-deep) / 1) 0%, var(--color-ana) 100%);
+  box-shadow: 0 0 8px rgb(var(--rgb-ana) / 0.5);
 }
 
 .xp-text {
@@ -399,11 +806,41 @@ body {
 
 .personagem-card {
   background: var(--color-surface);
+  background-image: var(--tex-noise);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   padding: var(--space-4);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
+  position: relative;
+}
+
+/* Cantos ornamentados (colchetes nos 4 vértices, via gradientes na moldura) */
+.personagem-card::after {
+  content: '';
+  position: absolute;
+  inset: 7px;
+  pointer-events: none;
+  border-radius: var(--radius-sm);
+  --oc: rgba(205, 214, 240, 0.28);
+  background:
+    linear-gradient(var(--oc), var(--oc)) 0 0 / 15px 1.5px no-repeat,
+    linear-gradient(var(--oc), var(--oc)) 0 0 / 1.5px 15px no-repeat,
+    linear-gradient(var(--oc), var(--oc)) 100% 0 / 15px 1.5px no-repeat,
+    linear-gradient(var(--oc), var(--oc)) 100% 0 / 1.5px 15px no-repeat,
+    linear-gradient(var(--oc), var(--oc)) 0 100% / 15px 1.5px no-repeat,
+    linear-gradient(var(--oc), var(--oc)) 0 100% / 1.5px 15px no-repeat,
+    linear-gradient(var(--oc), var(--oc)) 100% 100% / 15px 1.5px no-repeat,
+    linear-gradient(var(--oc), var(--oc)) 100% 100% / 1.5px 15px no-repeat;
+}
+
+/* Textura de pergaminho sutil nos demais painéis */
+.guild-card,
+.evento-card,
+.ranking-card,
+.reconciliacao-card,
+.missao-item {
+  background-image: var(--tex-noise);
 }
 
 /* ── Banner de herói (ficha) ── */
@@ -427,6 +864,83 @@ body {
   gap: var(--space-2);
   flex-shrink: 0;
 }
+
+/* Rosto único do herói = classe dominante — emblema ornamentado (aro metálico + gemas) */
+.hero-face { position: relative; flex-shrink: 0; display: flex; }
+
+.hero-face .avatar-slot[data-frente] {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border: 2px solid color-mix(in srgb, currentColor 62%, transparent);
+  background:
+    radial-gradient(circle at 50% 26%, rgba(255, 255, 255, 0.1), transparent 46%),
+    radial-gradient(circle at 50% 55%, rgba(255, 255, 255, 0.03), rgba(4, 5, 12, 0.94) 80%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 0 14px rgb(var(--rgb-m) / 0.22),
+    0 2px 6px rgba(0, 0, 0, 0.6),
+    0 0 18px var(--face-glow, rgba(255, 255, 255, 0.12));
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* anel interno */
+.hero-face .avatar-slot[data-frente]::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, currentColor 28%, transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+/* rebites no aro */
+.hero-face .avatar-slot[data-frente]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: repeating-conic-gradient(currentColor 0 1.2deg, transparent 1.2deg 45deg);
+  -webkit-mask: radial-gradient(circle, transparent 0 45%, black 46% 49.5%, transparent 50%);
+          mask: radial-gradient(circle, transparent 0 45%, black 46% 49.5%, transparent 50%);
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-face .avatar-glyph { position: relative; z-index: 2; }
+
+/* lift + glow no hover do card (mesmo idioma dos medalhões do header) */
+.personagem-card:hover .hero-face .avatar-slot[data-frente] {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 0 16px rgb(var(--rgb-m) / 0.3),
+    0 5px 14px rgba(0, 0, 0, 0.7),
+    0 0 26px var(--face-glow, rgba(255, 255, 255, 0.2));
+}
+
+.hero-face .avatar-glyph svg { width: 34px; height: 34px; }
+
+/* gemas em cima e embaixo (cor da classe dominante) */
+.hero-face::before,
+.hero-face::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle at 40% 32%, rgba(255, 255, 255, 0.95), var(--face-gem, rgba(160, 168, 190, 1)) 60%, rgba(0, 0, 0, 0.5));
+  box-shadow: 0 0 8px var(--face-gem, transparent), 0 1px 2px rgba(0, 0, 0, 0.6);
+  z-index: 2;
+}
+.hero-face::before { top: -5px; }
+.hero-face::after { bottom: -5px; }
+
+.hero-face[data-frente="operacional"] { --face-gem: rgb(var(--rgb-op) / 1);  --face-glow: rgb(var(--rgb-op) / 0.55); --rgb-m: var(--rgb-op);  color: var(--color-op); }
+.hero-face[data-frente="projeto"]     { --face-gem: rgb(var(--rgb-prj) / 1); --face-glow: rgb(var(--rgb-prj) / 0.55); --rgb-m: var(--rgb-prj); color: var(--color-prj); }
+.hero-face[data-frente="analise"]     { --face-gem: rgb(var(--rgb-ana) / 1); --face-glow: rgb(var(--rgb-ana) / 0.55); --rgb-m: var(--rgb-ana); color: var(--color-ana); }
 
 .hero-portrait {
   display: flex;
@@ -501,7 +1015,64 @@ body {
   color: var(--color-text-muted);
 }
 
-/* ── Chip de tier/classe (dentro da frente-card) ── */
+/* ── Moldura do card pela CLASSE DOMINANTE (cor da frente de maior nível) ── */
+.personagem-card[data-classe-dominante="operacional"] {
+  border-color: var(--color-op);
+  box-shadow: var(--shadow-sm), var(--shadow-glow-op);
+}
+.personagem-card[data-classe-dominante="projeto"] {
+  border-color: var(--color-prj);
+  box-shadow: var(--shadow-sm), var(--shadow-glow-prj);
+}
+.personagem-card[data-classe-dominante="analise"] {
+  border-color: var(--color-ana);
+  box-shadow: var(--shadow-sm), var(--shadow-glow-ana);
+}
+
+.personagem-card[data-classe-dominante="operacional"]:hover { box-shadow: var(--shadow-md), var(--shadow-glow-op); }
+.personagem-card[data-classe-dominante="projeto"]:hover     { box-shadow: var(--shadow-md), var(--shadow-glow-prj); }
+.personagem-card[data-classe-dominante="analise"]:hover     { box-shadow: var(--shadow-md), var(--shadow-glow-ana); }
+
+/* faixa do banner tingida pela aura da classe dominante */
+.personagem-card[data-classe-dominante="operacional"] .hero-banner { border-bottom-color: var(--color-op);
+  background: radial-gradient(ellipse 90% 130% at 0% 0%, var(--aura-op), transparent 62%), linear-gradient(135deg, var(--color-surface-2) 0%, var(--color-surface) 100%); }
+.personagem-card[data-classe-dominante="projeto"] .hero-banner { border-bottom-color: var(--color-prj);
+  background: radial-gradient(ellipse 90% 130% at 0% 0%, var(--aura-prj), transparent 62%), linear-gradient(135deg, var(--color-surface-2) 0%, var(--color-surface) 100%); }
+.personagem-card[data-classe-dominante="analise"] .hero-banner { border-bottom-color: var(--color-ana);
+  background: radial-gradient(ellipse 90% 130% at 0% 0%, var(--aura-ana), transparent 62%), linear-gradient(135deg, var(--color-surface-2) 0%, var(--color-surface) 100%); }
+
+/* — Linha de meta do herói: chip de classe dominante + dias — */
+.hero-meta-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-top: var(--space-1);
+}
+
+.classe-dom-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.classe-dom-chip svg { width: 14px; height: 14px; }
+
+.classe-dom-chip[data-frente="operacional"] { color: var(--color-op);  border-color: var(--color-op); }
+.classe-dom-chip[data-frente="projeto"]     { color: var(--color-prj); border-color: var(--color-prj); }
+.classe-dom-chip[data-frente="analise"]     { color: var(--color-ana); border-color: var(--color-ana); }
+
+/* ══════════════════════════════════════════════════════════════════════
+   FICHA DE CLASSE (frente-card) — nível em destaque + MOLDURA EVOLUTIVA
+   A moldura muda por classe e evolui com o tier (data-frame 1→4):
+   Guerreiro = armadura forjada · Engenheiro = pedra→ouro · Mago = aura+capuz.
+   ══════════════════════════════════════════════════════════════════════ */
 .frentes-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -510,95 +1081,453 @@ body {
 }
 
 .frente-card {
-  background: var(--color-surface-2);
-  border-radius: var(--radius-sm);
-  padding: var(--space-2);
-  border: 1px solid var(--color-border);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface-2);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-2) var(--space-2) var(--space-3);
   overflow: hidden;
 }
 
-/* Gradiente na borda esquerda via ::before (BLK-A11) */
+/* faixa de cor da frente no topo (mantém ::before com linear-gradient) */
 .frente-card::before {
   content: '';
   position: absolute;
-  left: 0;
   top: 0;
-  bottom: 0;
-  width: 3px;
-  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-border-strong), transparent);
 }
+.frente-card[data-frente="operacional"]::before { background: linear-gradient(90deg, transparent, var(--color-op), transparent); }
+.frente-card[data-frente="projeto"]::before     { background: linear-gradient(90deg, transparent, var(--color-prj), transparent); }
+.frente-card[data-frente="analise"]::before      { background: linear-gradient(90deg, transparent, var(--color-ana), transparent); }
 
-.frente-card[data-frente="operacional"]::before {
-  background: linear-gradient(180deg, var(--color-op) 0%, rgba(6, 182, 212, 0.2) 100%);
-}
-.frente-card[data-frente="projeto"]::before {
-  background: linear-gradient(180deg, var(--color-prj) 0%, rgba(245, 158, 11, 0.2) 100%);
-}
-.frente-card[data-frente="analise"]::before {
-  background: linear-gradient(180deg, var(--color-ana) 0%, rgba(139, 92, 246, 0.2) 100%);
-}
-
+/* — Cabeçalho: nome da classe + glyph pequeno — */
 .frente-header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  font-size: var(--text-xs);
+  gap: 4px;
   margin-bottom: var(--space-1);
 }
 
-/* — Glyph de classe (BLK-A11) — */
-.class-glyph-wrap {
-  display: flex;
-  justify-content: center;
+.frente-classe-nome {
+  display: inline-flex;
   align-items: center;
-  margin: var(--space-1) 0;
+  gap: 3px;
+  min-width: 0;
+  font-size: 0.62rem;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.class-glyph-wrap { display: flex; flex-shrink: 0; opacity: 0.9; }
+.class-glyph { display: block; width: 18px; height: 18px; }
+
+/* cor da frente (usada tb. no brilho de fundo do escudo) */
+.frente-card[data-frente="operacional"] { --rgb-m: var(--rgb-op); }
+.frente-card[data-frente="projeto"]     { --rgb-m: var(--rgb-prj); }
+.frente-card[data-frente="analise"]     { --rgb-m: var(--rgb-ana); }
+
+.frente-card[data-frente="operacional"] .frente-classe-nome,
+.frente-card[data-frente="operacional"] .class-glyph { color: var(--color-op); }
+.frente-card[data-frente="projeto"] .frente-classe-nome,
+.frente-card[data-frente="projeto"] .class-glyph { color: var(--color-prj); }
+.frente-card[data-frente="analise"] .frente-classe-nome,
+.frente-card[data-frente="analise"] .class-glyph { color: var(--color-ana); }
+
+.dom-star {
+  color: var(--color-warning);
+  text-shadow: 0 0 6px rgba(251, 191, 36, 0.7);
+  margin-left: 2px;
+}
+
+/* — Nível GIGANTE + título (o que os players mais curtem) — */
+.nivel-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1px;
+  padding: var(--space-1) 0 var(--space-2);
+}
+
+/* — Escudo heráldico em volta do nível (cosmético) — */
+.nivel-escudo {
+  position: relative;
+  width: 84px;
+  height: 92px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted); /* fallback; a frente sobrescreve currentColor */
+  /* fundo brilhando (mesmo idioma dos medalhões) — halo aceso atrás do brasão */
+  background: radial-gradient(circle at 50% 44%, color-mix(in srgb, currentColor 32%, transparent), transparent 68%);
+}
+
+.escudo-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.escudo-corpo {
+  /* fill vem do atributo (url(#esc-fill-<frente>)): preto no topo → cor profunda na base */
+  stroke: currentColor;
+  stroke-width: 3;
+  /* glow neon multi-camada (mesmo idioma dos medalhões) */
+  filter: drop-shadow(0 0 5px currentColor) drop-shadow(0 0 13px currentColor);
+}
+
+/* Stops do gradiente do escudo (token-driven; sem hex) */
+.esc-stop-0     { stop-color: rgb(3 4 8); }         /* quase preto no topo */
+.esc-stop-1--op  { stop-color: rgb(var(--rgb-op-deep)); }
+.esc-stop-1--prj { stop-color: rgb(var(--rgb-prj-deep)); }
+.esc-stop-1--ana { stop-color: rgb(var(--rgb-ana-deep)); }
+
+.escudo-borda {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.2;
+  opacity: 0.45;
+}
+
+.escudo-crista {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
   opacity: 0.85;
 }
 
-.class-glyph {
-  display: block;
+.escudo-rebite { fill: currentColor; }
+
+/* furos de parafuso da engrenagem (leitura mecânica) */
+.engrenagem-parafuso {
+  fill: rgba(0, 0, 0, 0.45);
+  stroke: currentColor;
+  stroke-width: 0.7;
+  stroke-opacity: 0.55;
 }
 
-.frente-card[data-frente="operacional"] .class-glyph { color: var(--color-op); }
-.frente-card[data-frente="projeto"]     .class-glyph { color: var(--color-prj); }
-.frente-card[data-frente="analise"]     .class-glyph { color: var(--color-ana); }
+/* brilhos internos do escudo (reflexos/estrelas na superfície) */
+.escudo-glints circle {
+  fill: rgba(255, 255, 255, 0.92);
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.85));
+}
+.escudo-glints circle:nth-child(2),
+.escudo-glints circle:nth-child(4),
+.escudo-glints circle:nth-child(6) { opacity: 0.55; }
+.escudo-glints circle:nth-child(7) { opacity: 0.4; }
 
-.frente-label {
-  font-weight: var(--fw-bold);
-  color: var(--color-text-muted);
+/* fogo/aura roxa subindo do grimório (Mago) — chamas que tremulam pra cima, sempre */
+.grimorio-fogo path {
+  fill: currentColor;
+  filter: drop-shadow(0 0 5px currentColor) drop-shadow(0 0 10px currentColor);
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: grimorio-fogo-sobe 1.3s ease-in-out infinite;
+}
+.grimorio-fogo path:nth-child(2) { animation-delay: 0.28s; }
+.grimorio-fogo path:nth-child(3) { animation-delay: 0.55s; }
+.grimorio-fogo path:nth-child(4) { animation-delay: 0.4s; }
+.grimorio-fogo path:nth-child(5) { animation-delay: 0.75s; }
+
+@keyframes grimorio-fogo-sobe {
+  0%, 100% { transform: scaleY(0.8) translateY(0);    opacity: 0.6; }
+  50%      { transform: scaleY(1.2) translateY(-3px); opacity: 1; }
 }
 
-.frente-classe {
-  color: var(--color-text-faint);
-  font-style: italic;
+/* ornamentos da capa do grimório */
+.grimorio-canto,
+.grimorio-selo {
+  fill: none;
+  stroke: currentColor;
+}
+.grimorio-canto { stroke-width: 1.6; stroke-linecap: round; opacity: 0.75; }
+.grimorio-selo  { stroke-width: 1.4; opacity: 0.5; }
+
+/* espessura do tomo: bloco de páginas + fio (borda) + lombada */
+.grimorio-paginas { fill: rgba(216, 206, 230, 0.5); }
+.grimorio-fio {
+  fill: none;
+  stroke: rgba(64, 46, 96, 0.55);
+  stroke-width: 1;
+}
+.grimorio-lombada {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  opacity: 0.45;
 }
 
-.frente-nivel {
-  margin-bottom: var(--space-1);
+.frente-card:hover .escudo-glints circle {
+  animation: glint-cintila 1.6s ease-in-out infinite;
+}
+.escudo-glints circle:nth-child(2) { animation-delay: 0.2s; }
+.escudo-glints circle:nth-child(3) { animation-delay: 0.4s; }
+.escudo-glints circle:nth-child(4) { animation-delay: 0.6s; }
+.escudo-glints circle:nth-child(5) { animation-delay: 0.8s; }
+.escudo-glints circle:nth-child(6) { animation-delay: 1s; }
+.escudo-glints circle:nth-child(7) { animation-delay: 1.2s; }
+
+@keyframes glint-cintila {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 1; }
 }
 
-.nivel {
+.frente-card[data-frente="operacional"] .nivel-escudo { color: var(--color-op); }
+.frente-card[data-frente="projeto"]     .nivel-escudo { color: var(--color-prj); }
+.frente-card[data-frente="analise"]     .nivel-escudo { color: var(--color-ana); }
+
+/* ── Efeitos de escudo — SÓ no hover do card (não poluir a tela parada) ──
+   Mago = aura pulsante · Engenheiro = faíscas · Guerreiro = onda de impacto.
+   Todos herdam a cor da frente via currentColor; desligam em reduced-motion. */
+
+/* aura (Mago) — halo que EMANA ao redor do escudo (centro transparente p/ não
+   ficar escondido atrás do brasão); expande e some no hover (estilo Solo Leveling) */
+.nivel-escudo::before {
+  content: '';
+  position: absolute;
+  inset: -24%;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    transparent 32%,
+    color-mix(in srgb, currentColor 70%, transparent) 50%,
+    transparent 74%);
+  filter: blur(2px);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* anel de impacto (Guerreiro) — contorno que expande */
+.nivel-escudo::after {
+  content: '';
+  position: absolute;
+  inset: 4%;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* lift + glow do escudo no hover (mesmo idioma dos medalhões do header) */
+.nivel-escudo { transition: transform 0.2s ease, filter 0.2s ease; }
+.frente-card:hover .nivel-escudo {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 0 10px currentColor);
+}
+
+/* Mago: aura roxa só no hover (sem pulso permanente) */
+.frente-card[data-frente="analise"]:hover .nivel-escudo::before {
+  animation: escudo-aura 1.9s ease-out infinite;
+}
+.frente-card[data-frente="operacional"]:hover .nivel-escudo::after {
+  animation: escudo-onda 1.3s ease-out infinite;
+}
+
+@keyframes escudo-aura {
+  0%   { opacity: 0.8; transform: scale(0.7); }
+  60%  { opacity: 0.35; }
+  100% { opacity: 0;   transform: scale(1.55); }
+}
+@keyframes escudo-onda {
+  0%   { opacity: 0.75; transform: scale(0.7); }
+  100% { opacity: 0;    transform: scale(1.55); }
+}
+
+/* faíscas (Engenheiro) — partículas douradas que sobem no hover */
+.faiscas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+.faisca {
+  position: absolute;
+  left: 50%;
+  top: 34%;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 5px currentColor, 0 0 9px currentColor;
+  opacity: 0;
+}
+.faisca:nth-child(1) { --fx: -16px; --fy: -22px; animation-delay: 0s;    }
+.faisca:nth-child(2) { --fx:  14px; --fy: -26px; animation-delay: 0.16s; }
+.faisca:nth-child(3) { --fx: -23px; --fy: -9px;  animation-delay: 0.33s; }
+.faisca:nth-child(4) { --fx:  21px; --fy: -12px; animation-delay: 0.5s;  }
+.faisca:nth-child(5) { --fx:   1px; --fy: -28px; animation-delay: 0.68s; }
+
+.frente-card[data-frente="projeto"]:hover .faisca {
+  animation: faisca-voa 0.85s ease-out infinite;
+}
+
+@keyframes faisca-voa {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
+  20%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--fx)), calc(-50% + var(--fy))) scale(1); }
+}
+
+.nivel-num {
+  position: relative;
+  z-index: 1;
+  margin-top: 0; /* número no centro da caixa → alinhado entre as 3 colunas */
   font-family: var(--font-display);
-  font-size: var(--text-sm);
+  font-size: 2rem;
   font-weight: var(--fw-bold);
-  letter-spacing: 0.04em;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+  line-height: 0.92;
+  color: var(--color-text);
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.25), 0 2px 4px rgba(0, 0, 0, 0.9);
 }
 
-.titulo-tier {
-  font-size: var(--text-xs);
+.frente-card[data-frente="operacional"] .nivel-num { color: var(--color-op);  text-shadow: 0 0 14px rgb(var(--rgb-op) / 0.6),  0 2px 4px rgba(0, 0, 0, 0.95); }
+.frente-card[data-frente="projeto"]     .nivel-num { color: var(--color-prj); text-shadow: 0 0 14px rgb(var(--rgb-prj) / 0.6), 0 2px 4px rgba(0, 0, 0, 0.95); }
+.frente-card[data-frente="analise"]     .nivel-num { color: var(--color-ana); text-shadow: 0 0 14px rgb(var(--rgb-ana) / 0.6), 0 2px 4px rgba(0, 0, 0, 0.95); }
+
+
+.nivel-titulo {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  color: var(--color-text);
+  /* reserva 2 linhas p/ alinhar as barras de XP entre as 3 colunas */
+  min-height: 2.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nivel-sub {
+  font-size: 0.58rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  min-height: 2.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* — Stats descongestionados: uma linha por stat, com respiro — */
+.frente-mini-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: var(--space-2);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-border);
+  font-size: 0.64rem;
   color: var(--color-text-muted);
-  display: block;
+  line-height: 1.25;
 }
 
-.frente-stats {
+.frente-mini-stats b {
+  color: var(--color-text);
+  font-weight: var(--fw-bold);
   font-size: var(--text-xs);
-  color: var(--color-text-muted);
-  margin-top: var(--space-1);
 }
 
-.frente-stats li { margin-bottom: 0.1rem; }
-.frente-stats strong { color: var(--color-text); }
+/* ── MOLDURAS EVOLUTIVAS ─────────────────────────────────────────────── */
+
+/* GUERREIRO — armadura de aço sendo forjada (rebites a partir do tier 3) */
+.frente-card[data-frente="operacional"][data-frame="1"] { border-color: var(--color-border-strong); }
+.frente-card[data-frente="operacional"][data-frame="2"] { border-color: rgb(var(--rgb-op) / 0.5); box-shadow: inset 0 0 0 1px rgb(var(--rgb-op) / 0.14); }
+.frente-card[data-frente="operacional"][data-frame="3"] { border-color: var(--color-op); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0 12px rgb(var(--rgb-op) / 0.25); }
+.frente-card[data-frente="operacional"][data-frame="4"] {
+  border-width: 2px; border-color: var(--color-op);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 0 22px rgb(var(--rgb-op) / 0.42);
+  background: linear-gradient(180deg, rgb(var(--rgb-op) / 0.07), transparent 42%), var(--color-surface-2);
+}
+.frente-card[data-frente="operacional"][data-frame="3"]::after,
+.frente-card[data-frente="operacional"][data-frame="4"]::after {
+  content: ''; position: absolute; inset: 4px; pointer-events: none; border-radius: var(--radius-sm);
+  --rv: rgb(var(--rgb-op) / 0.6);
+  background:
+    radial-gradient(circle, var(--rv) 42%, transparent 46%) 2px 2px / 4px 4px no-repeat,
+    radial-gradient(circle, var(--rv) 42%, transparent 46%) calc(100% - 2px) 2px / 4px 4px no-repeat,
+    radial-gradient(circle, var(--rv) 42%, transparent 46%) 2px calc(100% - 2px) / 4px 4px no-repeat,
+    radial-gradient(circle, var(--rv) 42%, transparent 46%) calc(100% - 2px) calc(100% - 2px) / 4px 4px no-repeat;
+}
+
+/* ENGENHEIRO — pedra rugosa evoluindo até ouro lapidado */
+.frente-card[data-frente="projeto"][data-frame="1"] { border-color: var(--color-border-strong); background: var(--tex-noise), var(--color-surface-2); }
+.frente-card[data-frente="projeto"][data-frame="2"] { border-color: rgb(var(--rgb-prj) / 0.45); background: var(--tex-noise), var(--color-surface-2); }
+.frente-card[data-frente="projeto"][data-frame="3"] { border-color: var(--color-prj); box-shadow: 0 0 12px rgb(var(--rgb-prj) / 0.22); background: linear-gradient(180deg, rgb(var(--rgb-prj) / 0.06), transparent 45%), var(--color-surface-2); }
+.frente-card[data-frente="projeto"][data-frame="4"] {
+  border-width: 2px; border-color: var(--color-prj);
+  box-shadow: inset 0 1px 0 rgba(255, 220, 150, 0.28), 0 0 22px rgb(var(--rgb-prj) / 0.42);
+  background: linear-gradient(160deg, rgb(var(--rgb-prj) / 0.14), transparent 42%), var(--color-surface-2);
+}
+/* facetas de ouro nos cantos superiores (band 4) */
+.frente-card[data-frente="projeto"][data-frame="4"]::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  --gd: rgba(255, 214, 140, 0.55);
+  background:
+    linear-gradient(135deg, var(--gd) 0 7px, transparent 7px) top left / 15px 15px no-repeat,
+    linear-gradient(225deg, var(--gd) 0 7px, transparent 7px) top right / 15px 15px no-repeat;
+}
+
+/* MAGO — aura violeta + capuz (sombra interna do topo que envolve) */
+.frente-card[data-frente="analise"][data-frame="1"] { border-color: rgb(var(--rgb-ana) / 0.3); box-shadow: 0 0 8px rgb(var(--rgb-ana) / 0.12); }
+.frente-card[data-frente="analise"][data-frame="2"] { border-color: rgb(var(--rgb-ana) / 0.5); box-shadow: 0 0 12px rgb(var(--rgb-ana) / 0.2); }
+.frente-card[data-frente="analise"][data-frame="3"] { border-color: var(--color-ana); box-shadow: 0 0 16px rgb(var(--rgb-ana) / 0.3), inset 0 10px 22px -10px rgb(var(--rgb-ana) / 0.55); }
+.frente-card[data-frente="analise"][data-frame="4"] {
+  border-width: 2px; border-color: var(--color-ana);
+  box-shadow: 0 0 26px rgb(var(--rgb-ana) / 0.5), inset 0 14px 28px -10px rgb(var(--rgb-ana) / 0.7);
+  background: radial-gradient(ellipse 120% 55% at 50% 0%, rgb(var(--rgb-ana) / 0.2), transparent 70%), var(--color-surface-2);
+}
+
+/* ── Medalhões pequenos na crônica de conquistas ── */
+.emblema-mini {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--metal-rim);
+  border: 1px solid rgba(0, 0, 0, 0.55);
+  color: var(--color-text-muted);
+  box-shadow: var(--medal-bevel);
+}
+.emblema-mini::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--metal-recess);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.7);
+}
+.emblema-mini svg { position: relative; z-index: 1; width: 15px; height: 15px; }
+.emblema-mini[data-frente="operacional"] { color: var(--color-op);  box-shadow: var(--medal-bevel), 0 0 7px rgb(var(--rgb-op) / 0.5); }
+.emblema-mini[data-frente="projeto"]     { color: var(--color-prj); box-shadow: var(--medal-bevel), 0 0 7px rgb(var(--rgb-prj) / 0.5); }
+.emblema-mini[data-frente="analise"]      { color: var(--color-ana); box-shadow: var(--medal-bevel), 0 0 7px rgb(var(--rgb-ana) / 0.5); }
+
+.cronica-linha {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+  flex-wrap: wrap;
+}
+.cronica-quinzena { font-size: var(--text-xs); color: var(--color-text-faint); min-width: 96px; }
+.cronica-medalhas { display: inline-flex; gap: 4px; flex-wrap: wrap; }
+.cronica-vazio { font-size: var(--text-xs); color: var(--color-text-faint); font-style: italic; }
 
 /* ── Emblemas do personagem ── */
 .emblemas-section,
@@ -617,7 +1546,8 @@ body {
 .emblemas-row {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-1);
+  gap: var(--space-3);
+  padding-top: var(--space-1);
 }
 
 .historico-section ul {
@@ -674,29 +1604,234 @@ body {
 .avatar-slot[data-frente="projeto"]     .avatar-glyph { color: var(--color-prj); }
 .avatar-slot[data-frente="analise"]     .avatar-glyph { color: var(--color-ana); }
 
-/* — Avatares no hero — */
+/* — Medalhões de classe no header (moedas arcanas ornamentadas) — */
 .hero-avatars {
   display: flex;
-  gap: var(--space-2);
+  gap: var(--space-3);
   align-items: center;
-  margin-left: auto;
+  margin-left: var(--space-3);
 }
 
+.hero-avatars .avatar-slot[data-frente="operacional"] { color: var(--color-op);  --rgb-m: var(--rgb-op);  }
+.hero-avatars .avatar-slot[data-frente="projeto"]     { color: var(--color-prj); --rgb-m: var(--rgb-prj); }
+.hero-avatars .avatar-slot[data-frente="analise"]     { color: var(--color-ana); --rgb-m: var(--rgb-ana); }
+
 .hero-avatars .avatar-slot {
-  width: 36px;
-  height: 36px;
+  position: relative;
+  width: 46px;
+  height: 46px;
+  overflow: visible;
+  border: 1.5px solid color-mix(in srgb, currentColor 65%, transparent);
+  background:
+    radial-gradient(circle at 50% 26%, rgba(255, 255, 255, 0.10), transparent 44%),
+    radial-gradient(circle at 50% 55%, rgba(255, 255, 255, 0.04), rgba(4, 5, 12, 0.92) 78%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 0 12px rgb(var(--rgb-m) / 0.25),
+    0 0 15px rgb(var(--rgb-m) / 0.34),
+    0 2px 6px rgba(0, 0, 0, 0.7);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+/* anel interno */
+.hero-avatars .avatar-slot::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, currentColor 28%, transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* rebites/ticks no aro */
+.hero-avatars .avatar-slot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: repeating-conic-gradient(currentColor 0 1.4deg, transparent 1.4deg 45deg);
+  -webkit-mask: radial-gradient(circle, transparent 0 44%, black 45% 49%, transparent 50%);
+          mask: radial-gradient(circle, transparent 0 44%, black 45% 49%, transparent 50%);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.hero-avatars .avatar-slot:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 0 14px rgb(var(--rgb-m) / 0.35),
+    0 0 22px rgb(var(--rgb-m) / 0.5),
+    0 3px 9px rgba(0, 0, 0, 0.75);
+}
+
+.hero-avatars .avatar-glyph { position: relative; z-index: 2; }
+.hero-avatars .avatar-glyph svg {
+  width: 26px;
+  height: 26px;
+  filter: drop-shadow(0 0 5px currentColor);
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    MAPA DE CAMPANHA (BLK-A14)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.mapa-campanha-svg {
-  display: block;
+/* ── Trilha da campanha: jornada horizontal de PARADAS (projetos) ligadas por estrada ── */
+.mapa-trilha {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  overflow-x: auto;
+  padding: var(--space-6) var(--space-2) var(--space-4);
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-strong) transparent;
+}
+.mapa-trilha::-webkit-scrollbar { height: 8px; }
+.mapa-trilha::-webkit-scrollbar-thumb { background: var(--color-border-strong); border-radius: var(--radius-full); }
+
+/* Estrada entre paradas — pontilhada; acende quando a parada anterior está pacificada */
+.trilha-estrada {
+  flex: 0 0 auto;
+  align-self: flex-start;
+  margin-top: 40px; /* alinha ao centro do marco (84/2) + padding */
+  width: 48px;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: repeating-linear-gradient(90deg, currentColor 0 5px, transparent 5px 11px);
+  color: var(--color-border-strong);
+  opacity: 0.7;
+}
+.trilha-estrada--feita {
+  color: var(--color-success);
+  opacity: 0.9;
+  box-shadow: 0 0 8px rgba(74, 222, 128, 0.4);
+}
+
+/* Parada = projeto */
+.mapa-parada {
+  flex: 0 0 auto;
+  width: 132px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-2);
+  animation: fade-in 0.25s ease both;
+}
+
+/* Marco circular (medalhão da parada) */
+.parada-marco {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.06), rgba(4, 5, 12, 0.9) 78%);
+  box-shadow:
+    inset 0 0 12px rgba(0, 0, 0, 0.6),
+    0 2px 8px rgba(0, 0, 0, 0.6);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.mapa-parada:hover .parada-marco {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 0 12px rgba(0, 0, 0, 0.6),
+    0 0 18px rgba(74, 222, 128, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.7);
+}
+.mapa-parada[data-pacificado="true"] .parada-marco {
+  box-shadow:
+    inset 0 0 12px rgba(0, 0, 0, 0.6),
+    0 0 16px rgba(74, 222, 128, 0.28),
+    0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.mapa-territorio {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  max-height: 180px;
-  border-radius: var(--radius);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-sm);
+  height: 100%;
+}
+.marco-prog {
+  filter: drop-shadow(0 0 5px rgba(74, 222, 128, 0.5));
+  transition: stroke-dashoffset 0.6s ease;
+}
+
+.parada-pct {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--fw-bold);
+  color: var(--color-success);
+  text-shadow: 0 0 10px rgba(74, 222, 128, 0.4);
+}
+
+/* Pino/bandeira de estado no topo do marco */
+.parada-pino {
+  position: absolute;
+  top: -4px;
+  right: -2px;
+  z-index: 2;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  border-radius: 50%;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+}
+.parada-pino--feito  { color: var(--color-success);    border-color: var(--color-success); box-shadow: 0 0 8px rgba(74, 222, 128, 0.5); }
+.parada-pino--aberta { color: var(--color-warning);    border-color: var(--color-warning); }
+.parada-pino--bloq   { color: var(--color-error-text); border-color: var(--color-error-border); }
+
+.parada-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.mapa-projeto__nome {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+}
+
+.mapa-conquista {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  font-weight: var(--fw-semibold);
+}
+
+.mapa-obstaculos {
+  display: inline-flex;
+  gap: var(--space-1);
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: var(--text-xs);
+}
+
+.obst {
+  padding: 1px var(--space-2);
+  border-radius: var(--radius-sm);
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+}
+
+.obst--aberta { color: var(--color-warning);    background: var(--color-warning-bg); }
+.obst--bloq   { color: var(--color-error-text); background: var(--color-error-bg); }
+.obst--limpo  { color: var(--color-success);    background: var(--color-success-bg); }
+
+.mapa-fonte {
+  margin-top: var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -709,23 +1844,31 @@ body {
 }
 
 .guild-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-top: 3px solid transparent;
+  --rgb-m: var(--rgb-op);
+  --cor-m: var(--color-op);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.008)),
+    var(--color-surface);
+  border: 1px solid color-mix(in srgb, rgb(var(--rgb-m)) 26%, var(--color-border));
+  border-top: 3px solid var(--cor-m);
   border-radius: var(--radius);
   padding: var(--space-4);
-  box-shadow: var(--shadow-sm);
+  box-shadow:
+    inset 0 0 0 1px rgb(var(--rgb-m) / 0.12),
+    0 0 16px rgb(var(--rgb-m) / 0.12),
+    var(--shadow-sm);
 }
 
-.guild-card[data-frente="operacional"] { border-top-color: var(--color-op); }
-.guild-card[data-frente="projeto"]     { border-top-color: var(--color-prj); }
-.guild-card[data-frente="analise"]     { border-top-color: var(--color-ana); }
+.guild-card[data-frente="projeto"] { --rgb-m: var(--rgb-prj); --cor-m: var(--color-prj); }
+.guild-card[data-frente="analise"] { --rgb-m: var(--rgb-ana); --cor-m: var(--color-ana); }
 
 .guild-card h3 {
   font-family: var(--font-display);
   font-size: var(--text-base);
   letter-spacing: 0.05em;
   margin-bottom: var(--space-2);
+  color: var(--cor-m);
+  text-shadow: 0 0 10px rgb(var(--rgb-m) / 0.35);
 }
 
 /* — Visualização temática da guild (BLK-A12) — */
@@ -736,18 +1879,227 @@ body {
   border-radius: var(--radius-sm);
 }
 
-.guild-viz--hexgrid { max-height: 44px; }
-.guild-viz--blocks  { max-height: 92px; }
-.guild-viz--fog     { max-height: 48px; }
+.guild-viz--hexgrid { max-height: 76px; }
+.guild-viz--blocks  { max-height: 98px; }
+.guild-viz--fog     { max-height: 70px; }
 
-.guild-stats {
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
-  margin-bottom: var(--space-3);
+/* ── Arte temática viva (favos / blocos / névoa) ── */
+/* Operacional — favos que acendem varrendo o território */
+.guild-viz--hexgrid polygon { stroke-width: 1; }
+.hex-cell {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: var(--op);
+}
+.hex-cell.is-lit {
+  animation: hex-acende 0.5s ease both;
+  animation-delay: var(--d);
+}
+.hex-cell.is-frontier {
+  animation: hex-acende 0.5s ease both, hex-pulso 2s ease-in-out infinite 0.6s;
+}
+@keyframes hex-acende {
+  0%   { opacity: 0; transform: scale(0.3); }
+  100% { opacity: var(--op); transform: scale(1); }
+}
+@keyframes hex-pulso {
+  0%, 100% { filter: drop-shadow(0 0 0 transparent); }
+  50%      { filter: drop-shadow(0 0 5px var(--cor-m)); }
 }
 
-.guild-stats li { margin-bottom: var(--space-1); }
-.guild-stats strong { color: var(--color-text); }
+/* Projeto — blocos que assentam de baixo p/ cima */
+.guild-viz--blocks rect { stroke-width: 1; }
+.bloco-cell {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  opacity: var(--op);
+}
+.bloco-cell.is-built {
+  animation: bloco-assenta 0.5s cubic-bezier(0.3, 1.3, 0.6, 1) both;
+  animation-delay: var(--d);
+}
+.bloco-cell.is-frontier {
+  animation: bloco-assenta 0.5s cubic-bezier(0.3, 1.3, 0.6, 1) both,
+             bloco-obra 1.6s ease-in-out infinite 0.6s;
+}
+@keyframes bloco-assenta {
+  0%   { opacity: 0; transform: translateY(-16px); }
+  70%  { opacity: var(--op); transform: translateY(2px); }
+  100% { opacity: var(--op); transform: translateY(0); }
+}
+@keyframes bloco-obra {
+  0%, 100% { filter: drop-shadow(0 0 0 transparent); }
+  50%      { filter: drop-shadow(0 0 5px var(--cor-m)); }
+}
+
+/* Análise — névoa que dissipa revelando a constelação de insights */
+.nevoa-fog {
+  opacity: var(--fog);
+  animation: nevoa-dissipa 1.4s ease both;
+}
+@keyframes nevoa-dissipa {
+  0%   { opacity: 0.92; }
+  100% { opacity: var(--fog); }
+}
+.nevoa-node {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: var(--op);
+}
+.nevoa-node.is-disc {
+  animation: nevoa-brota 0.5s ease both, nevoa-cintila 3s ease-in-out infinite;
+  animation-delay: var(--d), calc(var(--d) + 0.6s);
+}
+@keyframes nevoa-brota {
+  0%   { opacity: 0; transform: scale(0.2); }
+  100% { opacity: var(--op); transform: scale(1); }
+}
+@keyframes nevoa-cintila {
+  0%, 100% { filter: drop-shadow(0 0 0 transparent); }
+  50%      { filter: drop-shadow(0 0 4px var(--cor-m)); }
+}
+.nevoa-link {
+  stroke-width: 1;
+  stroke-opacity: 0.45;
+  stroke-dasharray: 60;
+  animation: nevoa-traca 0.6s ease both;
+  animation-delay: var(--d);
+}
+@keyframes nevoa-traca {
+  0%   { stroke-dashoffset: 60; opacity: 0; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+
+/* ── Barra de jornada épica (meta da guilda) ── */
+.guild-jornada {
+  margin: var(--space-3) 0 var(--space-4);
+}
+
+.jornada-topo {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-2);
+  margin-bottom: var(--space-3);
+}
+.jornada-entregue {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  color: var(--cor-m);
+  text-shadow: 0 0 12px rgb(var(--rgb-m) / 0.45);
+}
+.jornada-unid { font-size: var(--text-xs); color: var(--color-text-muted); }
+.jornada-estado {
+  margin-left: auto;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+.jornada-estado strong { color: var(--cor-m); }
+
+.jornada-trilho {
+  position: relative;
+  height: 26px;
+  margin: var(--space-3) 0 var(--space-2);
+}
+.jornada-canal {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 0 0 1px var(--color-border);
+}
+.jornada-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--pct);
+  min-width: 0;
+  background: linear-gradient(90deg, rgb(var(--rgb-m) / 0.5), rgb(var(--rgb-m) / 0.95));
+  box-shadow: 0 0 14px rgb(var(--rgb-m) / 0.45);
+  transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.jornada-fill.is-alem {
+  background: linear-gradient(90deg, rgb(var(--rgb-m) / 0.7), var(--color-success));
+}
+.jornada-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transform: translateX(-100%);
+  animation: jornada-brilho 2.8s ease-in-out infinite;
+}
+
+/* Marcos (bandeiras) em Comprometida / Alvo / Stretch */
+.jornada-flag {
+  position: absolute;
+  top: -5px;
+  bottom: -5px;
+  left: var(--at);
+  width: 2px;
+  transform: translateX(-50%);
+  background: var(--color-border-strong);
+  z-index: 1;
+}
+.jornada-flag::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  transform: translateX(-50%) rotate(45deg);
+  border-radius: 1px;
+  background: var(--color-surface-3);
+  border: 1px solid var(--color-border-strong);
+}
+.jornada-flag.is-ok { background: var(--cor-m); }
+.jornada-flag.is-ok::before {
+  background: var(--cor-m);
+  border-color: var(--cor-m);
+  box-shadow: 0 0 9px rgb(var(--rgb-m) / 0.7);
+}
+
+/* Token do herói: posição atual do "entregue" na trilha */
+.jornada-tip {
+  position: absolute;
+  top: 50%;
+  left: var(--at);
+  width: 14px;
+  height: 14px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, rgba(255, 255, 255, 0.95), rgb(var(--rgb-m)) 62%);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 0 10px rgb(var(--rgb-m) / 0.85);
+  z-index: 2;
+  transition: left 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.jornada-legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  font-size: var(--text-xs);
+}
+.jornada-leg { color: var(--color-text-faint); }
+.jornada-leg b {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-muted);
+}
+.jornada-leg.is-ok { color: var(--cor-m); }
+.jornada-leg.is-ok b { color: var(--cor-m); }
+
+@keyframes jornada-brilho {
+  0%        { transform: translateX(-100%); }
+  55%, 100% { transform: translateX(320%); }
+}
 
 .guild-contrib {
   margin-top: var(--space-3);
@@ -769,18 +2121,24 @@ body {
    EVENTOS / HORDAS
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .evento-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-left: 3px solid transparent;
+  --rgb-m: var(--rgb-op);
+  --cor-m: var(--color-op);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.008)),
+    var(--color-surface);
+  border: 1px solid color-mix(in srgb, rgb(var(--rgb-m)) 26%, var(--color-border));
+  border-left: 3px solid var(--cor-m);
   border-radius: var(--radius);
   padding: var(--space-4);
   margin-bottom: var(--space-2);
-  box-shadow: var(--shadow-sm);
+  box-shadow:
+    inset 0 0 0 1px rgb(var(--rgb-m) / 0.1),
+    0 0 14px rgb(var(--rgb-m) / 0.1),
+    var(--shadow-sm);
 }
 
-.evento-card[data-frente="operacional"] { border-left-color: var(--color-op); }
-.evento-card[data-frente="projeto"]     { border-left-color: var(--color-prj); }
-.evento-card[data-frente="analise"]     { border-left-color: var(--color-ana); }
+.evento-card[data-frente="projeto"] { --rgb-m: var(--rgb-prj); --cor-m: var(--color-prj); }
+.evento-card[data-frente="analise"] { --rgb-m: var(--rgb-ana); --cor-m: var(--color-ana); }
 
 .evento-header {
   display: flex;
@@ -841,51 +2199,134 @@ body {
 }
 
 .ranking-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-top: 3px solid transparent;
+  --rgb-m: var(--rgb-op);
+  --cor-m: var(--color-op);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.008)),
+    var(--color-surface);
+  border: 1px solid color-mix(in srgb, rgb(var(--rgb-m)) 26%, var(--color-border));
+  border-top: 3px solid var(--cor-m);
   border-radius: var(--radius);
   padding: var(--space-4);
-  box-shadow: var(--shadow-sm);
+  box-shadow:
+    inset 0 0 0 1px rgb(var(--rgb-m) / 0.12),
+    0 0 16px rgb(var(--rgb-m) / 0.12),
+    var(--shadow-sm);
 }
 
-.ranking-card[data-frente="operacional"] { border-top-color: var(--color-op); }
-.ranking-card[data-frente="projeto"]     { border-top-color: var(--color-prj); }
-.ranking-card[data-frente="analise"]     { border-top-color: var(--color-ana); }
+.ranking-card[data-frente="projeto"] { --rgb-m: var(--rgb-prj); --cor-m: var(--color-prj); }
+.ranking-card[data-frente="analise"] { --rgb-m: var(--rgb-ana); --cor-m: var(--color-ana); }
 
 .ranking-card h3 {
+  font-family: var(--font-display);
   font-size: var(--text-base);
+  letter-spacing: 0.05em;
   margin-bottom: var(--space-2);
+  color: var(--cor-m);
+  text-shadow: 0 0 10px rgb(var(--rgb-m) / 0.35);
 }
 
-.ranking-table {
-  width: 100%;
-  border-collapse: collapse;
+/* Pódio de gemas — placa por jogador, gema lapidada pela posição no ranking */
+.ranking-podio {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.podio-item {
+  display: grid;
+  grid-template-columns: 1.7em 40px 1fr auto;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3) var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  border: 1px solid color-mix(in srgb, rgb(var(--rgb-m)) 20%, var(--color-border));
+  background: linear-gradient(90deg, rgb(var(--rgb-m) / 0.08), transparent 78%);
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.podio-rank {
+  font-family: var(--font-display);
   font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  text-align: center;
 }
 
-.ranking-table th {
-  text-align: left;
-  color: var(--color-text-muted);
-  padding: var(--space-1) var(--space-2);
+.podio-gema {
+  display: inline-flex;
+  color: var(--cor-m);
+}
+.podio-gema svg { width: 40px; height: 40px; display: block; }
+.podio-gema .gema-corpo {
+  fill: currentColor;
+  fill-opacity: 0.15;
+  stroke: currentColor;
+  stroke-width: 1.3;
+  stroke-linejoin: round;
+}
+.podio-gema .gema-facetas {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+  stroke-opacity: 0.8;
+  stroke-linejoin: round;
+}
+.podio-gema .gema-brilho { stroke: rgba(255, 255, 255, 0.75); stroke-width: 1.2; stroke-linecap: round; }
+.podio-gema .gema-faisca { fill: rgba(255, 255, 255, 0.9); }
+
+.podio-nome {
   font-weight: var(--fw-semibold);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.ranking-table td {
-  padding: var(--space-1) var(--space-2);
-  color: var(--color-text-muted);
-}
-
-.ranking-table td:first-child {
-  font-weight: var(--fw-bold);
   color: var(--color-text);
+}
+
+.podio-valor {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--fw-bold);
+  font-size: var(--text-base);
+  color: var(--color-text);
+}
+
+/* Estágios de lapidação */
+.podio-item[data-estagio="lapidado"] .podio-gema {
+  filter: drop-shadow(0 0 5px rgb(var(--rgb-m) / 0.55));
+}
+.podio-item[data-estagio="lapidado"] .gema-faisca {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: gema-cintila 2.6s ease-in-out infinite;
+}
+.podio-item[data-estagio="quase"] .podio-gema { opacity: 0.9; }
+.podio-item[data-estagio="bruto"] .podio-gema {
+  color: var(--color-text-faint);
+  opacity: 0.7;
+}
+
+/* 1º lugar: placa acende na cor da frente */
+.podio-item[data-pos="1"] {
+  border-color: var(--cor-m);
+  background: linear-gradient(90deg, rgb(var(--rgb-m) / 0.2), transparent 72%);
+  box-shadow: inset 0 0 0 1px rgb(var(--rgb-m) / 0.22), 0 0 14px rgb(var(--rgb-m) / 0.16);
+}
+.podio-item[data-pos="1"] .podio-rank,
+.podio-item[data-pos="1"] .podio-nome,
+.podio-item[data-pos="1"] .podio-valor {
+  color: var(--cor-m);
+  text-shadow: 0 0 8px rgb(var(--rgb-m) / 0.4);
+}
+
+@keyframes gema-cintila {
+  0%, 100% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
+  50%      { opacity: 1;   transform: scale(1.15) rotate(90deg); }
 }
 
 .ranking-unidade {
   font-size: var(--text-xs);
   color: var(--color-text-faint);
-  margin-top: var(--space-1);
+  margin-top: var(--space-2);
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -898,8 +2339,11 @@ body {
 }
 
 .missao-item {
-  background: var(--color-surface);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.008)),
+    var(--color-surface);
   border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-warning);
   border-radius: var(--radius-sm);
   padding: var(--space-2) var(--space-3);
   font-size: var(--text-base);
@@ -908,6 +2352,34 @@ body {
   align-items: center;
   gap: var(--space-2);
   flex-wrap: wrap;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.missao-item:hover {
+  transform: translateX(2px);
+  box-shadow: 0 0 14px rgba(251, 191, 36, 0.16);
+}
+
+/* — Estado vazio temático (Hordas / Missões sem itens) — */
+.estado-vazio {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-4);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(ellipse 120% 100% at 50% 0%, rgba(255, 255, 255, 0.02), transparent 70%),
+    var(--color-surface);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.estado-vazio__icone {
+  font-size: 1.5rem;
+  line-height: 1;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.15));
 }
 
 .missao-motivo {
@@ -929,46 +2401,164 @@ body {
 }
 
 .reconciliacao-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-top: 3px solid transparent;
+  --rgb-m: var(--rgb-op);
+  --cor-m: var(--color-op);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.008)),
+    var(--color-surface);
+  border: 1px solid color-mix(in srgb, rgb(var(--rgb-m)) 26%, var(--color-border));
+  border-top: 3px solid var(--cor-m);
   border-radius: var(--radius);
   padding: var(--space-4);
-  box-shadow: var(--shadow-sm);
+  box-shadow:
+    inset 0 0 0 1px rgb(var(--rgb-m) / 0.12),
+    0 0 16px rgb(var(--rgb-m) / 0.12),
+    var(--shadow-sm);
 }
 
-.reconciliacao-card[data-frente="operacional"] { border-top-color: var(--color-op); }
-.reconciliacao-card[data-frente="projeto"]     { border-top-color: var(--color-prj); }
-.reconciliacao-card[data-frente="analise"]     { border-top-color: var(--color-ana); }
+.reconciliacao-card[data-frente="projeto"] { --rgb-m: var(--rgb-prj); --cor-m: var(--color-prj); }
+.reconciliacao-card[data-frente="analise"] { --rgb-m: var(--rgb-ana); --cor-m: var(--color-ana); }
 
 .reconciliacao-card h3 {
+  font-family: var(--font-display);
   font-size: var(--text-base);
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-2);
+  color: var(--cor-m);
+  text-shadow: 0 0 10px rgb(var(--rgb-m) / 0.35);
+}
+
+/* Barra empilhada — cada herói é um trecho; juntos formam o total de-dup */
+.recon-total-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
   margin-bottom: var(--space-2);
 }
 
-.reconciliacao-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: var(--text-sm);
+.recon-total-num {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
+  color: var(--cor-m);
+  text-shadow: 0 0 10px rgb(var(--rgb-m) / 0.4);
+  line-height: 1;
 }
 
-.reconciliacao-table th {
-  text-align: left;
+.recon-total-unid {
+  font-size: var(--text-xs);
   color: var(--color-text-muted);
-  padding: var(--space-1) var(--space-2);
+}
+
+.recon-paridade {
+  margin-left: auto;
+  font-size: var(--text-xs);
   font-weight: var(--fw-semibold);
-  border-bottom: 1px solid var(--color-border);
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
 }
-
-.reconciliacao-table td {
-  padding: var(--space-1) var(--space-2);
+.recon-paridade[data-ok="true"] {
+  color: var(--color-success);
+  background: color-mix(in srgb, var(--color-success) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-success) 35%, transparent);
+}
+.recon-paridade[data-ok="false"] {
   color: var(--color-text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border-strong);
 }
 
-.reconciliacao-total td {
+.recon-barra {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 22px;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 0 0 1px var(--color-border);
+}
+
+.recon-seg {
+  width: var(--w);
+  min-width: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(var(--rgb-m) / var(--tom));
+  border-right: 1px solid rgba(0, 0, 0, 0.35);
+  transition: filter 0.15s ease;
+}
+.recon-seg:last-of-type { border-right: none; }
+.recon-seg:hover { filter: brightness(1.18); }
+.recon-seg--vazio {
+  width: 100%;
+  background: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.05) 0 6px, transparent 6px 12px);
+  border-right: none;
+}
+
+.recon-seg__val {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: var(--text-xs);
   font-weight: var(--fw-bold);
   color: var(--color-text);
-  border-top: 1px solid var(--color-border);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* marcador do total de-dup (só quando as partes não batem) */
+.recon-marca {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  left: var(--at);
+  width: 2px;
+  background: var(--color-text);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+}
+.recon-marca::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  border: 4px solid transparent;
+  border-top-color: var(--color-text);
+}
+
+.recon-legenda {
+  list-style: none;
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+}
+.recon-legenda__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+}
+.recon-legenda__item.is-zero { color: var(--color-text-faint); }
+.recon-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: rgb(var(--rgb-m) / var(--tom));
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  flex-shrink: 0;
+}
+.recon-legenda__item.is-zero .recon-swatch {
+  background: none;
+  border: 1px dashed var(--color-border-strong);
+}
+.recon-legenda__val {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--fw-bold);
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1044,7 +2634,7 @@ body {
   animation: emblema-cunhado 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 }
 
-.nivel {
+.nivel-num {
   animation: level-up 0.5s ease 0.1s both;
 }
 
@@ -1187,4 +2777,5 @@ body {
     transition: none !important;
     animation: none !important;
   }
+  html { scroll-behavior: auto; }
 }

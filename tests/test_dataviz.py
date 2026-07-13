@@ -15,10 +15,14 @@ def test_guild_chart_usa_camadas():
         assert campo in js, f"'{campo}' ausente em app.js"
 
 
-def test_guild_chart_usa_stack():
-    """Guild chart deve usar stack para empilhar as camadas."""
+def test_guild_camadas_barra_jornada():
+    """A meta da guilda é apresentada na barra de jornada épica, com os 3 marcos
+    (Comprometida/Alvo/Stretch) e o token de progresso do entregue."""
     js = _js()
-    assert "stack:" in js or "stack :" in js, "guild chart não usa stack de datasets"
+    assert "guildJornadaHTML" in js, "função guildJornadaHTML (barra de jornada) ausente"
+    for marco in ["Comprometida", "Alvo", "Stretch"]:
+        assert marco in js, f"marco '{marco}' ausente na barra de jornada"
+    assert "jornada-flag" in js, "marcos (bandeiras) da jornada ausentes"
 
 
 def test_contrib_chart_existe():
@@ -29,11 +33,12 @@ def test_contrib_chart_existe():
     assert "contribuicoes_quinzena" in js, "'contribuicoes_quinzena' não referenciado"
 
 
-def test_chart_instancias_multiplas():
-    """app.js deve criar >= 2 instâncias de Chart (guild camadas + contrib)."""
+def test_chart_contrib_instancia():
+    """app.js deve criar o Chart de contribuições por pessoa (a meta da guilda
+    migrou para a barra de jornada em CSS; o Chart.js segue nas contribuições)."""
     js = _js()
     count = js.count("new Chart(")
-    assert count >= 2, f"Esperado >= 2 instâncias de Chart, encontrado {count}"
+    assert count >= 1, f"Esperado >= 1 instância de Chart (contrib), encontrado {count}"
 
 
 def test_chart_sem_cdn():
