@@ -7,7 +7,7 @@ description: Regras inegociáveis e guardrails do projeto "RPG de Produtividade"
 
 Esta skill é o **trilho** do build autônomo. O projeto é uma gamificação estilo RPG da produtividade de um time de 3 pessoas (Felipe, Juan, Vinícius). É **motivação lúdica, não avaliação de desempenho nem ferramenta de RH**. A fonte de verdade é o ClickUp (space `PROJETOS - DEG`, id `90175557627`).
 
-O **painel oficial ("FLUXO 3")** é a leitura **gerencial** (capacidade, vazão, bus factor, foco de 1:1) — hoje uma tarefa quinzenal no cowork que gera HTML. Este app é a camada **lúdica**. Os dois consomem o **mesmo motor** (mesmos números por pessoa/frente), mas o app **NÃO** reproduz a narrativa gerencial — isso protege a segurança psicológica. A paridade é **por construção**: o motor do painel (FLUXO 3) é o mesmo reusado pelo produtor no **cowork** — não há um `scoring-core` separado no repo (ver `references/tabela-validade-e-sizing.md`, §7).
+O **painel oficial ("FLUXO 3")** é a leitura **gerencial** (capacidade, vazão, bus factor, foco de 1:1) — hoje uma tarefa quinzenal no cowork que gera HTML. Este app é a camada **lúdica**. Os dois consomem o **mesmo motor** (mesmos números por pessoa/frente), mas o app **NÃO** reproduz a narrativa gerencial — isso protege a segurança psicológica. A paridade é garantida por **construção** (motor reusado no **cowork**) OU, por **decisão 2026-07-09**, por **teste**: um `scoring-core` no backend travado contra o golden (`tests/golden/maio2026_expected.json`). Ver `references/tabela-validade-e-sizing.md`, §7.
 
 As regras abaixo não são burocracia: cada uma existe porque a sua violação **quebra a credibilidade do jogo** ou **fere a segurança psicológica do time**. Entenda o porquê e honre o espírito, não só a letra.
 
@@ -82,11 +82,23 @@ Regra rápida:
 
 Estes são limites duros do loop. **Não relaxe nenhum sem aprovação humana explícita.**
 
-- **ClickUp de produção é SOMENTE-LEITURA.** O cliente do ClickUp **não deve possuir métodos de escrita**. Nunca criar, mover, editar, comentar, mudar status ou tags no workspace real. Para testar, use dataset sintético/sandbox ou snapshot read-only.
-- **Nada sai do container nem vai a produção sem gate humano.** Ao fim de cada marco relevante, pare e peça aprovação.
-- **Motor de pontuação único.** Não duplique a lógica de cálculo. O motor é o **cowork** (FLUXO 3 reusado pela skill produtora), **não** um script separado no repo. Painel e app exibem os mesmos números; se reimplementar, divergem.
+> **Decisão registrada 2026-07-09 (aprovada por Juan)** afrouxou 3 destes — ver o bloco no fim desta seção.
+> O que mudou: (1) backend PODE **ler** o ClickUp; (2) motor PODE viver num backend com **paridade testada**;
+> (3) deploy pode ser **automático** (incl. loop) com o **gate de testes verde**. **ESCRITA no ClickUp segue proibida.**
+
+- **ClickUp de produção é SOMENTE-LEITURA.** **Ler** é permitido (backend com token no servidor — decisão 2026-07-09); **escrever é proibido**: o cliente **não deve possuir métodos de escrita**. Nunca criar, mover, editar, comentar, mudar status ou tags no workspace real. Para testar, use dataset sintético/sandbox ou snapshot read-only.
+- **Deploy pode ser automático** (decisão 2026-07-09), **inclusive pelo loop**, **desde que o gate de testes (`ruff`+`pytest`, incl. paridade contra o golden) esteja verde**. O gate automático substitui o gate humano. (Antes: nada ia a produção sem aprovação humana.)
+- **Motor com paridade testada.** O motor pode viver no **cowork** OU num **backend do projeto** (decisão 2026-07-09) — mas, se calculado aqui, um **teste trava a paridade** contra `tests/golden/maio2026_expected.json` e as regras (frentes/unidades/sizing/de-dup/hierarquia/determinismo). Divergiu = build vermelho. Painel e app exibem os **mesmos números**.
 - **Nunca relaxar a regra de não-somar-entre-frentes** "para simplificar".
 - **Toda suposição relevante deve ser explicitada** no output/PR para revisão humana — não decida silenciosamente questões de produto.
+
+### Decisão registrada — 2026-07-09 (afrouxa 3 guardrails; aprovada por Juan)
+Objetivo: atualização quase em tempo real via **API (leitura)** + **deploy contínuo**. Substitui as
+redações antigas onde conflitar. **Continuam invioláveis:** não somar entre frentes · determinismo ·
+classificação por tags · níveis vitalícios · **nunca ESCREVER no ClickUp** · anti-inflação do objetivo coletivo.
+1. **ClickUp:** backend PODE **ler** produção (token só no servidor, nunca no cliente estático); escrever/mover/status/tag **proibido**.
+2. **Motor:** scoring pode ser calculado por backend próprio **se** houver teste de paridade contra o golden; senão, cowork segue como motor.
+3. **Deploy:** automático (CI no push à main), **inclusive pelo loop**, com o gate (`ruff`+`pytest`, incl. paridade) **verde**.
 
 ---
 
@@ -97,7 +109,7 @@ Estes são limites duros do loop. **Não relaxe nenhum sem aprovação humana ex
 - **Neutralidade a afastamentos.** XP é monotônico (nunca regride) — férias/folga não fazem ninguém regredir. Vazão = entregue ÷ dias disponíveis, com o denominador **excluindo** dias indisponíveis.
 - **Ritmos diferentes por frente são esperados**, não desigualdade: Análise = boss fights raros e épicos; Operacional = limpar hordas; Projeto = construir a fortaleza.
 - **Premiar precisão de estimativa, não sizing alto.** Sizing idealmente revisado por outra pessoa que não o executor.
-- **Progressão VITALÍCIA (sem reset).** Nível e XP acumulam para sempre, por frente — NÃO zerar a cada ciclo (decisão do time 2026-06-03). A renovação vem de **emblemas/conquistas quinzenais** (cosméticos, renováveis), não de reset. Custo fixo por nível: **Op 6 · Projeto 8 · Análise 6** (XP = 1 por item/ponto). Cada frente tem uma **classe cosmética** (Operacional=Guerreiro, Projeto=Engenheiro, Análise=Mago) com 12 tiers de título por faixa de nível — o título depende **só do nível daquela frente**, nunca combina frentes. Detalhe em [contrato-dados-json.md](../../../contrato-dados-json.md).
+- **Progressão VITALÍCIA (sem reset), SELADA no fecho.** Nível e XP acumulam para sempre, por frente — NÃO zerar a cada ciclo (decisão do time 2026-06-03). **Decisão 2026-07-12 (atualização ao vivo):** o "vitalício" é **selado no fecho da quinzena**, não instantâneo — durante a quinzena o nível/XP acompanha o estado atual do ClickUp ao vivo (uma tarefa concluída errada removida/reaberta **pode fazer descer**), mas **nunca abaixo do piso selado** nos fechos anteriores; no fecho, o nível corrente vira o novo piso vitalício. Isso evita que um engano trave um nível para sempre. A renovação vem de **emblemas/conquistas quinzenais** (cosméticos, renováveis), não de reset. Custo fixo por nível: **Op 6 · Projeto 8 · Análise 6** (XP = 1 por item/ponto). Cada frente tem uma **classe cosmética** (Operacional=Guerreiro, Projeto=Engenheiro, Análise=Mago) com 12 tiers de título por faixa de nível — o título depende **só do nível daquela frente**, nunca combina frentes. Detalhe em [contrato-dados-json.md](../../../contrato-dados-json.md).
 - **Objetivo coletivo = construção/conquista por frente** (Operacional = Conquista de Território/hexágonos · Projeto = Construção da Base · Análise = Mapa de Insights). Soma **dentro** da frente, nunca entre frentes.
 - **GUARDRAIL anti-inflação (Goodhart) do objetivo coletivo:** o "HP" vem do **backlog real comprometido e priorizado por valor** da quinzena (estilo sprint planning), **travado no planejamento ANTES da reunião quinzenal com o diretor**. **NUNCA** inflar o backlog com item fácil/baixo valor só para ter um "boss gordo" e vitória garantida. Dimensionar pela **vazão das últimas 1–2 quinzenas**, em **faixa/camadas**: `comprometida` (piso, alta confiança) → `alvo` → `stretch` (heroico). Matar a base é o piso; o stretch é o épico.
 - **Emblemas = conquista por entrega (determinística), salva no histórico.** Ex.: "registrou ≥10 pts de Análise na quinzena → Alquimista". Limiar por frente/quinzena; nada de "quem fez mais" como emblema (isso é o ranking secundário, não conquista). Emblema baseado em esforço/precisão fica **fora por enquanto** (esforço ainda não é mensurável de forma determinística).
