@@ -1,0 +1,5 @@
+# Painel interno do time — não indexar em buscadores.
+# O controle de acesso real é o Cloudflare Access (ver deploy/cloudflare-pages.md);
+# isto é só defesa em profundidade contra crawlers.
+User-agent: *
+Disallow: /

@@ -1,0 +1,19 @@
+# Cloudflare Pages — cabeçalhos do Growth RPG (host estático grátis).
+# Este arquivo é lido da RAIZ do diretório publicado (que é a pasta app/).
+
+# dados.json muda a cada republicação do produtor (cowork): nunca cachear,
+# senão o painel mostraria um snapshot velho. O app já busca com ?t= + no-store,
+# mas reforçamos aqui na borda.
+/dados.json
+  Cache-Control: no-store
+
+# Vendor (Chart.js, fontes) é imutável e versionado no repo: cache longo.
+/vendor/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Segurança básica em todas as respostas (defesa em profundidade; o gate real
+# de acesso é o Cloudflare Access — ver deploy/cloudflare-pages.md).
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  X-Frame-Options: SAMEORIGIN
