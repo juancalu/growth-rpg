@@ -22,16 +22,29 @@ from __future__ import annotations
 
 import unicodedata
 from collections import defaultdict
+from datetime import date, datetime, timedelta, timezone
 
 FRENTES = ("operacional", "projeto", "analise")
 SIZING = {"baixa": 1, "media": 3, "alta": 8}
 VAL_KEY = {"operacional": "itens", "projeto": "pontos", "analise": "pontos"}
+BRT = timezone(timedelta(hours=-3))  # data de conclusão ancorada no fuso do time
 
 
 def _norm(texto: str) -> str:
     """Normaliza tag/status: minúsculo, sem acento, sem espaços nas pontas."""
     base = unicodedata.normalize("NFD", (texto or "").strip().lower())
     return "".join(c for c in base if unicodedata.category(c) != "Mn")
+
+
+def _data_done(tarefa: dict) -> date | None:
+    """date_done → date (BRT). Aceita epoch-ms (ClickUp) ou ISO 'YYYY-MM-DD...'."""
+    valor = tarefa.get("date_done")
+    if valor in (None, ""):
+        return None
+    texto = str(valor)
+    if texto.isdigit():
+        return datetime.fromtimestamp(int(texto) / 1000, BRT).date()
+    return date.fromisoformat(texto[:10])
 
 
 def _tags_norm(tarefa: dict) -> set[str]:
@@ -63,11 +76,18 @@ def _missao(tarefa: dict, motivo: str) -> dict:
     }
 
 
-def score(tarefas: list[dict]) -> dict:
+def score(tarefas: list[dict], janela: tuple[str, str] | None = None) -> dict:
     """Recebe as tarefas cruas (read-only do ClickUp) e devolve o resultado agregado.
 
-    Formato de cada tarefa: {id, name, status, tags[], assignees[], parent}.
+    Formato de cada tarefa: {id, name, status, tags[], assignees[], parent, date_done}.
+    `janela=(de, ate)` (datas ISO): se informada, só conta tarefas concluídas com
+    `date_done` DENTRO de [de, ate] (a quinzena); missões idem. Sem janela = all-time.
     """
+    de = ate = None
+    if janela is not None:
+        de = date.fromisoformat(janela[0])
+        ate = date.fromisoformat(janela[1])
+
     index = {t["id"]: t for t in tarefas}
     filhos: dict[str, list[str]] = defaultdict(list)
     for t in tarefas:
@@ -103,6 +123,10 @@ def score(tarefas: list[dict]) -> dict:
     for t in tarefas:
         if _norm(t.get("status", "")) != "concluido":
             continue  # só concluído pontua
+        if janela is not None:
+            d = _data_done(t)
+            if d is None or not (de <= d <= ate):
+                continue  # fora da quinzena: não conta e não é missão desta janela
         if tem_descendente_tagueado(t["id"]):
             continue  # container: conta as folhas, não o pai
 

@@ -43,3 +43,32 @@ def test_determinismo_idempotente():
     """Mesmo input → mesmo output em execuções repetidas."""
     entrada = _load("sintetico_input.json")["tarefas"]
     assert score(entrada) == score(entrada)
+
+
+def _t(tid, dt, **kw):
+    base = {"id": tid, "name": tid, "status": "concluído", "tags": ["operacional"],
+            "assignees": ["Juan"], "parent": None, "date_done": dt}
+    base.update(kw)
+    return base
+
+
+def test_janela_quinzena_filtra_por_date_done():
+    """Só conta tarefas concluídas DENTRO da janela; ISO e epoch-ms aceitos."""
+    from datetime import datetime
+
+    ms_dentro = str(int(datetime.fromisoformat("2026-07-10T12:00:00-03:00").timestamp() * 1000))
+    tarefas = [
+        _t("dentro_iso", "2026-07-05"),          # dentro
+        _t("borda_de", "2026-07-02"),            # dentro (inclusivo)
+        _t("borda_ate", "2026-07-16"),           # dentro (inclusivo)
+        _t("fora_antes", "2026-06-20"),          # fora
+        _t("fora_depois", "2026-07-20"),         # fora
+        _t("dentro_ms", ms_dentro),              # dentro (epoch-ms)
+        _t("sem_data", None),                    # sem date_done → não entra na janela
+    ]
+    r = score(tarefas, janela=("2026-07-02", "2026-07-16"))
+    # 4 dentro: dentro_iso, borda_de, borda_ate, dentro_ms
+    assert r["guild"]["operacional"]["total"] == 4
+    assert r["por_pessoa"]["Juan"]["operacional"]["itens"] == 4
+    # sem janela = all-time conta todas as concluídas (7)
+    assert score(tarefas)["guild"]["operacional"]["total"] == 7
