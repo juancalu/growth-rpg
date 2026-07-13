@@ -19,8 +19,8 @@ config/secrets.json
 # Dados derivados / histórico (regeneráveis; backup vive em 2 cópias, não no git)
 historico/
 dados.local.json
-# cópia local p/ servir o app em dev (o canônico fica na raiz)
-app/dados.json
+# OBS: app/dados.json É versionado — é a cópia que o Cloudflare (pasta app/) serve.
+# Mantê-la em sincronia com o canônico da raiz (o gerador escreve os dois).
 
 # refs de design (stock/terceiros — não versionar)
 Fotos Exemplo/

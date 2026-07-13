@@ -1,0 +1,807 @@
+{
+  "meta": {
+    "schema_version": "1.3",
+    "motor_versao": "cowork/produtividade-clickup-ultra",
+    "gerado_em": "2026-07-12T22:23:37.263832-03:00",
+    "fonte": "ClickUp PROJETOS-DEG (read-only) via scoring-core increment 2a — NAO reconciliado com o painel FLUXO 3; date_done pode refletir fechamento em lote (backfill)",
+    "quinzena": {
+      "label": "Julho/2026 (02-16)",
+      "de": "2026-07-02",
+      "ate": "2026-07-16",
+      "ancora": "Reuniao 'alinhamento e resultados' com o diretor Marcos, 02/07",
+      "cadencia": "quinzenal — quintas: 02/07, 16/07, 30/07..."
+    },
+    "xp_base": {
+      "operacional_por_item": 1,
+      "projeto_por_ponto": 1,
+      "analise_por_ponto": 1
+    },
+    "custos_por_nivel": {
+      "operacional": 6,
+      "projeto": 8,
+      "analise": 6
+    },
+    "_nota_parametros": "Tarefa agendada recebeu QUINZENA_LABEL 'Julho/2026 (Q1)'; motor corrigiu para quinzena ativa per backlog_quinzena.json: 'Julho/2026 (02-16)'."
+  },
+  "classes": {
+    "operacional": {
+      "nome": "Guerreiro",
+      "tema": "a horda e a conquista de territorio",
+      "trilha": [
+        {
+          "tier": 1,
+          "de": 0,
+          "ate": 0,
+          "titulo": "Recruta"
+        },
+        {
+          "tier": 2,
+          "de": 1,
+          "ate": 2,
+          "titulo": "Soldado"
+        },
+        {
+          "tier": 3,
+          "de": 3,
+          "ate": 5,
+          "titulo": "Combatente"
+        },
+        {
+          "tier": 4,
+          "de": 6,
+          "ate": 9,
+          "titulo": "Veterano"
+        },
+        {
+          "tier": 5,
+          "de": 10,
+          "ate": 14,
+          "titulo": "Ceifador de Hordas"
+        },
+        {
+          "tier": 6,
+          "de": 15,
+          "ate": 21,
+          "titulo": "Barbaro"
+        },
+        {
+          "tier": 7,
+          "de": 22,
+          "ate": 30,
+          "titulo": "Campeao"
+        },
+        {
+          "tier": 8,
+          "de": 31,
+          "ate": 45,
+          "titulo": "Comandante"
+        },
+        {
+          "tier": 9,
+          "de": 46,
+          "ate": 65,
+          "titulo": "Senhor da Guerra"
+        },
+        {
+          "tier": 10,
+          "de": 66,
+          "ate": 90,
+          "titulo": "Conquistador"
+        },
+        {
+          "tier": 11,
+          "de": 91,
+          "ate": 129,
+          "titulo": "Marechal das Fronteiras"
+        },
+        {
+          "tier": 12,
+          "de": 130,
+          "ate": null,
+          "titulo": "Lenda da Vanguarda"
+        }
+      ]
+    },
+    "projeto": {
+      "nome": "Engenheiro",
+      "tema": "a construcao e a criacao da base",
+      "trilha": [
+        {
+          "tier": 1,
+          "de": 0,
+          "ate": 0,
+          "titulo": "Aprendiz"
+        },
+        {
+          "tier": 2,
+          "de": 1,
+          "ate": 2,
+          "titulo": "Tecnico"
+        },
+        {
+          "tier": 3,
+          "de": 3,
+          "ate": 5,
+          "titulo": "Engenheiro Junior"
+        },
+        {
+          "tier": 4,
+          "de": 6,
+          "ate": 9,
+          "titulo": "Engenheiro"
+        },
+        {
+          "tier": 5,
+          "de": 10,
+          "ate": 14,
+          "titulo": "Engenheiro Senior"
+        },
+        {
+          "tier": 6,
+          "de": 15,
+          "ate": 21,
+          "titulo": "Mestre de Obras"
+        },
+        {
+          "tier": 7,
+          "de": 22,
+          "ate": 30,
+          "titulo": "Mecanista"
+        },
+        {
+          "tier": 8,
+          "de": 31,
+          "ate": 45,
+          "titulo": "Arquiteto de Sistemas"
+        },
+        {
+          "tier": 9,
+          "de": 46,
+          "ate": 65,
+          "titulo": "Engenheiro-Chefe"
+        },
+        {
+          "tier": 10,
+          "de": 66,
+          "ate": 90,
+          "titulo": "Grande Engenheiro"
+        },
+        {
+          "tier": 11,
+          "de": 91,
+          "ate": 129,
+          "titulo": "Engenheiro-Mor"
+        },
+        {
+          "tier": 12,
+          "de": 130,
+          "ate": null,
+          "titulo": "Demiurgo"
+        }
+      ]
+    },
+    "analise": {
+      "nome": "Mago",
+      "tema": "a magia e o mapa de insights",
+      "trilha": [
+        {
+          "tier": 1,
+          "de": 0,
+          "ate": 0,
+          "titulo": "Aprendiz de Feiticos"
+        },
+        {
+          "tier": 2,
+          "de": 1,
+          "ate": 2,
+          "titulo": "Conjurador"
+        },
+        {
+          "tier": 3,
+          "de": 3,
+          "ate": 5,
+          "titulo": "Feiticeiro"
+        },
+        {
+          "tier": 4,
+          "de": 6,
+          "ate": 9,
+          "titulo": "Bruxo"
+        },
+        {
+          "tier": 5,
+          "de": 10,
+          "ate": 14,
+          "titulo": "Arcanista"
+        },
+        {
+          "tier": 6,
+          "de": 15,
+          "ate": 21,
+          "titulo": "Necromante"
+        },
+        {
+          "tier": 7,
+          "de": 22,
+          "ate": 30,
+          "titulo": "Mago"
+        },
+        {
+          "tier": 8,
+          "de": 31,
+          "ate": 45,
+          "titulo": "Mago Superior"
+        },
+        {
+          "tier": 9,
+          "de": 46,
+          "ate": 65,
+          "titulo": "Magus"
+        },
+        {
+          "tier": 10,
+          "de": 66,
+          "ate": 90,
+          "titulo": "Grande Mago"
+        },
+        {
+          "tier": 11,
+          "de": 91,
+          "ate": 129,
+          "titulo": "Arquimago"
+        },
+        {
+          "tier": 12,
+          "de": 130,
+          "ate": null,
+          "titulo": "Senhor do Arcano"
+        }
+      ]
+    }
+  },
+  "emblemas_catalogo": {
+    "_nota": "Conquistas por ENTREGA na quinzena (deterministicas). Um membro ganha o emblema se entregue_quinzena na frente >= limiar. Salvos no historico do personagem. Limiares = ponto de partida, ajustaveis [DH].",
+    "lista": [
+      {
+        "id": "op_batedor",
+        "nome": "Batedor",
+        "frente": "operacional",
+        "metrica": "itens",
+        "limiar": 10
+      },
+      {
+        "id": "op_ceifador",
+        "nome": "Ceifador",
+        "frente": "operacional",
+        "metrica": "itens",
+        "limiar": 25
+      },
+      {
+        "id": "op_senhor_hordas",
+        "nome": "Senhor das Hordas",
+        "frente": "operacional",
+        "metrica": "itens",
+        "limiar": 50
+      },
+      {
+        "id": "prj_construtor",
+        "nome": "Construtor",
+        "frente": "projeto",
+        "metrica": "pontos",
+        "limiar": 8
+      },
+      {
+        "id": "prj_engenheiro_mestre",
+        "nome": "Engenheiro Mestre",
+        "frente": "projeto",
+        "metrica": "pontos",
+        "limiar": 20
+      },
+      {
+        "id": "prj_arquiteto_chefe",
+        "nome": "Arquiteto-Chefe",
+        "frente": "projeto",
+        "metrica": "pontos",
+        "limiar": 40
+      },
+      {
+        "id": "ana_alquimista",
+        "nome": "Alquimista",
+        "frente": "analise",
+        "metrica": "pontos",
+        "limiar": 10
+      },
+      {
+        "id": "ana_vidente",
+        "nome": "Vidente",
+        "frente": "analise",
+        "metrica": "pontos",
+        "limiar": 20
+      },
+      {
+        "id": "ana_oraculo",
+        "nome": "Oraculo",
+        "frente": "analise",
+        "metrica": "pontos",
+        "limiar": 30
+      }
+    ]
+  },
+  "pessoas": [
+    {
+      "id": 296609800,
+      "nome": "Felipe",
+      "jogavel": true,
+      "dias_disponiveis": 11,
+      "afastamentos": [],
+      "frentes": {
+        "operacional": {
+          "classe": "Guerreiro",
+          "unidade": "itens",
+          "nivel": 1,
+          "custo_por_nivel": 6,
+          "xp_total": 6,
+          "xp_no_nivel": 0,
+          "xp_para_proximo": 6,
+          "entregaveis_total": 6,
+          "entregue_quinzena": 0,
+          "entregaveis_quinzena": 0,
+          "vazao_quinzena": 0.0,
+          "tier": 2,
+          "titulo": "Soldado",
+          "backlog": {
+            "valor": 2,
+            "tarefas": 1
+          }
+        },
+        "projeto": {
+          "classe": "Engenheiro",
+          "unidade": "pontos",
+          "nivel": 29,
+          "custo_por_nivel": 8,
+          "xp_total": 234,
+          "xp_no_nivel": 2,
+          "xp_para_proximo": 6,
+          "entregaveis_total": 88,
+          "entregue_quinzena": 16,
+          "entregaveis_quinzena": 5,
+          "vazao_quinzena": 1.45,
+          "tier": 7,
+          "titulo": "Mecanista",
+          "backlog": {
+            "valor": 37,
+            "tarefas": 7
+          }
+        },
+        "analise": {
+          "classe": "Mago",
+          "unidade": "pontos",
+          "nivel": 5,
+          "custo_por_nivel": 6,
+          "xp_total": 34,
+          "xp_no_nivel": 4,
+          "xp_para_proximo": 2,
+          "entregaveis_total": 10,
+          "entregue_quinzena": 30,
+          "entregaveis_quinzena": 5,
+          "vazao_quinzena": 2.73,
+          "tier": 3,
+          "titulo": "Feiticeiro",
+          "backlog": {
+            "valor": 24,
+            "tarefas": 3
+          }
+        }
+      },
+      "emblemas_quinzena": [],
+      "emblemas_historico": [
+        {
+          "quinzena": "Maio/2026 (ref.)",
+          "ids": [
+            "prj_construtor",
+            "prj_engenheiro_mestre",
+            "prj_arquiteto_chefe"
+          ]
+        },
+        {
+          "quinzena": "Junho/2026 (01-18)",
+          "ids": [
+            "prj_construtor",
+            "prj_engenheiro_mestre",
+            "ana_alquimista",
+            "ana_vidente"
+          ]
+        }
+      ],
+      "prestigio": {
+        "badges": []
+      }
+    },
+    {
+      "id": 101182134,
+      "nome": "Juan",
+      "jogavel": true,
+      "dias_disponiveis": 11,
+      "afastamentos": [],
+      "frentes": {
+        "operacional": {
+          "classe": "Guerreiro",
+          "unidade": "itens",
+          "nivel": 24,
+          "custo_por_nivel": 6,
+          "xp_total": 145,
+          "xp_no_nivel": 1,
+          "xp_para_proximo": 5,
+          "entregaveis_total": 145,
+          "entregue_quinzena": 12,
+          "entregaveis_quinzena": 12,
+          "vazao_quinzena": 1.09,
+          "tier": 7,
+          "titulo": "Campeao",
+          "backlog": {
+            "valor": 1,
+            "tarefas": 1
+          }
+        },
+        "projeto": {
+          "classe": "Engenheiro",
+          "unidade": "pontos",
+          "nivel": 2,
+          "custo_por_nivel": 8,
+          "xp_total": 18,
+          "xp_no_nivel": 2,
+          "xp_para_proximo": 6,
+          "entregaveis_total": 5,
+          "entregue_quinzena": 3,
+          "entregaveis_quinzena": 1,
+          "vazao_quinzena": 0.27,
+          "tier": 2,
+          "titulo": "Tecnico",
+          "backlog": {
+            "valor": 11,
+            "tarefas": 2
+          }
+        },
+        "analise": {
+          "classe": "Mago",
+          "unidade": "pontos",
+          "nivel": 6,
+          "custo_por_nivel": 6,
+          "xp_total": 36,
+          "xp_no_nivel": 0,
+          "xp_para_proximo": 6,
+          "entregaveis_total": 18,
+          "entregue_quinzena": 0,
+          "entregaveis_quinzena": 0,
+          "vazao_quinzena": 0.0,
+          "tier": 4,
+          "titulo": "Bruxo",
+          "backlog": {
+            "valor": 8,
+            "tarefas": 1
+          }
+        }
+      },
+      "emblemas_quinzena": [],
+      "emblemas_historico": [
+        {
+          "quinzena": "Maio/2026 (ref.)",
+          "ids": [
+            "op_batedor",
+            "op_ceifador",
+            "ana_alquimista",
+            "ana_vidente"
+          ]
+        },
+        {
+          "quinzena": "Junho/2026 (01-18)",
+          "ids": [
+            "op_batedor",
+            "op_ceifador",
+            "op_senhor_hordas",
+            "prj_construtor"
+          ]
+        }
+      ],
+      "prestigio": {
+        "badges": []
+      }
+    },
+    {
+      "id": 101182135,
+      "nome": "Vinicius",
+      "jogavel": true,
+      "dias_disponiveis": 11,
+      "afastamentos": [],
+      "frentes": {
+        "operacional": {
+          "classe": "Guerreiro",
+          "unidade": "itens",
+          "nivel": 27,
+          "custo_por_nivel": 6,
+          "xp_total": 167,
+          "xp_no_nivel": 5,
+          "xp_para_proximo": 1,
+          "entregaveis_total": 167,
+          "entregue_quinzena": 23,
+          "entregaveis_quinzena": 23,
+          "vazao_quinzena": 2.09,
+          "tier": 7,
+          "titulo": "Campeao",
+          "backlog": {
+            "valor": 1,
+            "tarefas": 1
+          }
+        },
+        "projeto": {
+          "classe": "Engenheiro",
+          "unidade": "pontos",
+          "nivel": 13,
+          "custo_por_nivel": 8,
+          "xp_total": 104,
+          "xp_no_nivel": 0,
+          "xp_para_proximo": 8,
+          "entregaveis_total": 28,
+          "entregue_quinzena": 7,
+          "entregaveis_quinzena": 3,
+          "vazao_quinzena": 0.64,
+          "tier": 5,
+          "titulo": "Engenheiro Senior",
+          "backlog": {
+            "valor": 15,
+            "tarefas": 4
+          }
+        },
+        "analise": {
+          "classe": "Mago",
+          "unidade": "pontos",
+          "nivel": 4,
+          "custo_por_nivel": 6,
+          "xp_total": 27,
+          "xp_no_nivel": 3,
+          "xp_para_proximo": 3,
+          "entregaveis_total": 13,
+          "entregue_quinzena": 0,
+          "entregaveis_quinzena": 0,
+          "vazao_quinzena": 0.0,
+          "tier": 3,
+          "titulo": "Feiticeiro",
+          "backlog": {
+            "valor": 0,
+            "tarefas": 0
+          }
+        }
+      },
+      "emblemas_quinzena": [
+        "op_batedor"
+      ],
+      "emblemas_historico": [
+        {
+          "quinzena": "Maio/2026 (ref.)",
+          "ids": [
+            "op_batedor",
+            "op_ceifador",
+            "op_senhor_hordas",
+            "prj_construtor",
+            "prj_engenheiro_mestre",
+            "ana_alquimista"
+          ]
+        },
+        {
+          "quinzena": "Junho/2026 (01-18)",
+          "ids": [
+            "op_batedor",
+            "op_ceifador",
+            "op_senhor_hordas",
+            "prj_construtor",
+            "prj_engenheiro_mestre",
+            "prj_arquiteto_chefe"
+          ]
+        },
+        {
+          "quinzena": "Julho/2026 (02-16)",
+          "ids": [
+            "op_batedor"
+          ]
+        }
+      ],
+      "prestigio": {
+        "badges": []
+      }
+    }
+  ],
+  "ranking_quinzena": {
+    "operacional": {
+      "unidade": "itens",
+      "ordem": [
+        {
+          "pessoa": "Vinicius",
+          "valor": 23,
+          "vazao": 2.09,
+          "pos": 1
+        },
+        {
+          "pessoa": "Juan",
+          "valor": 12,
+          "vazao": 1.09,
+          "pos": 2
+        },
+        {
+          "pessoa": "Felipe",
+          "valor": 0,
+          "vazao": 0.0,
+          "pos": 3
+        }
+      ]
+    },
+    "projeto": {
+      "unidade": "pontos",
+      "ordem": [
+        {
+          "pessoa": "Felipe",
+          "valor": 16,
+          "vazao": 1.45,
+          "pos": 1
+        },
+        {
+          "pessoa": "Vinicius",
+          "valor": 7,
+          "vazao": 0.64,
+          "pos": 2
+        },
+        {
+          "pessoa": "Juan",
+          "valor": 3,
+          "vazao": 0.27,
+          "pos": 3
+        }
+      ]
+    },
+    "analise": {
+      "unidade": "pontos",
+      "ordem": [
+        {
+          "pessoa": "Felipe",
+          "valor": 30,
+          "vazao": 2.73,
+          "pos": 1
+        },
+        {
+          "pessoa": "Juan",
+          "valor": 0,
+          "vazao": 0.0,
+          "pos": 2
+        },
+        {
+          "pessoa": "Vinicius",
+          "valor": 0,
+          "vazao": 0.0,
+          "pos": 3
+        }
+      ]
+    }
+  },
+  "guild": {
+    "operacional": {
+      "unidade": "itens",
+      "objetivo": "territorio",
+      "camadas": {
+        "comprometida": 40,
+        "alvo": 70,
+        "stretch": 110
+      },
+      "entregue_quinzena": 35,
+      "camada_atingida": null,
+      "proxima_camada": "comprometida",
+      "restante_para_proxima": 5,
+      "contribuicoes_quinzena": {
+        "Felipe": 0,
+        "Juan": 12,
+        "Vinicius": 23
+      },
+      "total_equipe_quinzena": 35
+    },
+    "projeto": {
+      "unidade": "pontos",
+      "objetivo": "construcao",
+      "camadas": {
+        "comprometida": 35,
+        "alvo": 55,
+        "stretch": 80
+      },
+      "entregue_quinzena": 26,
+      "camada_atingida": null,
+      "proxima_camada": "comprometida",
+      "restante_para_proxima": 9,
+      "contribuicoes_quinzena": {
+        "Felipe": 16,
+        "Juan": 3,
+        "Vinicius": 7
+      },
+      "total_equipe_quinzena": 26
+    },
+    "analise": {
+      "unidade": "pontos",
+      "objetivo": "mapa_insights",
+      "camadas": {
+        "comprometida": 12,
+        "alvo": 20,
+        "stretch": 32
+      },
+      "entregue_quinzena": 30,
+      "camada_atingida": "alvo",
+      "proxima_camada": "stretch",
+      "restante_para_proxima": 2,
+      "contribuicoes_quinzena": {
+        "Felipe": 30,
+        "Juan": 0,
+        "Vinicius": 0
+      },
+      "total_equipe_quinzena": 30
+    }
+  },
+  "eventos": {
+    "marcadores_titulo": [
+      "fix",
+      "bug",
+      "corrigir",
+      "correcao",
+      "hotfix",
+      "blk-fix"
+    ],
+    "lista": []
+  },
+  "missoes_organizacao": [],
+  "_nota_missoes": "So entra aqui tarefa concluida na janela com tag invalida (falta_frente, frente_ambigua, falta_sizing, sizing_ambiguo). Subtarefa sem tag sob pai tagueado e ignorada silenciosamente.",
+  "projetos": {
+    "atualizado_em": "2026-07-08",
+    "fonte": "ClickUp — space PROJETOS - DEG (snapshot; futuramente gerado pelo produtor/cowork, nunca pelo app)",
+    "lista": [
+      {
+        "id": "901713535516",
+        "nome": "Motor de Expansão",
+        "total": 132,
+        "concluidas": 102,
+        "abertas": 28,
+        "bloqueadas": 2,
+        "progresso": 0.7727
+      },
+      {
+        "id": "901713535386",
+        "nome": "LTV e Churn",
+        "total": 8,
+        "concluidas": 8,
+        "abertas": 0,
+        "bloqueadas": 0,
+        "progresso": 1.0
+      },
+      {
+        "id": "901713535385",
+        "nome": "Dashboard Operacional",
+        "total": 7,
+        "concluidas": 6,
+        "abertas": 0,
+        "bloqueadas": 1,
+        "progresso": 0.8571
+      },
+      {
+        "id": "901713571204",
+        "nome": "Gestão Operacional",
+        "total": 7,
+        "concluidas": 7,
+        "abertas": 0,
+        "bloqueadas": 0,
+        "progresso": 1.0
+      },
+      {
+        "id": "901714370081",
+        "nome": "API GeoEspacial",
+        "total": 3,
+        "concluidas": 2,
+        "abertas": 1,
+        "bloqueadas": 0,
+        "progresso": 0.6667
+      }
+    ]
+  }
+}
