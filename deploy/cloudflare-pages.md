@@ -33,13 +33,15 @@ segurança psicológica do time e não é aceitável.
    **Connect to Git** e selecione este repositório.
 2. Configuração de build:
    - **Framework preset:** `None`
-   - **Build command:** *(vazio)*
+   - **Build command:** `cp dados.json app/dados.json`
    - **Build output directory:** `app`
 3. **Save and Deploy.** Cada push na branch de produção republica o site.
 
-> O `dados.json` publicado é o que está em `app/dados.json` no commit. Para atualizar
-> os dados você republica (ou, no futuro, liga o auto-refresh + cadência do produtor —
-> ver "Próximos passos").
+> **Por que o build command copia o `dados.json`:** o canônico vive na **raiz** do
+> repo; `app/dados.json` é uma cópia de dev **gitignored** (não vai pro commit). O
+> `cp dados.json app/dados.json` coloca o dado dentro da pasta servida (`app/`) na
+> hora do build. Sem isso, o site subiria sem o `dados.json` e o painel daria erro.
+> Para atualizar os dados, commite um `dados.json` novo (na raiz) e o push republica.
 
 ### Opção B — Upload direto (sem Git), via Wrangler
 
@@ -48,6 +50,7 @@ segurança psicológica do time e não é aceitável.
 npx wrangler pages project create growth-rpg --production-branch main
 
 # a cada publicação (roda na RAIZ do repo; publica só a pasta app/):
+cp dados.json app/dados.json   # coloca o dado canônico na pasta servida
 npx wrangler pages deploy app --project-name growth-rpg
 ```
 

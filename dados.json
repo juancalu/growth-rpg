@@ -2,8 +2,8 @@
   "meta": {
     "schema_version": "1.3",
     "motor_versao": "cowork/produtividade-clickup-ultra",
-    "gerado_em": "2026-07-07T15:51:06.445629-03:00",
-    "fonte": "ClickUp PROJETOS-DEG (read-only) via cowork",
+    "gerado_em": "2026-07-12T22:23:37.263832-03:00",
+    "fonte": "ClickUp PROJETOS-DEG (read-only) via scoring-core increment 2a — NAO reconciliado com o painel FLUXO 3; date_done pode refletir fechamento em lote (backfill)",
     "quinzena": {
       "label": "Julho/2026 (02-16)",
       "de": "2026-07-02",
@@ -363,9 +363,9 @@
           "xp_no_nivel": 2,
           "xp_para_proximo": 6,
           "entregaveis_total": 88,
-          "entregue_quinzena": 0,
-          "entregaveis_quinzena": 0,
-          "vazao_quinzena": 0.0,
+          "entregue_quinzena": 16,
+          "entregaveis_quinzena": 5,
+          "vazao_quinzena": 1.45,
           "tier": 7,
           "titulo": "Mecanista",
           "backlog": {
@@ -382,9 +382,9 @@
           "xp_no_nivel": 4,
           "xp_para_proximo": 2,
           "entregaveis_total": 10,
-          "entregue_quinzena": 0,
-          "entregaveis_quinzena": 0,
-          "vazao_quinzena": 0.0,
+          "entregue_quinzena": 30,
+          "entregaveis_quinzena": 5,
+          "vazao_quinzena": 2.73,
           "tier": 3,
           "titulo": "Feiticeiro",
           "backlog": {
@@ -433,9 +433,9 @@
           "xp_no_nivel": 1,
           "xp_para_proximo": 5,
           "entregaveis_total": 145,
-          "entregue_quinzena": 8,
-          "entregaveis_quinzena": 8,
-          "vazao_quinzena": 0.73,
+          "entregue_quinzena": 12,
+          "entregaveis_quinzena": 12,
+          "vazao_quinzena": 1.09,
           "tier": 7,
           "titulo": "Campeao",
           "backlog": {
@@ -452,9 +452,9 @@
           "xp_no_nivel": 2,
           "xp_para_proximo": 6,
           "entregaveis_total": 5,
-          "entregue_quinzena": 0,
-          "entregaveis_quinzena": 0,
-          "vazao_quinzena": 0.0,
+          "entregue_quinzena": 3,
+          "entregaveis_quinzena": 1,
+          "vazao_quinzena": 0.27,
           "tier": 2,
           "titulo": "Tecnico",
           "backlog": {
@@ -523,9 +523,9 @@
           "xp_no_nivel": 5,
           "xp_para_proximo": 1,
           "entregaveis_total": 167,
-          "entregue_quinzena": 14,
-          "entregaveis_quinzena": 14,
-          "vazao_quinzena": 1.27,
+          "entregue_quinzena": 23,
+          "entregaveis_quinzena": 23,
+          "vazao_quinzena": 2.09,
           "tier": 7,
           "titulo": "Campeao",
           "backlog": {
@@ -542,9 +542,9 @@
           "xp_no_nivel": 0,
           "xp_para_proximo": 8,
           "entregaveis_total": 28,
-          "entregue_quinzena": 6,
-          "entregaveis_quinzena": 2,
-          "vazao_quinzena": 0.55,
+          "entregue_quinzena": 7,
+          "entregaveis_quinzena": 3,
+          "vazao_quinzena": 0.64,
           "tier": 5,
           "titulo": "Engenheiro Senior",
           "backlog": {
@@ -616,14 +616,14 @@
       "ordem": [
         {
           "pessoa": "Vinicius",
-          "valor": 14,
-          "vazao": 1.27,
+          "valor": 23,
+          "vazao": 2.09,
           "pos": 1
         },
         {
           "pessoa": "Juan",
-          "valor": 8,
-          "vazao": 0.73,
+          "valor": 12,
+          "vazao": 1.09,
           "pos": 2
         },
         {
@@ -638,21 +638,21 @@
       "unidade": "pontos",
       "ordem": [
         {
-          "pessoa": "Vinicius",
-          "valor": 6,
-          "vazao": 0.55,
+          "pessoa": "Felipe",
+          "valor": 16,
+          "vazao": 1.45,
           "pos": 1
         },
         {
-          "pessoa": "Felipe",
-          "valor": 0,
-          "vazao": 0.0,
+          "pessoa": "Vinicius",
+          "valor": 7,
+          "vazao": 0.64,
           "pos": 2
         },
         {
           "pessoa": "Juan",
-          "valor": 0,
-          "vazao": 0.0,
+          "valor": 3,
+          "vazao": 0.27,
           "pos": 3
         }
       ]
@@ -662,8 +662,8 @@
       "ordem": [
         {
           "pessoa": "Felipe",
-          "valor": 0,
-          "vazao": 0.0,
+          "valor": 30,
+          "vazao": 2.73,
           "pos": 1
         },
         {
@@ -690,16 +690,16 @@
         "alvo": 70,
         "stretch": 110
       },
-      "entregue_quinzena": 22,
+      "entregue_quinzena": 35,
       "camada_atingida": null,
       "proxima_camada": "comprometida",
-      "restante_para_proxima": 18,
+      "restante_para_proxima": 5,
       "contribuicoes_quinzena": {
         "Felipe": 0,
-        "Juan": 8,
-        "Vinicius": 14
+        "Juan": 12,
+        "Vinicius": 23
       },
-      "total_equipe_quinzena": 22
+      "total_equipe_quinzena": 35
     },
     "projeto": {
       "unidade": "pontos",
@@ -709,16 +709,16 @@
         "alvo": 55,
         "stretch": 80
       },
-      "entregue_quinzena": 6,
+      "entregue_quinzena": 26,
       "camada_atingida": null,
       "proxima_camada": "comprometida",
-      "restante_para_proxima": 29,
+      "restante_para_proxima": 9,
       "contribuicoes_quinzena": {
-        "Felipe": 0,
-        "Juan": 0,
-        "Vinicius": 6
+        "Felipe": 16,
+        "Juan": 3,
+        "Vinicius": 7
       },
-      "total_equipe_quinzena": 6
+      "total_equipe_quinzena": 26
     },
     "analise": {
       "unidade": "pontos",
@@ -728,16 +728,16 @@
         "alvo": 20,
         "stretch": 32
       },
-      "entregue_quinzena": 0,
-      "camada_atingida": null,
-      "proxima_camada": "comprometida",
-      "restante_para_proxima": 12,
+      "entregue_quinzena": 30,
+      "camada_atingida": "alvo",
+      "proxima_camada": "stretch",
+      "restante_para_proxima": 2,
       "contribuicoes_quinzena": {
-        "Felipe": 0,
+        "Felipe": 30,
         "Juan": 0,
         "Vinicius": 0
       },
-      "total_equipe_quinzena": 0
+      "total_equipe_quinzena": 30
     }
   },
   "eventos": {
