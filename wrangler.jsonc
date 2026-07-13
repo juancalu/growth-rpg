@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "growth-rpg",
+  "compatibility_date": "2026-07-13",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "app"
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
