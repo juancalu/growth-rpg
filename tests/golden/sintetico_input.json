@@ -1,0 +1,20 @@
+{
+  "_nota": "Fixture SINTÉTICO hand-verificado do scoring-core (increment 1). NÃO é dado real. Cobre: operacional (compl. ignorada), projeto/análise sized, colaborativa (de-dup), órfã sem frente (missão), subtarefa sem tag sob pai tagueado (ignorada), frente ambígua, falta sizing, sizing ambíguo, container pai/folha, não-concluída.",
+  "tarefas": [
+    {"id": "op1", "name": "Op um", "status": "concluído", "tags": ["operacional"], "assignees": ["Juan"], "parent": null},
+    {"id": "op2", "name": "Op dois (compl. ignorada)", "status": "concluído", "tags": ["operacional", "alta"], "assignees": ["Vinícius"], "parent": null},
+    {"id": "prj1", "name": "Projeto baixa", "status": "concluído", "tags": ["projeto", "baixa"], "assignees": ["Felipe"], "parent": null},
+    {"id": "prj2", "name": "Projeto média", "status": "concluído", "tags": ["Projeto", "Média"], "assignees": ["Felipe"], "parent": null},
+    {"id": "prj3", "name": "Projeto alta", "status": "concluído", "tags": ["projeto", "alta"], "assignees": ["Vinícius"], "parent": null},
+    {"id": "ana1", "name": "Análise média", "status": "concluído", "tags": ["análise", "média"], "assignees": ["Juan"], "parent": null},
+    {"id": "ana2", "name": "Análise alta colaborativa", "status": "concluído", "tags": ["ANALISE", "alta"], "assignees": ["Vinícius", "Felipe"], "parent": null},
+    {"id": "orphan1", "name": "Sem tag órfã", "status": "concluído", "tags": [], "assignees": ["Juan"], "parent": null},
+    {"id": "pai", "name": "Container operacional", "status": "concluído", "tags": ["operacional"], "assignees": ["Juan"], "parent": null},
+    {"id": "filho1", "name": "Folha operacional", "status": "concluído", "tags": ["operacional"], "assignees": ["Juan"], "parent": "pai"},
+    {"id": "sub_untagged", "name": "Ajuste simples", "status": "concluído", "tags": [], "assignees": ["Felipe"], "parent": "prj1"},
+    {"id": "amb_frente", "name": "Duas frentes", "status": "concluído", "tags": ["operacional", "projeto"], "assignees": ["Felipe"], "parent": null},
+    {"id": "falta_sizing", "name": "Projeto sem sizing", "status": "concluído", "tags": ["projeto"], "assignees": ["Vinícius"], "parent": null},
+    {"id": "amb_sizing", "name": "Análise dois sizings", "status": "concluído", "tags": ["análise", "baixa", "alta"], "assignees": ["Juan"], "parent": null},
+    {"id": "naoconcl", "name": "Pendente não conta", "status": "pendente", "tags": ["projeto", "média"], "assignees": ["Felipe"], "parent": null}
+  ]
+}

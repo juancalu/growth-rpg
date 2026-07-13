@@ -1,0 +1,31 @@
+{
+  "_nota": "Saída esperada hand-verificada de sintetico_input.json (scoring-core increment 1).",
+  "por_pessoa": {
+    "Felipe": {
+      "operacional": {"itens": 0, "entregaveis": 0},
+      "projeto": {"pontos": 4, "entregaveis": 2},
+      "analise": {"pontos": 8, "entregaveis": 1}
+    },
+    "Juan": {
+      "operacional": {"itens": 2, "entregaveis": 2},
+      "projeto": {"pontos": 0, "entregaveis": 0},
+      "analise": {"pontos": 3, "entregaveis": 1}
+    },
+    "Vinícius": {
+      "operacional": {"itens": 1, "entregaveis": 1},
+      "projeto": {"pontos": 8, "entregaveis": 1},
+      "analise": {"pontos": 8, "entregaveis": 1}
+    }
+  },
+  "guild": {
+    "operacional": {"total": 3, "entregaveis": 3},
+    "projeto": {"total": 12, "entregaveis": 3},
+    "analise": {"total": 11, "entregaveis": 2}
+  },
+  "missoes": [
+    {"id": "amb_frente", "nome": "Duas frentes", "assignee": "Felipe", "motivo": "frente_ambigua"},
+    {"id": "amb_sizing", "nome": "Análise dois sizings", "assignee": "Juan", "motivo": "sizing_ambiguo"},
+    {"id": "falta_sizing", "nome": "Projeto sem sizing", "assignee": "Vinícius", "motivo": "falta_sizing"},
+    {"id": "orphan1", "nome": "Sem tag órfã", "assignee": "Juan", "motivo": "falta_frente"}
+  ]
+}
